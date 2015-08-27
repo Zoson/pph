@@ -14,7 +14,7 @@ import com.pengpenghui.domain.controller.LogController;
 import com.pengpenghui.pph_interface.ViewInterface;
 
 /**
- * Created by 肖文浩 on 2015/6/17.
+ * Created by 肖文浩    on 2015/6/17.
  */
 public class Activity_Login extends Activity implements ViewInterface {
 	private Button bn_login;
