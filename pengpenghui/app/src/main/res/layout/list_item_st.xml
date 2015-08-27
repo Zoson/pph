@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:paddingTop="4dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:background="@drawable/itemse"
+    android:descendantFocusability="blocksDescendants"
+    >
+
+    <ImageView
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:id="@+id/itempic_st"
+        android:background="@drawable/tx"
+        />
+    <TextView
+        android:layout_width="190dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/itemText_st"
+        android:text="未定义"
+        android:textSize="22dp"
+        android:textColor="@color/black"/>
+    <ToggleButton
+        android:id="@+id/mTogBtn"
+        android:layout_width="70dp"
+        android:layout_height="40dp"
+        android:background="@android:color/transparent"
+        android:button="@drawable/botton_switch"
+        android:layout_gravity="center_vertical"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="7dp"
+        android:focusable="false"
+        android:text=""
+        android:textOff=""
+        android:textOn="" />
+</LinearLayout>

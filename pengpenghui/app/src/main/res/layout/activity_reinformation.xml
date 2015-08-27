@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/orange"
+        android:gravity="center_vertical"
+
+        >
+        <Button
+            android:layout_width="35dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="10dp"
+            android:id="@+id/bn_re_rein"
+            android:background="@drawable/rere"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="60dp"
+            android:text="个人信息修改"
+            android:textColor="@color/white"
+            android:textSize="23dp" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="70dp"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+
+        <EditText
+            android:layout_marginTop="20dp"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/re_person_name"
+            android:singleLine="true"
+            android:hint="请输入更换昵称"
+            android:background="@drawable/re_line"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            />
+        <EditText
+            android:layout_marginTop="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:ems="12"
+            android:id="@+id/re_person_ops"
+            android:singleLine="true"
+            android:hint="请输入旧密码"
+            android:background="@drawable/re_line"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            />
+        <EditText
+            android:layout_marginTop="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:ems="12"
+            android:id="@+id/re_person_nps"
+            android:singleLine="true"
+            android:hint="请输入新密码"
+            android:background="@drawable/re_line"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            />
+        <EditText
+            android:layout_marginTop="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:ems="12"
+            android:id="@+id/re_preson_rnps"
+            android:singleLine="true"
+            android:hint="再一次输入新密码"
+            android:background="@drawable/re_line"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            />
+        <Button
+            android:layout_marginTop="40dp"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="更换头像"
+            android:textSize="20dp"
+            android:padding="7dp"
+            android:id="@+id/uppic"
+            android:background="@drawable/bnse2"
+            android:layout_gravity="bottom" />
+
+        <Button
+            android:layout_marginTop="20dp"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="确定"
+            android:textSize="20dp"
+            android:padding="7dp"
+            android:id="@+id/regi"
+            android:background="@drawable/bnse2"
+            android:layout_gravity="bottom" />
+    </LinearLayout>
+
+
+
+
+</LinearLayout>
+

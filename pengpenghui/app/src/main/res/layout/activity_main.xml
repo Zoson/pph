@@ -1,0 +1,57 @@
+<LinearLayout xmlns:hzx="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.pengpenghui.ui.MainActivity" >
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" >
+    </android.support.v4.view.ViewPager>
+  <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@drawable/tab_bg"
+        android:orientation="horizontal" >
+
+        <com.pengpenghui.ui.component.ChangeColorText
+            android:id="@+id/id_indicator_one"
+            android:padding="5dp"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            hzx:icon1="@drawable/ad"
+            hzx:text="推送"
+            hzx:textSize="12sp"
+            hzx:color1="@color/orange" />
+        
+        <com.pengpenghui.ui.component.ChangeColorText
+            android:id="@+id/id_indicator_two"
+            android:padding="5dp"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            hzx:icon1="@drawable/home"
+            hzx:text="钱包"
+            hzx:textSize="12sp"
+            hzx:color1="@color/orange" />
+
+        <com.pengpenghui.ui.component.ChangeColorText
+            android:id="@+id/id_indicator_three"
+            android:padding="5dp"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            hzx:icon1="@drawable/perset"
+            hzx:text="个人"
+            hzx:textSize="12sp"
+            hzx:color1="@color/orange" />
+        </LinearLayout>
+       
+  
+
+</LinearLayout>

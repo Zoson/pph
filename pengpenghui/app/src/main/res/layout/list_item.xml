@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:background="@drawable/itemse"
+    android:descendantFocusability="blocksDescendants"
+    >
+
+     <ImageView
+         android:layout_marginLeft="15dp"
+         android:layout_marginRight="15dp"
+         android:layout_marginTop="10dp"
+         android:layout_marginBottom="10dp"
+         android:layout_width="30dp"
+         android:layout_height="30dp"
+         android:id="@+id/itempic"
+         android:background="@drawable/tx"
+         />
+     <TextView
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:id="@+id/itemText"
+         android:text="未定义"
+         android:textSize="17dp"
+         android:textColor="@color/black"/>
+</LinearLayout>

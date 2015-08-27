@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+ <LinearLayout 
+     android:layout_width="match_parent"
+     android:layout_height="50dp"
+     android:orientation="horizontal"
+     android:background="@color/orange"
+     android:gravity="center_vertical"
+     
+     >
+     <Button
+         android:layout_width="40dp"
+         android:layout_height="35dp"
+         android:layout_marginLeft="10dp"
+         android:padding="7dp"
+         android:id="@+id/bn_re_s"
+         android:background="@drawable/rere"
+         />
+
+     <TextView
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:gravity="center"
+         android:layout_marginLeft="60dp"
+         android:text="偏好设置"
+         android:textColor="@color/white"
+         android:textSize="23dp" />
+
+     </LinearLayout>   
+      
+     
+     <ListView 
+        android:layout_marginTop="20dp"
+        android:id="@+id/listview_se"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:dividerHeight="7dp"
+        android:focusable="true"
+
+           
+           
+       ></ListView>
+    <Button
+        android:layout_marginTop="100dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="退出登录"
+        android:id="@+id/relogin"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
+        android:paddingLeft="50dp"
+        android:paddingRight="50dp"
+        android:textSize="20dp"
+        android:textColor="@color/black"
+        android:background="@drawable/bnse2"
+         />
+
+       
+     
+       
+
+</LinearLayout>

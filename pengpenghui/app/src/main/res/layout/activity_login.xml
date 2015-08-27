@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:background="@color/orange">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+        <ImageView
+            android:layout_height="200dp"
+            android:layout_width="200dp"
+            android:id="@+id/biaotipic"
+            android:background="@drawable/biaoti"
+            />
+        <EditText
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:id="@+id/et_account"
+            android:singleLine="true"
+            android:hint="账号"
+            android:textSize="20dp"
+            android:background="@drawable/line"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            />
+
+        <EditText
+            android:layout_marginTop="25dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:ems="12"
+            android:id="@+id/et_password"
+            android:singleLine="true"
+            android:textSize="20dp"
+            android:hint="密码"
+            android:background="@drawable/line"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+             />
+        <Button
+            android:layout_marginTop="40dp"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="登录"
+            android:textSize="20dp"
+
+            android:padding="7dp"
+            android:id="@+id/login"
+            android:background="@drawable/bnse"
+            android:layout_gravity="bottom" />
+
+        <Button
+            android:layout_marginTop="20dp"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="注册"
+            android:padding="7dp"
+            android:textSize="20dp"
+            android:id="@+id/resigter"
+            android:background="@drawable/bnse"
+            android:layout_gravity="bottom" />
+
+    </LinearLayout>
+
+
+
+
+</LinearLayout>

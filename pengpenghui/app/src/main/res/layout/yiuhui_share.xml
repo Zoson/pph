@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/nfc_bg">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingTop="10dp"
+        android:layout_marginBottom="40dp"
+        android:layout_above="@+id/getItem"
+        android:descendantFocusability="blocksDescendants"
+        >
+
+        <RelativeLayout
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/youhui_bg_share"
+            android:background="@drawable/youhuibg4">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="35pt"
+                android:textColor="@color/white"
+
+                android:textStyle="bold"
+                android:layout_marginLeft="31dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="5dp"
+                android:id="@+id/youhui_price_share" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16pt"
+                android:textColor="@color/white"
+
+                android:layout_marginBottom="7dp"
+                android:textStyle="bold"
+                android:singleLine="true"
+                android:id="@+id/youhui_style_share"
+                android:layout_alignBottom="@+id/youhui_price_share"
+                android:layout_toRightOf="@+id/youhui_price_share"
+                android:layout_toEndOf="@+id/youhui_price_share" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="10pt"
+                android:textColor="@color/white"
+                android:singleLine="true"
+                android:id="@+id/youhui_address_share"
+                android:layout_marginLeft="5dp"
+                android:layout_above="@+id/youhui_style_share"
+                android:layout_toRightOf="@+id/youhui_price_share" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="3dp"
+                android:layout_below="@+id/youhui_price_share"
+                android:layout_centerHorizontal="true">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="6pt"
+                    android:singleLine="true"
+                    android:textColor="@color/white"
+                    android:layout_marginRight="10dp"
+
+                    android:id="@+id/start_data_share"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="6pt"
+                    android:textColor="@color/white"
+                    android:layout_marginRight="10dp"
+                    android:text="---"
+
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="6pt"
+                    android:singleLine="true"
+                    android:textColor="@color/white"
+                    android:id="@+id/end_data_share"
+
+                    />
+
+
+            </LinearLayout>
+        </RelativeLayout>
+    </LinearLayout>
+    <Button
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/getItem"
+        android:layout_above="@+id/bb"
+        android:layout_centerHorizontal="true"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
+        android:paddingLeft="50dp"
+        android:paddingRight="50dp"
+        android:textSize="22dp"
+        android:text="一键分享"
+        android:textColor="@color/white"
+        android:background="@drawable/bnse2"
+        />
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="110dp"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/bb"
+        />
+
+
+</RelativeLayout>
