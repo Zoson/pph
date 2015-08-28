@@ -34,7 +34,7 @@ public class Fragment_Person extends Fragment {
     private MainPageController mainPageController;
     private AdapterView.OnItemClickListener listener;
     private String[] itemsNames = {"个人信息", "我的关注",
-            "分享", "设置","获取优惠"};
+            "分享", "设置"};
     private int[] pid={R.drawable.it1,R.drawable.it2,
             R.drawable.it3,R.drawable.it4,R.drawable.ic_launcher};
     private List<Map<String, Object>> listItems;
@@ -133,11 +133,6 @@ public class Fragment_Person extends Fragment {
                         //Toast.makeText(getActivity(), "您�?�择了标题：" + position, Toast.LENGTH_LONG).show();
                         Intent intent=new Intent(getActivity(),Activity_Setting.class);
                         getActivity().startActivity(intent);
-                        break;
-                    }
-                    case 4:{
-                        TestToGetAd();
-
                         break;
                     }
                     default: {
