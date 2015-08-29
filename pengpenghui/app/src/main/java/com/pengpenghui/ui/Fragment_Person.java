@@ -84,7 +84,7 @@ public class Fragment_Person extends Fragment {
     }
     private void setAdapter(){
         List<Map<String, Object>> listems  = new ArrayList<Map<String, Object>>();
-        for(int i = 0; i <listems.size(); i++) {
+        for(int i = 0; i <4; i++) {
             Map<String, Object> listem  = new HashMap<String, Object>();
             listem .put("image", pid[i]);
             listem .put("title", itemsNames[i] );
