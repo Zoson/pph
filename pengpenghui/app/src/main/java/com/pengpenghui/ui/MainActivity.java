@@ -46,7 +46,7 @@ public class MainActivity extends FragmentActivity implements OnClickListener,
 		initDatas();
 		mViewPager.setAdapter(mAdapter);  //设置Adapter，则每一页显示相应View
 		initEvent();
-        //startNfc();
+        startNfc();
 	}
 
     private void startNfc(){
@@ -198,7 +198,7 @@ public class MainActivity extends FragmentActivity implements OnClickListener,
     @Override
     protected void onResume() {
         super.onResume();
-        //nfcModel.endbleForegroundDispatch();
+        nfcModel.endbleForegroundDispatch();
     }
 
     public void getnfc(String code){
@@ -207,11 +207,11 @@ public class MainActivity extends FragmentActivity implements OnClickListener,
     @Override
     protected void onPause() {
         super.onPause();
-        //nfcModel.disableForegroundDispatch();
+        nfcModel.disableForegroundDispatch();
     }
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
-        //nfcModel.getNfcIntent(intent);
+        nfcModel.getNfcIntent(intent);
     }
     @Override
     public void getNfcInfo(String code) {
