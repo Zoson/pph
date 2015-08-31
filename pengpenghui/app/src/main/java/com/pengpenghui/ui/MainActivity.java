@@ -177,8 +177,8 @@ public class MainActivity extends FragmentActivity implements OnClickListener,
 			right.setIconAlpha(positionOffset);
 			
 			// 以下代码是切换Fragment中View的�?�明度，不需要可以注释掉
-			mTabs.get(position).getView().setAlpha(1 - positionOffset);
-			mTabs.get(position + 1).getView().setAlpha(positionOffset);
+//			mTabs.get(position).getView().setAlpha(1 - positionOffset);
+//			mTabs.get(position + 1).getView().setAlpha(positionOffset);
 		}
 	}
 	
