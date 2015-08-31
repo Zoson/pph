@@ -219,7 +219,9 @@ public class MainActivity extends FragmentActivity implements OnClickListener,
     }
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
-        nfcModel.getNfcIntent(intent);
+		if(tryStartNfc){
+			nfcModel.getNfcIntent(intent);
+		}
     }
     @Override
     public void getNfcInfo(String code) {
