@@ -118,6 +118,7 @@ public class MainPageController {
         httpService.setListener(new HttpListener() {
             @Override
             public void succToRequired(String message, String data) {
+                System.out.println("getBro= "+data);
                 viewInterface.requestSuccessfully("1",data);
             }
 

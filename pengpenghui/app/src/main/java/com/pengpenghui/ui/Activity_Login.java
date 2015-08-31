@@ -10,6 +10,7 @@ import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.pengpenghui.domain.controller.LogController;
@@ -20,7 +21,7 @@ import com.pengpenghui.pph_interface.ViewInterface;
  */
 public class Activity_Login extends Activity implements ViewInterface {
 	private Button bn_login;
-	private Button bn_register;
+	private TextView bn_register;
     private EditText et_account;
     private EditText et_password;
     private LogController logController;
@@ -36,7 +37,7 @@ public class Activity_Login extends Activity implements ViewInterface {
     }
     private void findView(){
         bn_login=(Button) findViewById(R.id.login);
-        bn_register=(Button) findViewById(R.id.resigter);
+        bn_register=(TextView) findViewById(R.id.resigter);
         et_account = (EditText)findViewById(R.id.et_account);
         et_password = (EditText)findViewById(R.id.et_password);
     }

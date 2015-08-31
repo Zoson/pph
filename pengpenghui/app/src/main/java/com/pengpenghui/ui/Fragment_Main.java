@@ -60,7 +60,7 @@ public class Fragment_Main extends android.support.v4.app.Fragment implements Vi
     public void findView(){
         re_bn = (Button) rootView.findViewById(R.id.bn_re_s);
         listview = (ListView) rootView.findViewById(R.id.listview_youhui);
-        alldc = (RadioButton) rootView.findViewById(R.id.youhui_text);
+//        alldc = (RadioButton) rootView.findViewById(R.id.youhui_text);
         //deadlineldc = (RadioButton) rootView.findViewById(R.id.guoqi_text);
         //这里修改优惠券的颜色
         relativeLayout = (RelativeLayout) rootView.findViewById(R.id.youhui_bg);

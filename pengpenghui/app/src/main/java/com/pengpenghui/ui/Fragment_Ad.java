@@ -41,9 +41,9 @@ public class Fragment_Ad extends Fragment {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if (event.getAction() == KeyEvent.ACTION_DOWN) {
-                    if (keyCode == KeyEvent.KEYCODE_BACK && webView.canGoBack()) {  //±íÊ¾°´·µ»Ø¼ü Ê±µÄ²Ù×÷
-                        webView.goBack();   //ºóÍË
-                        return true;    //ÒÑ´¦Àí
+                    if (keyCode == KeyEvent.KEYCODE_BACK && webView.canGoBack()) {  //è¡¨ç¤ºæŒ‰è¿”å›é”® æ—¶çš„æ“ä½œ
+                        webView.goBack();   //åé€€
+                        return true;    //å·²å¤„ç†
                     }
                 }
                 return false;

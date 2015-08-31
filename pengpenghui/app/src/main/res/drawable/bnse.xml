@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android" >
     <item 
-        android:drawable="@color/white"
+        android:drawable="@drawable/bt_radius"
         android:state_pressed="false"/>
     <item 
-        android:drawable="@color/orange2"
+        android:drawable="@drawable/bt_radius_press"
         android:state_pressed="true"/>
     
 
