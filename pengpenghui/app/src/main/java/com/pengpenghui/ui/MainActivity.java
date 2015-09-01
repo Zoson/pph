@@ -17,7 +17,7 @@ import android.widget.Toast;
 
 import com.pengpenghui.domain.controller.MainPageController;
 import com.pengpenghui.pph_interface.NFCListener;
-import com.pengpenghui.domain.entity.NFCModel;
+import com.pengpenghui.domain.entity.nfc.NFCModel;
 import com.pengpenghui.pph_interface.ViewInterface;
 import com.pengpenghui.ui.component.ChangeColorText;
 import com.pengpenghui.ui.component.GetBroDialog;
@@ -35,7 +35,7 @@ public class MainActivity extends FragmentActivity implements OnClickListener,
 	List<Fragment> mTabs = new ArrayList<Fragment>();
 	String[] mTitles = new String[] { "first Fragment !", "Second Fragment !","Third Fragment !" };
 	List<ChangeColorText> mTabIndicators = new ArrayList<ChangeColorText>();
-	private boolean tryStartNfc = false;
+	private boolean tryStartNfc = true;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -49,7 +49,6 @@ public class MainActivity extends FragmentActivity implements OnClickListener,
 		if(tryStartNfc){
 			startNfc();
 		}
-
 	}
 
     private void startNfc(){
@@ -229,6 +228,6 @@ public class MainActivity extends FragmentActivity implements OnClickListener,
 		if (getBroDialog!=null&&getBroDialog.isShowing()){
 			return;
 		}
-		mainPageController.fromNfcTagToGetAd("1234");
+		mainPageController.fromNfcTagToGetAd(code);
     }
 }
