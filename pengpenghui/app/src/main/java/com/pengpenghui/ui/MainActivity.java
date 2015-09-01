@@ -35,7 +35,7 @@ public class MainActivity extends FragmentActivity implements OnClickListener,
 	List<Fragment> mTabs = new ArrayList<Fragment>();
 	String[] mTitles = new String[] { "first Fragment !", "Second Fragment !","Third Fragment !" };
 	List<ChangeColorText> mTabIndicators = new ArrayList<ChangeColorText>();
-	
+	private boolean tryStartNfc = false;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -46,7 +46,10 @@ public class MainActivity extends FragmentActivity implements OnClickListener,
 		initDatas();
 		mViewPager.setAdapter(mAdapter);  //设置Adapter，则每一页显示相应View
 		initEvent();
-        startNfc();
+		if(tryStartNfc){
+			startNfc();
+		}
+
 	}
 
     private void startNfc(){
@@ -198,7 +201,10 @@ public class MainActivity extends FragmentActivity implements OnClickListener,
     @Override
     protected void onResume() {
         super.onResume();
-        nfcModel.endbleForegroundDispatch();
+		if (tryStartNfc){
+			nfcModel.endbleForegroundDispatch();
+		}
+
     }
 
     public void getnfc(String code){
@@ -207,11 +213,15 @@ public class MainActivity extends FragmentActivity implements OnClickListener,
     @Override
     protected void onPause() {
         super.onPause();
-        nfcModel.disableForegroundDispatch();
+		if (tryStartNfc){
+			nfcModel.disableForegroundDispatch();
+		}
     }
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
-        nfcModel.getNfcIntent(intent);
+		if(tryStartNfc){
+			nfcModel.getNfcIntent(intent);
+		}
     }
     @Override
     public void getNfcInfo(String code) {

@@ -1,73 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
-    android:background="@color/orange">
+    >
+    <ImageView
+        android:layout_height="100dp"
+        android:layout_width="100dp"
+        android:id="@+id/biaotipic"
+        android:src="@drawable/biaoti"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/bt_radius"
+        android:layout_centerHorizontal="true"
+        />
     <LinearLayout
+        android:layout_below="@id/biaotipic"
         android:orientation="vertical"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center">
-        <ImageView
-            android:layout_height="200dp"
-            android:layout_width="200dp"
-            android:id="@+id/biaotipic"
-            android:background="@drawable/biaoti"
-            />
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
         <EditText
-            android:layout_width="fill_parent"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:padding="10dp"
             android:layout_marginTop="15dp"
             android:id="@+id/et_account"
             android:singleLine="true"
             android:hint="账号"
+            android:background="@drawable/et_radius"
+            android:textColorHint="#aaa"
             android:textSize="20dp"
-            android:background="@drawable/line"
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
             />
 
         <EditText
-            android:layout_marginTop="25dp"
-            android:layout_width="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPassword"
             android:ems="12"
+            android:padding="10dp"
+            android:background="@drawable/et_radius"
+            android:textColorHint="#aaa"
             android:id="@+id/et_password"
             android:singleLine="true"
             android:textSize="20dp"
             android:hint="密码"
-            android:background="@drawable/line"
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
-             />
+            />
         <Button
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="10dp"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="登录"
+            android:textColor="#fff"
             android:textSize="20dp"
-
             android:padding="7dp"
             android:id="@+id/login"
             android:background="@drawable/bnse"
             android:layout_gravity="bottom" />
-
-        <Button
-            android:layout_marginTop="20dp"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="注册"
-            android:padding="7dp"
-            android:textSize="20dp"
-            android:id="@+id/resigter"
-            android:background="@drawable/bnse"
-            android:layout_gravity="bottom" />
-
     </LinearLayout>
-
-
-
-
-</LinearLayout>
+    <TextView
+        android:layout_marginTop="20dp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="注册"
+        android:padding="7dp"
+        android:textSize="20dp"
+        android:id="@+id/resigter"
+        android:textColor="#555"
+        android:layout_alignParentBottom="true"
+        android:gravity="center" />
+</RelativeLayout>

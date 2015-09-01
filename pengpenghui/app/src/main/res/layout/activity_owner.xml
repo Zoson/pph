@@ -13,14 +13,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
-
         >
     <ImageView
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:id="@+id/userpic"
         android:scaleType="fitXY"
-        android:src="@drawable/tx"/>
+        android:background="@drawable/headpic"/>
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -42,7 +41,8 @@
             android:id="@+id/phone"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="10dp"
-            android:text="XXXXXXXXXXXXX"
+            android:text="用户账号"
+            android:textColor="@color/white"
             />
         </LinearLayout>
     </LinearLayout>

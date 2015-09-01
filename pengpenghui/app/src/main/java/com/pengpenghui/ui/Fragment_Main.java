@@ -2,7 +2,6 @@ package com.pengpenghui.ui;
 
 import android.app.LauncherActivity;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,7 +19,7 @@ import com.pengpenghui.pph_interface.ViewInterface;
 
 import java.util.Date;
 
-public class Fragment_Main extends Fragment implements ViewInterface {
+public class Fragment_Main extends android.support.v4.app.Fragment implements ViewInterface {
     private View rootView;
 	private Button re_bn;
     private RadioGroup mRadioGroup;
@@ -61,7 +60,7 @@ public class Fragment_Main extends Fragment implements ViewInterface {
     public void findView(){
         re_bn = (Button) rootView.findViewById(R.id.bn_re_s);
         listview = (ListView) rootView.findViewById(R.id.listview_youhui);
-        alldc = (RadioButton) rootView.findViewById(R.id.youhui_text);
+//        alldc = (RadioButton) rootView.findViewById(R.id.youhui_text);
         //deadlineldc = (RadioButton) rootView.findViewById(R.id.guoqi_text);
         //这里修改优惠券的颜色
         relativeLayout = (RelativeLayout) rootView.findViewById(R.id.youhui_bg);
