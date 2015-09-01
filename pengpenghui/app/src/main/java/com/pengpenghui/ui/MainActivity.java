@@ -35,7 +35,7 @@ public class MainActivity extends FragmentActivity implements OnClickListener,
 	List<Fragment> mTabs = new ArrayList<Fragment>();
 	String[] mTitles = new String[] { "first Fragment !", "Second Fragment !","Third Fragment !" };
 	List<ChangeColorText> mTabIndicators = new ArrayList<ChangeColorText>();
-	private boolean tryStartNfc = true;
+	private boolean tryStartNfc;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -46,15 +46,18 @@ public class MainActivity extends FragmentActivity implements OnClickListener,
 		initDatas();
 		mViewPager.setAdapter(mAdapter);  //设置Adapter，则每一页显示相应View
 		initEvent();
-		if(tryStartNfc){
-			startNfc();
-		}
+		startNfc();
 	}
 
     private void startNfc(){
         nfcModel = new NFCModel(this,this);
-        pendingIntent = PendingIntent.getActivity(this, 0, new Intent(this,getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
-
+		tryStartNfc = nfcModel.checkNFCFunction();
+		if (tryStartNfc){
+			pendingIntent = PendingIntent.getActivity(this, 0, new Intent(this,getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
+		}else{
+			Toast.makeText(this,"you phone dont have NFC device",Toast.LENGTH_SHORT).show();
+			nfcModel = null;
+		}
     }
 	/** 初始化所有事�? */
 	private void initEvent() {

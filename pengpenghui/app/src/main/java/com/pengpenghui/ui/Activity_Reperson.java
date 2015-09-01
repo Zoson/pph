@@ -37,7 +37,7 @@ public class Activity_Reperson extends Activity{
         initData();
     }
     private void findView(){
-        et_re_person_name = (EditText)findViewById(R.id.re_person_name);
+        //et_re_person_name = (EditText)findViewById(R.id.re_person_name);
         et_re_person_ops = (EditText)findViewById(R.id.re_person_ops);
         et_re_person_nps = (EditText)findViewById(R.id.re_person_nps);
         et_re_person_rps = (EditText)findViewById(R.id.re_preson_rnps);

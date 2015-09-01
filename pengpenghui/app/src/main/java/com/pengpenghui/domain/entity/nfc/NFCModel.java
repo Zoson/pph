@@ -47,7 +47,7 @@ public class NFCModel {
 
     private NFCListener nfcListener;
 
-    private boolean checkNFCFunction() {
+    public boolean checkNFCFunction() {
         //获取系统支持的Adapter，NFC默认的适配器
         mAdapter = NfcAdapter.getDefaultAdapter(activity);
 
