@@ -27,10 +27,7 @@ public class Fragment_Ad extends Fragment {
             WebSettings webSettings = webView.getSettings();
             webSettings.setJavaScriptEnabled(true);
             webView.getSettings().setCacheMode(WebSettings.LOAD_DEFAULT);
-
             setListener();
-
-
         }
         return rootView;
     }
@@ -41,9 +38,9 @@ public class Fragment_Ad extends Fragment {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if (event.getAction() == KeyEvent.ACTION_DOWN) {
-                    if (keyCode == KeyEvent.KEYCODE_BACK && webView.canGoBack()) {  //±íÊ¾°´·µ»Ø¼ü Ê±µÄ²Ù×÷
-                        webView.goBack();   //ºóÍË
-                        return true;    //ÒÑ´¦Àí
+                    if (keyCode == KeyEvent.KEYCODE_BACK && webView.canGoBack()) {  //ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ Ê±ï¿½Ä²ï¿½ï¿½ï¿½
+                        webView.goBack();   //ï¿½ï¿½ï¿½ï¿½
+                        return true;    //ï¿½Ñ´ï¿½ï¿½ï¿½
                     }
                 }
                 return false;
