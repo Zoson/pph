@@ -18,13 +18,14 @@ public class HttpApi {
     private static String deleteOwns = "deleteOwns.php";
     private static String ownsToGetDis = "ownsToGetDis.php";
     private static String insertOwns = "insertOwns.php";
+    private static String test = "test.php";
 
     public static void tagToGetAd(HttpService httpService,String adid){
         httpService.sendGet(tagToGetAd,"tag="+adid);
     }
     public static void deleteOwns(HttpService httpService,String id,String disid){
         String param = "id="+id+"&"+"disId="+disid;
-        httpService.sendPost(deleteOwns,param);
+        httpService.sendPost(deleteOwns, param);
     }
     public static void insertOwns(HttpService httpService,String id,String disid){
         String param = "id="+id+"&"+"disId="+disid;
@@ -33,11 +34,11 @@ public class HttpApi {
 
     public static void isSuited(HttpService httpService,String id){
         String param = "id="+id;
-        httpService.sendGet(isSuited,param);
+        httpService.sendGet(isSuited, param);
     }
     public static void setUserIdPassword(HttpService httpService,String account,String password){
         String param = "id=" + account + "&" + "password=" + password;
-        httpService.sendPost(setUserIdPassword,param);
+        httpService.sendPost(setUserIdPassword, param);
     }
     public static void log(HttpService httpService,String id,String password){
         String param = "id="+id+"&"+"password="+password;
@@ -52,15 +53,20 @@ public class HttpApi {
         httpService.sendPost(setPsw,param);
     }
     public static void setNickName(HttpService httpService,String id,String nickName){
-        String param = "id="+id+"&"+"nickName="+nickName;
-        httpService.sendPost(setNickName,param);
+        String param = "id="+id+"&"+"newNickName="+nickName;
+        httpService.sendGet(setNickName, param);
     }
     public static void setPicture(HttpService httpService,String id,String filepath){
         String param = "id="+id;
-        httpService.sendFileByPost(setPicture,param,filepath);
+        httpService.sendFileByPost(setPicture, param, filepath);
     }
     public static void ownsToGetDis(HttpService httpService,String id){
         String param = "id="+id;
-        httpService.sendGet(ownsToGetDis,param);
+        httpService.sendGet(ownsToGetDis, param);
+    }
+
+    public static void test(HttpService httpService){
+        String param = "test=哈哈哈";
+        httpService.sendGet(test,param);
     }
 }

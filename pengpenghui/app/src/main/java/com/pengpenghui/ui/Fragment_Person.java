@@ -5,8 +5,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +29,7 @@ import com.pengpenghui.domain.controller.MainPageController;
 import com.pengpenghui.domain.entity.UserModel;
 import com.pengpenghui.pph_interface.ViewInterface;
 import com.pengpenghui.ui.component.GetBroDialog;
+import com.pengpenghui.ui.component.RenameDialog;
 
 
 public class Fragment_Person extends Fragment {
@@ -62,7 +70,10 @@ public class Fragment_Person extends Fragment {
                         getBroDialog.show();
                         break;
                     case "1":
-                        Toast.makeText(getActivity(),"领取成功",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(),"领取成功",Toast.LENGTH_SHORT).show();break;
+                    case "changename":
+                        personName.setText(data);
+                        break;
                 }
 
             }
@@ -111,28 +122,22 @@ public class Fragment_Person extends Fragment {
                                     long id) {
                 switch (position) {
                     case 0: {
-                        Toast.makeText(getActivity(), "您�?�择了标题：" + position, Toast.LENGTH_LONG).show();
                         Intent intent=new Intent(getActivity(),Activity_Reperson.class);
                         getActivity().startActivity(intent);
                         break;
                     }
                     case 1: {
-                        Toast.makeText(getActivity(), "您�?�择了标题：" + position, Toast.LENGTH_LONG).show();
-
-
                         break;
                     }
                     case 2: {
-                        //Toast.makeText(getActivity(), "您�?�择了标题：" + position, Toast.LENGTH_LONG).show();
-                        //这里是测试页�?
                         Intent intent=new Intent(getActivity(),Activity_Share.class);
                         getActivity().startActivity(intent);
                         break;
                     }
                     case 3: {
-                        //Toast.makeText(getActivity(), "您�?�择了标题：" + position, Toast.LENGTH_LONG).show();
                         Intent intent=new Intent(getActivity(),Activity_Setting.class);
                         getActivity().startActivity(intent);
+                        //getActivity().finish();
                         break;
                     }
                     default: {
@@ -143,6 +148,7 @@ public class Fragment_Person extends Fragment {
                 }
             }
         });
+
     }
     private void TestToGetAd(){
         mainPageController.fromNfcTagToGetAd("1234");

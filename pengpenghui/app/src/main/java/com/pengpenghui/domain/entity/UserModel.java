@@ -36,6 +36,7 @@ public class UserModel implements DataObjectInterface {
     public String getAccount(){
         return account;
     }
+
     public void setAccount(String account){
         this.account = account;
     }
@@ -88,7 +89,6 @@ public class UserModel implements DataObjectInterface {
         this.money = money;
     }
 
-
     @Override
     public ContentValues getContentValues() {
         ContentValues contentValues = new ContentValues();
@@ -107,6 +107,7 @@ public class UserModel implements DataObjectInterface {
         money = Double.parseDouble(map.get(DataBaseTable.UserDataTable.MONEY));
         img = map.get(DataBaseTable.UserDataTable.IMG);
     }
+
     public void dealJsonData(String data){
         try {
             JSONObject jsonObject = new JSONObject(data);

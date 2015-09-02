@@ -1,6 +1,7 @@
 package com.pengpenghui.domain.controller;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.widget.Toast;
 
 import com.pengpenghui.domain.entity.AdData;
@@ -154,6 +155,7 @@ public class MainPageController {
             @Override
             public void succToRequired(String message, String data) {
                 viewInterface.requestSuccessfully("changeps",data);
+
             }
 
             @Override
@@ -173,7 +175,13 @@ public class MainPageController {
         httpService.setListener(new HttpListener() {
             @Override
             public void succToRequired(String message, String data) {
-                viewInterface.requestSuccessfully("changename",data);
+                try {
+                    JSONObject js = new JSONObject(data);
+                    userModel.setNickName(js.getString("newNickName"));
+                    viewInterface.requestSuccessfully("changename", js.getString("newNickName"));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
 
             @Override
@@ -186,7 +194,15 @@ public class MainPageController {
                 viewInterface.requestError("","");
             }
         });
-        HttpApi.setNickName(httpService,userModel.getId(),name);
+        HttpApi.setNickName(httpService, userModel.getId(), name);
+        System.out.println("uid=" + userModel.getId());
+    }
+
+    public void changPicture(String file){
+        sharedPreference = new SharedPreference(context);
+        sharedPreference.set("file",file);
+        HttpApi.setPicture(httpService,userModel.getId(),file);
+
     }
 
 }

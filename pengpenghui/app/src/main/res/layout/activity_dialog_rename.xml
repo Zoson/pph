@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="300dp"
+    android:layout_height="wrap_content">
+    <EditText
+        android:background="@drawable/et_radius"
+        android:layout_width="match_parent"
+        android:hint="输入昵称"
+        android:id="@+id/et_rename"
+        android:padding="10dp"
+        android:layout_height="wrap_content" />
+    <TableLayout
+        android:layout_gravity="center_horizontal"
+        android:stretchColumns="0,1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TableRow>
+            <Button
+                android:id="@+id/bt_get_bro"
+                android:text="修改"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+            <Button
+                android:id="@+id/bt_cancel"
+                android:text="取消"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+        </TableRow>
+    </TableLayout>
+</LinearLayout>

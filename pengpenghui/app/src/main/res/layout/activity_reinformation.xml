@@ -4,7 +4,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     >
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -34,11 +33,54 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="密码修改"
+            android:text="信息修改"
             android:textColor="@color/white"
             android:textSize="23dp" />
 
     </RelativeLayout>
+    <LinearLayout
+        android:background="@color/orange"
+        android:layout_gravity="center_vertical"
+        android:paddingLeft="25dp"
+        android:paddingBottom="33dp"
+        android:paddingTop="33dp"
+        android:id="@+id/ln"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:id="@+id/userpic"
+            android:scaleType="fitXY"
+            android:background="@drawable/headpic"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:layout_marginLeft="20dp"
+                android:id="@+id/uesrname_show"
+                android:text="昵称"
+                android:textColor="@color/white"
+                android:textSize="25dp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/phone"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:text="用户账号"
+                android:textColor="@color/white"
+                />
+        </LinearLayout>
+    </LinearLayout>
     <LinearLayout
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="30dp"

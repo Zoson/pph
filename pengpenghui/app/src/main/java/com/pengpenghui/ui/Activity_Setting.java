@@ -64,9 +64,9 @@ public class Activity_Setting extends Activity {
             @Override
             public void onClick(View v) {
                 //注销
-
                 Intent intent = new Intent();
                 intent.setClass(Activity_Setting.this, Activity_Login.class);
+                finish();
                 startActivity(intent);
 
             }

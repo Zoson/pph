@@ -29,7 +29,6 @@
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.nfc.action.NDEF_DISCOVERED" ></action>
-
                 <category android:name="android.intent.category.DEFAULT" >
                 </category>
                 <data android:mimeType="text/plain" >
