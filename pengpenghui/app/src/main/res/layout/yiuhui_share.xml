@@ -10,7 +10,7 @@
         android:gravity="center_vertical"
         android:paddingTop="10dp"
         android:layout_marginBottom="40dp"
-        android:layout_above="@+id/getItem"
+        android:layout_above="@+id/getddItem"
         android:descendantFocusability="blocksDescendants"
         >
 
@@ -102,7 +102,7 @@
 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/getItem"
+        android:id="@+id/getddItem"
         android:layout_above="@+id/bb"
         android:layout_centerHorizontal="true"
         android:paddingBottom="8dp"
