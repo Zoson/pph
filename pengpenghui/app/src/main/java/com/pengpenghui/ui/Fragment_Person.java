@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -71,9 +72,11 @@ public class Fragment_Person extends Fragment {
                         break;
                     case "1":
                         Toast.makeText(getActivity(),"领取成功",Toast.LENGTH_SHORT).show();break;
-                    case "changename":
-                        personName.setText(data);
+                    case "changeInfo":
+                        personName.setText(userModel.getNickName());
+                        personPicture.setImageBitmap(userModel.getBitmap());
                         break;
+
                 }
 
             }
@@ -123,7 +126,7 @@ public class Fragment_Person extends Fragment {
                 switch (position) {
                     case 0: {
                         Intent intent=new Intent(getActivity(),Activity_Reperson.class);
-                        getActivity().startActivity(intent);
+                        startActivityForResult(intent, Activity.RESULT_OK);
                         break;
                     }
                     case 1: {
@@ -131,17 +134,16 @@ public class Fragment_Person extends Fragment {
                     }
                     case 2: {
                         Intent intent=new Intent(getActivity(),Activity_Share.class);
-                        getActivity().startActivity(intent);
+                        startActivity(intent);
                         break;
                     }
                     case 3: {
                         Intent intent=new Intent(getActivity(),Activity_Setting.class);
-                        getActivity().startActivity(intent);
+                        startActivity(intent);
                         //getActivity().finish();
                         break;
                     }
                     default: {
-
                         break;
                     }
 
@@ -154,5 +156,15 @@ public class Fragment_Person extends Fragment {
         mainPageController.fromNfcTagToGetAd("1234");
     }
 
+    public void updateInfo(){
+        personPicture.setImageBitmap(userModel.getBitmap());
+        personName.setText(userModel.getNickName());
+    }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        updateInfo();
+        super.onActivityResult(requestCode, resultCode, data);
+
+    }
 }

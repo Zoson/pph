@@ -256,7 +256,7 @@ public class HttpService {
                     sb_file.append(BOUNDARY);
                     sb_file.append("\r\n");
 
-                    sb_file.append("Content-Disposition: form-data;name=\"userPicture\";filename=\""
+                    sb_file.append("Content-Disposition: form-data;name=\"bitmap\";filename=\""
                             + file.getName() + "\"\r\n");
                     sb_file.append("Content-Type:application/octet-stream\r\n\r\n");
 

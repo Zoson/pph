@@ -32,6 +32,9 @@ public class MainActivity extends FragmentActivity implements OnClickListener,
 	private MainPageController mainPageController;
 	ViewPager mViewPager;
 	FragmentPagerAdapter mAdapter;
+	private Fragment_Ad Fragment_ad;
+	private Fragment_Person Fragment_person;
+	private Fragment_Main Fragment_main;
 	List<Fragment> mTabs = new ArrayList<Fragment>();
 	String[] mTitles = new String[] { "first Fragment !", "Second Fragment !","Third Fragment !" };
 	List<ChangeColorText> mTabIndicators = new ArrayList<ChangeColorText>();
@@ -67,13 +70,13 @@ public class MainActivity extends FragmentActivity implements OnClickListener,
 
 	private void initDatas() {
 		//广告页面
-		Fragment_Ad Fragment_ad = new Fragment_Ad();
+		Fragment_ad = new Fragment_Ad();
 		mTabs.add(Fragment_ad);
         //主界�?
-		Fragment_Main Fragment_main = new Fragment_Main();
+		Fragment_main = new Fragment_Main();
 		mTabs.add(Fragment_main);
 		//个人信息页面
-		Fragment_Person Fragment_person = new Fragment_Person();
+		Fragment_person = new Fragment_Person();
 		mTabs.add(Fragment_person);
 
 		mainPageController = new MainPageController(this, new ViewInterface() {
@@ -233,4 +236,11 @@ public class MainActivity extends FragmentActivity implements OnClickListener,
 		}
 		mainPageController.fromNfcTagToGetAd(code);
     }
+//
+//	@Override
+//	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//		super.onActivityResult(requestCode, resultCode, data);
+//		Toast.makeText(this,"onResult",Toast.LENGTH_SHORT).show();
+//		Fragment_person.updateInfo();
+//	}
 }

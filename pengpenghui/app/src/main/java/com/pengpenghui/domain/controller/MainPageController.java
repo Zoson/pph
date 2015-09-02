@@ -202,6 +202,7 @@ public class MainPageController {
         sharedPreference = new SharedPreference(context);
         sharedPreference.set("file",file);
         HttpApi.setPicture(httpService,userModel.getId(),file);
+        viewInterface.requestSuccessfully("changeInfo","");
 
     }
 

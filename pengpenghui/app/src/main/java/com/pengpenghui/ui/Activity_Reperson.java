@@ -49,6 +49,10 @@ public class Activity_Reperson extends Activity{
     private UserModel userModel;
     private String[] items = {"选择本地图片", "拍照"};
     private String file;
+    private static final int IMAGE_REQUEST_CODE = 0;
+    private static final int CAMERA_REQUEST_CODE = 1;
+    private static final int RESULT_REQUEST_CODE = 2;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -145,19 +149,24 @@ public class Activity_Reperson extends Activity{
         intent.putExtra("outputX", 300);
         intent.putExtra("outputY", 300);
         intent.putExtra("return-data", true);
-        startActivityForResult(intent, 102);
+        startActivityForResult(intent, 2);
     }
     private void getImageToView(Intent data) {
         Bundle extras = data.getExtras();
         if (extras != null) {
             Bitmap photo_bit = extras.getParcelable("data");
             Drawable drawable = new BitmapDrawable(photo_bit);
+
             personPicture.setImageDrawable(drawable);
-            userModel.setBitmap(photo_bit);
             saveBitmap(photo_bit);
-            mainPageController.changPicture(file);
+            if(EnvironmentData.checkSDCard())
+                file = Environment.getExternalStorageDirectory()+StaticData.IMAGE_DIR+StaticData.IMAGE_FILE_NAME2;
+            else
+                file = StaticData.IMAGE_DIR+StaticData.IMAGE_FILE_NAME2;
         }
+        mainPageController.changPicture(file);
     }
+
 
     private void showDialog() {
         new AlertDialog.Builder(this)
@@ -171,9 +180,10 @@ public class Activity_Reperson extends Activity{
                                 Intent intentFromGallery = new Intent();
                                 intentFromGallery.setType("image/*"); // 设置文件类型
                                 intentFromGallery.setAction(Intent.ACTION_GET_CONTENT);
-                                startActivityForResult(intentFromGallery,100);
+                                startActivityForResult(intentFromGallery,IMAGE_REQUEST_CODE);
                                 break;
                             case 1:
+
                                 Intent intentFromCapture = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                                 // 判断存储卡是否可以用，可用进行存储
                                 if (EnvironmentData.checkSDCard()) {
@@ -192,36 +202,38 @@ public class Activity_Reperson extends Activity{
                                     }
                                     intentFromCapture.putExtra(MediaStore.EXTRA_OUTPUT,Uri.fromFile(new File(StaticData.IMAGE_DIR,StaticData.IMAGE_FILE_NAME)));
                                 }
-                                startActivityForResult(intentFromCapture,101);
+                                startActivityForResult(intentFromCapture,CAMERA_REQUEST_CODE);
                                 break;
                         }
                     }
                 })
                 .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
                     }
                 }).show();
+
     }
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
         if(resultCode == RESULT_OK) {
             switch (requestCode) {
-                case 100:
+                case IMAGE_REQUEST_CODE:
                     startPhotoZoom(data.getData());
                     break;
-                case 101:
+                case CAMERA_REQUEST_CODE:
                     if (EnvironmentData.checkSDCard()) {
-                        File tempFile = new File(Environment.getExternalStorageDirectory()+ StaticData.IMAGE_DIR + StaticData.IMAGE_FILE_NAME);
+                        File tempFile = new File(Environment.getExternalStorageDirectory()+StaticData.IMAGE_DIR + StaticData.IMAGE_FILE_NAME);
                         startPhotoZoom(Uri.fromFile(tempFile));
                     } else {
                         File tempFile = new File(StaticData.IMAGE_DIR + StaticData.IMAGE_FILE_NAME);
                         startPhotoZoom(Uri.fromFile(tempFile));
                     }
                     break;
-                case 102:
+                case RESULT_REQUEST_CODE:
                     if (data != null) {
                         getImageToView(data);
                     }
@@ -231,8 +243,9 @@ public class Activity_Reperson extends Activity{
         }
     }
     private void saveBitmap(Bitmap bmp){
+        String filePath;
         if (EnvironmentData.checkSDCard()){
-            file = Environment.getExternalStorageDirectory()+StaticData.IMAGE_DIR+StaticData.IMAGE_FILE_NAME2;
+            filePath = Environment.getExternalStorageDirectory()+StaticData.IMAGE_DIR+StaticData.IMAGE_FILE_NAME2;
             try {
                 FileOutputStream out = new FileOutputStream(Environment.getExternalStorageDirectory()+StaticData.IMAGE_DIR+StaticData.IMAGE_FILE_NAME2);
                 bmp.compress(Bitmap.CompressFormat.PNG, 90, out);
@@ -242,7 +255,7 @@ public class Activity_Reperson extends Activity{
             }
         }
         else{
-            file = StaticData.IMAGE_DIR+StaticData.IMAGE_FILE_NAME2;
+            filePath = StaticData.IMAGE_DIR+StaticData.IMAGE_FILE_NAME2;
             try{
                 FileOutputStream out = new FileOutputStream(StaticData.IMAGE_DIR+StaticData.IMAGE_FILE_NAME2);
                 bmp.compress(Bitmap.CompressFormat.PNG,90,out);
@@ -251,7 +264,6 @@ public class Activity_Reperson extends Activity{
                 e.printStackTrace();
             }
         }
+
     }
-
-
 }
