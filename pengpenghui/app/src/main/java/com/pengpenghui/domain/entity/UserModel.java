@@ -15,7 +15,7 @@ import java.util.Map;
  */
 public class UserModel implements DataObjectInterface {
     private String id;
-    private String account;
+    private String account = null;
     private String passWord;
     private String nickName;
     private String img;

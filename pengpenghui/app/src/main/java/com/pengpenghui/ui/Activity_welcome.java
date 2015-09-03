@@ -29,14 +29,13 @@ public class Activity_welcome extends PPHActivity{
         ll_welcome.postDelayed(new Runnable() {
             @Override
             public void run() {
-//                if (logController.isAutoLog()) {
-//                    logController.tryAutoLog();
-//                } else {
-//                    startLogActivity();
-//                }
-                startLogActivity();
+                if (logController.isAutoLog()) {
+                    logController.tryAutoLog();
+                } else {
+                    startLogActivity();
+                }
             }
-        }, 3000);
+        }, 1000);
     }
     private void startLogActivity(){
         Intent intent = new Intent(Activity_welcome.this, Activity_Login.class);

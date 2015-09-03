@@ -58,9 +58,15 @@ public class Fragment_Person extends Fragment {
             setListener();
             initData();
         }
-
 		return rootView;
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        updateInfo();
+    }
+
     private void initData(){
         mainPageController = new MainPageController(getActivity(),new ViewInterface() {
             @Override
@@ -126,7 +132,7 @@ public class Fragment_Person extends Fragment {
                 switch (position) {
                     case 0: {
                         Intent intent=new Intent(getActivity(),Activity_Reperson.class);
-                        startActivityForResult(intent, Activity.RESULT_OK);
+                        getActivity().startActivityForResult(intent, Activity.RESULT_OK);
                         break;
                     }
                     case 1: {
@@ -140,7 +146,7 @@ public class Fragment_Person extends Fragment {
                     case 3: {
                         Intent intent=new Intent(getActivity(),Activity_Setting.class);
                         startActivity(intent);
-                        //getActivity().finish();
+                        getActivity().finish();
                         break;
                     }
                     default: {
@@ -161,10 +167,5 @@ public class Fragment_Person extends Fragment {
         personName.setText(userModel.getNickName());
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        updateInfo();
-        super.onActivityResult(requestCode, resultCode, data);
 
-    }
 }

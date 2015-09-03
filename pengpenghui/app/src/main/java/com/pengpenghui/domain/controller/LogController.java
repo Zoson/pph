@@ -26,8 +26,10 @@ public class LogController {
     private DataBaseOperator dataBaseOperator;
     private SharedPreference sharedPreference;
     private HttpService httpService;
-    public LogController(Context context,ViewInterface viewInterface){
+    private Context context;
+    public LogController(final Context context,ViewInterface viewInterface){
         this.viewInterface = viewInterface;
+        this.context = context;
         userModel = UserModel.getInstance();
         sharedPreference = new SharedPreference(context);
         httpService = new HttpService();
@@ -149,5 +151,11 @@ public class LogController {
         HttpApi.isSuited(httpService,account);
     }
 
+    public void forceTolog(){
+        sharedPreference = new SharedPreference(context);
+        userModel.setAccount(sharedPreference.get("account",""));
+        userModel.setPassWord(sharedPreference.get("password", ""));
+        this.tryAutoLog();
+    }
 
 }

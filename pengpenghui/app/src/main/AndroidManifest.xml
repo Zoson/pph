@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    android:versionName="0.0.1"
+    android:versionName="0.1.1"
     package="com.pengpenghui.ui" >
     <!-- ###################声明SDK使用的相关权限###################### -->
     <!-- ###################声明SDK使用的相关权限###################### -->

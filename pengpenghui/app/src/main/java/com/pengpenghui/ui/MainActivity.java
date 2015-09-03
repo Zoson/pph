@@ -15,10 +15,13 @@ import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.Toast;
 
+import com.pengpenghui.domain.controller.LogController;
 import com.pengpenghui.domain.controller.MainPageController;
+import com.pengpenghui.domain.entity.UserModel;
 import com.pengpenghui.pph_interface.NFCListener;
 import com.pengpenghui.domain.entity.nfc.NFCModel;
 import com.pengpenghui.pph_interface.ViewInterface;
+import com.pengpenghui.service.SharedPreference;
 import com.pengpenghui.ui.component.ChangeColorText;
 import com.pengpenghui.ui.component.GetBroDialog;
 
@@ -35,6 +38,7 @@ public class MainActivity extends FragmentActivity implements OnClickListener,
 	private Fragment_Ad Fragment_ad;
 	private Fragment_Person Fragment_person;
 	private Fragment_Main Fragment_main;
+	private UserModel userModel;
 	List<Fragment> mTabs = new ArrayList<Fragment>();
 	String[] mTitles = new String[] { "first Fragment !", "Second Fragment !","Third Fragment !" };
 	List<ChangeColorText> mTabIndicators = new ArrayList<ChangeColorText>();
@@ -104,17 +108,38 @@ public class MainActivity extends FragmentActivity implements OnClickListener,
 		});
 
 		mAdapter = new FragmentPagerAdapter(getSupportFragmentManager()){
-		@Override
-		public int getCount() {
-			return mTabs.size();
+			@Override
+			public int getCount() {
+				return mTabs.size();
+			}
+			@Override
+			public Fragment getItem(int position) {
+				return mTabs.get(position);
+			}
+		};
+		UserModel userModel = UserModel.getInstance();
+		if(userModel.getAccount()==null){
+			LogController logController = new LogController(this, new ViewInterface() {
+				@Override
+				public void requestSuccessfully(String msg, String data) {
+
+				}
+
+				@Override
+				public void requestUnSuccessfully(String msg, String data) {
+					Toast.makeText(MainActivity.this, "请先登录", Toast.LENGTH_SHORT).show();
+					Intent intent = new Intent(MainActivity.this,Activity_Login.class);
+					startActivity(intent);
+					MainActivity.this.finish();
+				}
+
+				@Override
+				public void requestError(String msg, String data) {
+
+				}
+			});
+			logController.forceTolog();
 		}
-		@Override
-		public Fragment getItem(int position) {
-			return mTabs.get(position);
-		}
-	};
-		
-		
 	}
 
 	private void initView() {
@@ -236,11 +261,5 @@ public class MainActivity extends FragmentActivity implements OnClickListener,
 		}
 		mainPageController.fromNfcTagToGetAd(code);
     }
-//
-//	@Override
-//	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//		super.onActivityResult(requestCode, resultCode, data);
-//		Toast.makeText(this,"onResult",Toast.LENGTH_SHORT).show();
-//		Fragment_person.updateInfo();
-//	}
+
 }

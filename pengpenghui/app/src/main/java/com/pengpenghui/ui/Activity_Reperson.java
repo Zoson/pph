@@ -38,6 +38,7 @@ public class Activity_Reperson extends Activity{
     private EditText et_re_person_rps;
     private EditText et_re_person_name;
     private Button regi;
+    private Button rein;
     private String oldps;
     private String newps;
     private String rnewps;
@@ -71,8 +72,15 @@ public class Activity_Reperson extends Activity{
         personName= (TextView)findViewById(R.id.uesrname_show);
         phoneNum= (TextView)findViewById(R.id.phone);
         regi = (Button)findViewById(R.id.regi);
+        rein  = (Button)findViewById(R.id.bn_re_rein);
     }
     private void setListener(){
+        rein.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
         regi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -121,6 +129,7 @@ public class Activity_Reperson extends Activity{
             public void requestSuccessfully(String msg, String data) {
                 switch (msg){
                     case "changeps":userModel.setPassWord(newps);break;
+                    case "changename":personName.setText(userModel.getNickName());
                 }
             }
 
@@ -158,6 +167,7 @@ public class Activity_Reperson extends Activity{
             Drawable drawable = new BitmapDrawable(photo_bit);
 
             personPicture.setImageDrawable(drawable);
+            userModel.setBitmap(photo_bit);
             saveBitmap(photo_bit);
             if(EnvironmentData.checkSDCard())
                 file = Environment.getExternalStorageDirectory()+StaticData.IMAGE_DIR+StaticData.IMAGE_FILE_NAME2;

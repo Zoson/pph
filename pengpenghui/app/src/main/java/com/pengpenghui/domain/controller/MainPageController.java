@@ -172,6 +172,7 @@ public class MainPageController {
     }
 
     public void changeName(String name){
+        userModel.setNickName(name);
         httpService.setListener(new HttpListener() {
             @Override
             public void succToRequired(String message, String data) {
@@ -200,10 +201,11 @@ public class MainPageController {
 
     public void changPicture(String file){
         sharedPreference = new SharedPreference(context);
-        sharedPreference.set("file",file);
-        HttpApi.setPicture(httpService,userModel.getId(),file);
-        viewInterface.requestSuccessfully("changeInfo","");
+        sharedPreference.set("file", file);
+        HttpApi.setPicture(httpService, userModel.getId(), file);
+        viewInterface.requestSuccessfully("changeInfo", "");
 
     }
+
 
 }

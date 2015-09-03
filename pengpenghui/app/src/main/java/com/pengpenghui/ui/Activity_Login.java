@@ -76,7 +76,7 @@ public class Activity_Login extends Activity implements ViewInterface {
     }
     @Override
     public void requestSuccessfully(String msg, String data) {
-        Toast.makeText(this,"登录成功"+data,Toast.LENGTH_LONG).show();
+        Toast.makeText(this,"登录成功",Toast.LENGTH_LONG).show();
         logController.AutoLog();
         Intent intent = new Intent();
         intent.setClass(Activity_Login.this, MainActivity.class);
