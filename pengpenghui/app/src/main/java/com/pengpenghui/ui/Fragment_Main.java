@@ -11,6 +11,7 @@ import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.pengpenghui.domain.controller.BroMessageListAdapter;
@@ -24,6 +25,7 @@ public class Fragment_Main extends android.support.v4.app.Fragment implements Vi
 	private Button re_bn;
     private RadioGroup mRadioGroup;
 	private ListView listview;
+    private TextView hongbaoAllCost;
     //private int[] bnbg={R.drawable.bn_sw_dis,R.color.white};
 	private LauncherActivity.ListItem listItems;
 	//全部优惠券
@@ -40,6 +42,7 @@ public class Fragment_Main extends android.support.v4.app.Fragment implements Vi
 	private Date startDate;
 	private Date endDate;
     private RelativeLayout relativeLayout;
+
 	//结束时间
     private MainPageController mainPageController;
     private BroMessageListAdapter broMessageListAdapter;
@@ -64,6 +67,7 @@ public class Fragment_Main extends android.support.v4.app.Fragment implements Vi
         //deadlineldc = (RadioButton) rootView.findViewById(R.id.guoqi_text);
         //这里修改优惠券的颜色
         relativeLayout = (RelativeLayout) rootView.findViewById(R.id.youhui_bg);
+        hongbaoAllCost=(TextView) rootView.findViewById(R.id.hongbao_cost);
         //relativeLayout.setBackground();
         //youhuibg1到youhuibg4
 

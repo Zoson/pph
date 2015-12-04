@@ -51,6 +51,68 @@
          <!--android:textSize="15dp" />-->
 
      <!--</RadioGroup>-->
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="100dp"
+        android:background="@drawable/hongbao_bg"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:gravity="center_horizontal">
+
+        <ImageView
+            android:layout_marginTop="18dp"
+            android:id="@+id/im1"
+            android:layout_width="120dp"
+            android:layout_height="40dp"
+            android:background="@drawable/hongbao_2"/>
+
+        <TextView
+            android:layout_marginTop="12dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/im1"
+            android:layout_marginLeft="10dp"
+            android:id="@+id/hongbao_cost"
+            android:textColor="@color/orange"
+            android:textSize="50dp"
+            android:text="0"/>
+
+            <ImageView
+                android:layout_marginTop="18dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/hongbao_cost"
+                android:background="@drawable/hongbao_1"/>
+
+
+        </RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:gravity="center_vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/white"
+                android:textSize="20dp"
+                android:text="优惠券"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="200dp"
+                android:textColor="@color/white"
+                android:textSize="20dp"
+                android:text="2 张"/>
+
+
+        </LinearLayout>
+    </LinearLayout>
      <ListView
          android:id="@+id/listview_youhui"
          android:layout_gravity="left"
