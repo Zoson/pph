@@ -68,14 +68,8 @@ public class Activity_Setting extends Activity {
                 intent.setClass(Activity_Setting.this, Activity_Login.class);
                 finish();
                 startActivity(intent);
-
             }
         });
-
-
     }
-
-
-
 }
 

@@ -155,7 +155,6 @@ public class MainPageController {
             @Override
             public void succToRequired(String message, String data) {
                 viewInterface.requestSuccessfully("changeps",data);
-
             }
 
             @Override
@@ -204,8 +203,5 @@ public class MainPageController {
         sharedPreference.set("file", file);
         HttpApi.setPicture(httpService, userModel.getId(), file);
         viewInterface.requestSuccessfully("changeInfo", "");
-
     }
-
-
 }

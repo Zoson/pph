@@ -24,6 +24,19 @@ public class DataBaseTable {
             + "foreign key("+UserDataTable.ID+") references " + UserDataTable.USER_TABLE_NAME + "("+UserDataTable.ID+")"
             +")";
 
+    public static String create_wchatentry = "create table "+WchatEntry.WCHATENTRY_TABLE_NAME + "("
+            + WchatEntry.ID+" varchar(32),"
+            + WchatEntry.VERIFYCODE + " char(28),"
+            + "foreign key("+WchatEntry.ID+")reference "+UserDataTable.USER_TABLE_NAME + "("+UserDataTable.ID+")"
+            +")";
+
+    public static String create_gift = "create table "+Gift.GIFT_TABLE_NAME+"("
+            + Gift.ID + " varchar(32),"
+            + Gift.MONEY + " integer,"
+            + Gift.TIME + " date,"
+            + "foreign key("+Gift.ID+") references "+UserDataTable.USER_TABLE_NAME+"("+UserDataTable.ID+")"
+            +")";
+
     public static class UserDataTable{
         public static final String USER_TABLE_NAME = "user";
         public static final String ID = "id";
@@ -42,5 +55,16 @@ public class DataBaseTable {
         public static final String ENDDATE = "enddate";
         public static final String DISMONEY = "dismoney";
         public static final String NAME = "name";
+    }
+    public static class WchatEntry{
+        public static final String WCHATENTRY_TABLE_NAME = "wchatentry";
+        public static final String ID = "wc_id";
+        public static final String VERIFYCODE = "verifycode";
+    }
+    public static class Gift{
+        public static final String GIFT_TABLE_NAME = "gift";
+        public static final String ID = "g_id";
+        public static final String TIME = "time";
+        public static final String MONEY = "money";
     }
 }

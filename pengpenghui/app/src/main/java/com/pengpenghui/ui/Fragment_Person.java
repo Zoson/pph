@@ -43,7 +43,7 @@ public class Fragment_Person extends Fragment {
     private MainPageController mainPageController;
     private AdapterView.OnItemClickListener listener;
     private String[] itemsNames = {"个人信息", "我的关注",
-            "分享", "设置"};
+            "红包","分享","设置"};
     private int[] pid={R.drawable.it1,R.drawable.it2,
             R.drawable.it3,R.drawable.it4,R.drawable.ic_launcher};
     private List<Map<String, Object>> listItems;
@@ -82,7 +82,6 @@ public class Fragment_Person extends Fragment {
                         personName.setText(userModel.getNickName());
                         personPicture.setImageBitmap(userModel.getBitmap());
                         break;
-
                 }
 
             }
@@ -104,7 +103,7 @@ public class Fragment_Person extends Fragment {
     }
     private void setAdapter(){
         List<Map<String, Object>> listems  = new ArrayList<Map<String, Object>>();
-        for(int i = 0; i <4; i++) {
+        for(int i = 0; i <5; i++) {
             Map<String, Object> listem  = new HashMap<String, Object>();
             listem .put("image", pid[i]);
             listem .put("title", itemsNames[i] );
@@ -139,11 +138,16 @@ public class Fragment_Person extends Fragment {
                         break;
                     }
                     case 2: {
+                        Intent intent = new Intent(getActivity(),Activity_GetGift.class);
+                        getActivity().startActivity(intent);
+                        break;
+                    }
+                    case 3: {
                         Intent intent=new Intent(getActivity(),Activity_Share.class);
                         startActivity(intent);
                         break;
                     }
-                    case 3: {
+                    case 4: {
                         Intent intent=new Intent(getActivity(),Activity_Setting.class);
                         startActivity(intent);
                         getActivity().finish();

@@ -107,6 +107,7 @@
             android:value="55e3facfe0f55a7d8a001a01" >
         </meta-data>
 
+        <activity android:name=".Activity_GetGift"/>
 
     </application>
 
