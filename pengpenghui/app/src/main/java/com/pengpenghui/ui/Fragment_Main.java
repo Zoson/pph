@@ -15,10 +15,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.pengpenghui.domain.controller.BroMessageListAdapter;
+import com.pengpenghui.domain.controller.GiftManager;
 import com.pengpenghui.domain.controller.MainPageController;
 import com.pengpenghui.pph_interface.ViewInterface;
 
 import java.util.Date;
+import java.util.List;
 
 public class Fragment_Main extends android.support.v4.app.Fragment implements ViewInterface {
     private View rootView;
@@ -26,6 +28,7 @@ public class Fragment_Main extends android.support.v4.app.Fragment implements Vi
     private RadioGroup mRadioGroup;
 	private ListView listview;
     private TextView hongbaoAllCost;
+    private TextView bro_sum;
     //private int[] bnbg={R.drawable.bn_sw_dis,R.color.white};
 	private LauncherActivity.ListItem listItems;
 	//全部优惠券
@@ -46,6 +49,7 @@ public class Fragment_Main extends android.support.v4.app.Fragment implements Vi
 	//结束时间
     private MainPageController mainPageController;
     private BroMessageListAdapter broMessageListAdapter;
+    private GiftManager giftManager;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
@@ -68,18 +72,37 @@ public class Fragment_Main extends android.support.v4.app.Fragment implements Vi
         //这里修改优惠券的颜色
         relativeLayout = (RelativeLayout) rootView.findViewById(R.id.youhui_bg);
         hongbaoAllCost=(TextView) rootView.findViewById(R.id.hongbao_cost);
+        bro_sum = (TextView)rootView.findViewById(R.id.bro_sum);
         //relativeLayout.setBackground();
         //youhuibg1到youhuibg4
 
     }
     public void initData(){
-
         mainPageController = new MainPageController(getActivity(),this);
+        giftManager = new GiftManager(getActivity(), new ViewInterface() {
+            @Override
+            public void requestSuccessfully(String msg, String data) {
+                hongbaoAllCost.setText(data);
+            }
+
+            @Override
+            public void requestUnSuccessfully(String msg, String data) {
+
+            }
+
+            @Override
+            public void requestError(String msg, String data) {
+
+            }
+        });
 
     }
     private void initListView(){
-        broMessageListAdapter = new BroMessageListAdapter(getActivity().getLayoutInflater(),mainPageController.getBroList());
+        List list = mainPageController.getBroList();
+        broMessageListAdapter = new BroMessageListAdapter(getActivity().getLayoutInflater(),list);
         listview.setAdapter(broMessageListAdapter);
+        bro_sum.setText(""+list.size()+" 张");
+
     }
     public void getDiscount(){
         mainPageController.getBro();

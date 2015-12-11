@@ -28,8 +28,8 @@ public class GiftManager {
         wxGift = new WxGift();
     }
 
-    public void bindWx(){
-        HttpApi.getGiftSum(httpService, userModel.getId());
+    public void bindWx(String code){
+        HttpApi.insertVerifyCode(httpService, userModel.getId(),code);
         httpService.setListener(new HttpListener() {
             @Override
             public void succToRequired(String message, String data) {

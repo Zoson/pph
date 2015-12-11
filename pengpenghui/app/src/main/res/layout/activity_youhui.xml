@@ -103,12 +103,13 @@
                 android:textSize="20dp"
                 android:text="优惠券"/>
             <TextView
+                android:id="@+id/bro_sum"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="200dp"
                 android:textColor="@color/white"
                 android:textSize="20dp"
-                android:text="2 张"/>
+                android:text="0 张"/>
 
 
         </LinearLayout>
