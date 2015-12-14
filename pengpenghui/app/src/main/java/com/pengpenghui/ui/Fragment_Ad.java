@@ -21,7 +21,7 @@ public class Fragment_Ad extends Fragment {
             rootView = inflater.inflate(R.layout.activity_ad,
                     container, false);
             webView = (WebView) rootView.findViewById(R.id.webView);
-            webView.loadUrl("http://182.92.100.145/TouchYourCredit/ss/pph.php");
+            webView.loadUrl("http://182.92.100.145/TouchYourCredit/ad2/");
             webView.setWebViewClient(new WebViewClient());
             webView.getSettings().setJavaScriptEnabled(true);
             WebSettings webSettings = webView.getSettings();

@@ -71,7 +71,7 @@
             android:background="@drawable/hongbao_2"/>
 
         <TextView
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/im1"
@@ -98,7 +98,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
+                android:layout_marginLeft="20dp"
                 android:textColor="@color/white"
                 android:textSize="20dp"
                 android:text="优惠券"/>
@@ -106,7 +106,7 @@
                 android:id="@+id/bro_sum"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="200dp"
+                android:layout_marginLeft="250dp"
                 android:textColor="@color/white"
                 android:textSize="20dp"
                 android:text="0 张"/>
