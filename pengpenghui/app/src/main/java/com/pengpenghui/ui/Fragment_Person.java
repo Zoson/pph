@@ -48,7 +48,7 @@ public class Fragment_Person extends Fragment {
     private String[] itemsNames = {"个人信息", "我的关注",
             "红包","分享","微信验证"};
     private int[] pid={R.drawable.it1,R.drawable.it2,
-            R.drawable.it3,R.drawable.it4,R.drawable.ic_launcher};
+            R.drawable.it3,R.drawable.it4,R.drawable.it5};
     private List<Map<String, Object>> listItems;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -151,22 +151,10 @@ public class Fragment_Person extends Fragment {
                         break;
                     }
                     case 4: {
-//                        Intent intent=new Intent(getActivity(),Activity_Setting.class);
-//                        startActivity(intent);
-//                        getActivity().finish();
-                        LayoutInflater inflaterDl = LayoutInflater.from(getActivity());
-                        LinearLayout layout =(LinearLayout)inflaterDl.inflate(R.layout.dialog_instru_layout, null );
-                        final Dialog dialog = new AlertDialog.Builder(getActivity()).create();
-                        dialog.show();
-                        dialog.getWindow().setContentView(layout);
-                        Button btnOK = (Button) layout.findViewById(R.id.instu_sure);
-                        btnOK.setOnClickListener(new View.OnClickListener() {
+                        Intent intent=new Intent(getActivity(),Activity_weixincheck.class);
+                        startActivity(intent);
+                        //getActivity().finish();
 
-                            @Override
-                            public void onClick(View v) {
-                                dialog.dismiss();
-                            }
-                        });
                         break;
                     }
                     default: {
