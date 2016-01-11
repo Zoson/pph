@@ -19,7 +19,7 @@ public class HttpApi {
     private final static String ownsToGetDis = "ownsToGetDis.php";
     private final static String insertOwns = "insertOwns.php";
     private final static String test = "test.php";
-    private final static String insertVerifyCode = "yinsertVerifyCode.php";
+    private final static String insertVerifyCode = "insertVerifyCode.php";
     private final static String deleteVerifyCode = "deleteVerifyCode.php";
     private final static String insertGif = "insertGift.php";
     private final static String getGiftSum = "getGifySum.php";
@@ -76,7 +76,7 @@ public class HttpApi {
 
     public static void insertVerifyCode(HttpService httpService,String id,String verifyCode){
         String param = "id="+id+"&"+"verifyCode="+verifyCode;
-        httpService.sendGet(insertVerifyCode,param);
+        httpService.sendPost(insertVerifyCode,param);
     }
 
     public static void deleteVerifyCode(HttpService httpService,String id){

@@ -14,13 +14,18 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.pengpenghui.domain.controller.GiftManager;
 import com.pengpenghui.domain.controller.LogController;
+import com.pengpenghui.pph_interface.ViewInterface;
 
 
 /**
  * Created by 文浩 on 2015/12/16.
  */
 public class Activity_weixincheck extends Activity {
+    private LayoutInflater inflaterDl;
+    private LinearLayout layout_dia;
+    private  Dialog dialog;
     //确认
     private Button bn_sure_weixin;
     //返回
@@ -31,6 +36,8 @@ public class Activity_weixincheck extends Activity {
     private TextView user_id;
     //微信验证码
     private EditText weixin_check;
+
+    private GiftManager giftManager;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,15 +54,21 @@ public class Activity_weixincheck extends Activity {
         bn_question_weixin=(Button) findViewById(R.id.question_weixin);
         user_id=(TextView) findViewById(R.id.userid_weixin);
         weixin_check = (EditText)findViewById(R.id.weixin_check);
-
+        inflaterDl = LayoutInflater.from(Activity_weixincheck.this);
+        layout_dia =(LinearLayout)inflaterDl.inflate(R.layout.dialog_instru_layout, null);
+        dialog = new AlertDialog.Builder(Activity_weixincheck.this).create();
+        show_dia();
     }
     private void setListener(){
         bn_sure_weixin.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-
-                    Toast.makeText(Activity_weixincheck.this, "queding", Toast.LENGTH_SHORT).show();
-
+                String code = weixin_check.getText().toString();
+                if(code.isEmpty()){
+                    Toast.makeText(Activity_weixincheck.this,"请绑定码",Toast.LENGTH_SHORT).show();
+                }else{
+                    giftManager.bindWx(code);
+                }
             }
 
         });
@@ -69,26 +82,42 @@ public class Activity_weixincheck extends Activity {
         bn_question_weixin.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                LayoutInflater inflaterDl = LayoutInflater.from(Activity_weixincheck.this);
-                LinearLayout layout =(LinearLayout)inflaterDl.inflate(R.layout.dialog_instru_layout, null);
-                final Dialog dialog = new AlertDialog.Builder(Activity_weixincheck.this).create();
                 dialog.show();
-                dialog.getWindow().setContentView(layout);
-                Button btnOK = (Button) layout.findViewById(R.id.instu_sure);
-                btnOK.setOnClickListener(new View.OnClickListener() {
 
-                    @Override
-                    public void onClick(View v) {
-                        dialog.dismiss();
-
-                    }
-                });
             }
 
         });
     }
     private void initData(){
+        giftManager = new GiftManager(this, new ViewInterface() {
+            @Override
+            public void requestSuccessfully(String msg, String data) {
+                Toast.makeText(Activity_weixincheck.this,"绑定成功",Toast.LENGTH_SHORT).show();
+            }
 
+            @Override
+            public void requestUnSuccessfully(String msg, String data) {
+                Toast.makeText(Activity_weixincheck.this,"绑定码不存在或错误",Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void requestError(String msg, String data) {
+                Toast.makeText(Activity_weixincheck.this,"网络异常",Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+    private void show_dia(){
+        dialog.show();
+        dialog.getWindow().setContentView(layout_dia);
+        Button btnOK = (Button) layout_dia.findViewById(R.id.instu_sure);
+        btnOK.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+
+            }
+        });
     }
 }
 

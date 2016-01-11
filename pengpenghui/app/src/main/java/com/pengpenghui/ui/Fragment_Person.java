@@ -46,9 +46,9 @@ public class Fragment_Person extends Fragment {
     private MainPageController mainPageController;
     private AdapterView.OnItemClickListener listener;
     private String[] itemsNames = {"个人信息", "我的关注",
-            "红包","分享","微信验证"};
+            "分享","微信验证"};
     private int[] pid={R.drawable.it1,R.drawable.it2,
-            R.drawable.it3,R.drawable.it4,R.drawable.it5};
+           R.drawable.it4,R.drawable.it5};
     private List<Map<String, Object>> listItems;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -106,7 +106,7 @@ public class Fragment_Person extends Fragment {
     }
     private void setAdapter(){
         List<Map<String, Object>> listems  = new ArrayList<Map<String, Object>>();
-        for(int i = 0; i <5; i++) {
+        for(int i = 0; i <4; i++) {
             Map<String, Object> listem  = new HashMap<String, Object>();
             listem .put("image", pid[i]);
             listem .put("title", itemsNames[i] );
@@ -140,17 +140,13 @@ public class Fragment_Person extends Fragment {
                     case 1: {
                         break;
                     }
+
                     case 2: {
-                        Intent intent = new Intent(getActivity(),Activity_GetGift.class);
-                        getActivity().startActivity(intent);
-                        break;
-                    }
-                    case 3: {
                         Intent intent=new Intent(getActivity(),Activity_Share.class);
                         startActivity(intent);
                         break;
                     }
-                    case 4: {
+                    case 3: {
                         Intent intent=new Intent(getActivity(),Activity_weixincheck.class);
                         startActivity(intent);
                         //getActivity().finish();
