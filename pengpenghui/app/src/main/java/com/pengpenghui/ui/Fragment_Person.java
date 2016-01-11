@@ -7,6 +7,7 @@ import java.util.Map;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -20,7 +21,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.SimpleAdapter;
@@ -43,9 +46,9 @@ public class Fragment_Person extends Fragment {
     private MainPageController mainPageController;
     private AdapterView.OnItemClickListener listener;
     private String[] itemsNames = {"个人信息", "我的关注",
-            "红包","分享","设置"};
+            "红包","分享","微信验证"};
     private int[] pid={R.drawable.it1,R.drawable.it2,
-            R.drawable.it3,R.drawable.it4,R.drawable.ic_launcher};
+            R.drawable.it3,R.drawable.it4,R.drawable.it5};
     private List<Map<String, Object>> listItems;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -148,9 +151,10 @@ public class Fragment_Person extends Fragment {
                         break;
                     }
                     case 4: {
-                        Intent intent=new Intent(getActivity(),Activity_Setting.class);
+                        Intent intent=new Intent(getActivity(),Activity_weixincheck.class);
                         startActivity(intent);
-                        getActivity().finish();
+                        //getActivity().finish();
+
                         break;
                     }
                     default: {

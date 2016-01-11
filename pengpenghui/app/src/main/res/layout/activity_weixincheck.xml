@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:orientation="vertical"
+    android:gravity="center_horizontal">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/orange"
+        android:gravity="center_vertical"
+        android:padding="6dp"
+
+        >
+        <Button
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginRight="6dp"
+            android:layout_centerVertical="true"
+            android:textColor="@color/white"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/question_icon"
+            android:id="@+id/question_weixin"
+            android:textSize="23dp"
+            />
+        <Button
+            android:layout_width="32dp"
+            android:layout_height="36dp"
+            android:layout_marginLeft="10dp"
+            android:id="@+id/bn_re_weixin"
+            android:background="@drawable/return_icon"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="微信验证"
+            android:textColor="@color/white"
+            android:textSize="24sp" />
+
+    </RelativeLayout>
+    <ImageView
+        android:layout_width="200dp"
+        android:layout_height="260dp"
+        android:background="@drawable/weixincheck"/>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="4dp"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:text="绑定账号:"
+            android:textSize="20sp"
+            android:textStyle="bold"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/userid_weixin"
+            android:singleLine="true"
+            android:text="1*********"
+            android:textSize="20sp"
+            />
+    </LinearLayout>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/weixin_check"
+        android:padding="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:hint="请输入验证码"
+        android:background="@drawable/et_radius"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:text="确定"
+        android:textColor="@color/white"
+        android:textSize="20dp"
+        android:id="@+id/bt_sure_weixin"
+        android:background="@drawable/bnse"
+        android:layout_gravity="bottom" />
+</LinearLayout>

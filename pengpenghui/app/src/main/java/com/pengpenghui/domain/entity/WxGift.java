@@ -1,14 +1,24 @@
 package com.pengpenghui.domain.entity;
 
+import android.content.ContentValues;
+
+import com.pengpenghui.pph_interface.DataObjectInterface;
+
 /**
  * Created by Zoson on 15/11/27.
  */
-public class WxGift {
+public class WxGift{
     private boolean isbind;
     private String id;
     private String verifyCode;
     private String gift_sum;
-    public WxGift(){
+
+    public static WxGift instance = new WxGift();
+    public static WxGift getInstance(){
+        return instance;
+    }
+
+    protected WxGift(){
 
     }
     public boolean isbind() {
@@ -42,4 +52,5 @@ public class WxGift {
     public void setGift_sum(String gift_sum) {
         this.gift_sum = gift_sum;
     }
+
 }

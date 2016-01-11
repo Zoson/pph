@@ -1,13 +1,17 @@
 package com.pengpenghui.ui;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.pengpenghui.domain.controller.LogController;
@@ -64,11 +68,25 @@ public class Activity_Register extends Activity implements ViewInterface {
     }
     @Override
     public void requestSuccessfully(String msg, String data) {
-        Toast.makeText(this,"注册成功"+msg,Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent();
-        intent.setClass(Activity_Register.this, Activity_Login.class);
-        startActivity(intent);
-        finish();
+        Toast.makeText(this, "注册成功" + msg, Toast.LENGTH_SHORT).show();
+        LayoutInflater inflaterDl = LayoutInflater.from(this);
+        LinearLayout layout =(LinearLayout)inflaterDl.inflate(R.layout.dialog_instru_layout, null);
+        final Dialog dialog = new AlertDialog.Builder(this).create();
+        dialog.show();
+        dialog.getWindow().setContentView(layout);
+        Button btnOK = (Button) layout.findViewById(R.id.instu_sure);
+        btnOK.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                Intent intent = new Intent();
+                intent.setClass(Activity_Register.this, Activity_Login.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
     }
 
     @Override

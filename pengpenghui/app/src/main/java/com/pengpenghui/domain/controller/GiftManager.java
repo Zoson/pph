@@ -25,7 +25,7 @@ public class GiftManager {
         this.httpService = new HttpService();
         userModel = userModel.getInstance();
         dataBaseOperator = new DataBaseOperator(context);
-        wxGift = new WxGift();
+        //wxGift = new WxGift();
     }
 
     public void bindWx(String code){
