@@ -2,6 +2,9 @@ package com.pengpenghui.ui;
 
 import android.app.LauncherActivity;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,7 +29,8 @@ public class Fragment_Main extends android.support.v4.app.Fragment{
     private View rootView;
 	private Button re_bn;
     private RadioGroup mRadioGroup;
-	private ListView listview;
+    private SwipeRefreshLayout swipeRefreshLayout;
+    private ListView listview;
     private TextView hongbaoAllCost;
     private TextView bro_sum;
     //private int[] bnbg={R.drawable.bn_sw_dis,R.color.white};
@@ -74,7 +78,27 @@ public class Fragment_Main extends android.support.v4.app.Fragment{
         bro_sum = (TextView)rootView.findViewById(R.id.bro_sum);
         //relativeLayout.setBackground();
         //youhuibg1到youhuibg4
-
+        swipeRefreshLayout = (SwipeRefreshLayout)rootView.findViewById(R.id.swipe_container_youhui);
+        //设置刷新时动画的颜色，可以设置4个
+        swipeRefreshLayout.setColorSchemeResources(android.R.color.holo_blue_light,
+                                                   android.R.color.holo_red_light, android.R.color.holo_orange_light, android.R.color.holo_green_light);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            
+            @Override
+            public void onRefresh() {
+                Log.v("s", "正在刷新");
+                // TODO Auto-generated method stub
+                new Handler().postDelayed(new Runnable() {
+                    
+                    @Override
+                    public void run() {
+                        // TODO Auto-generated method stub
+                        Log.v("s", "刷新完成");
+                        swipeRefreshLayout.setRefreshing(false);
+                    }
+                }, 6000);
+            }
+        });
     }
     public void initData(){
         mainPageController = new MainController();

@@ -100,7 +100,8 @@ public class Fragment_Person extends Fragment {
                         break;
                     }
                     case 1: {
-                        TestToGetAd();
+                        Intent intent=new Intent(getActivity(),Activity_MyAttention.class);
+                        startActivity(intent);
                         break;
                     }
 
