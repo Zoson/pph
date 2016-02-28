@@ -18,7 +18,7 @@ import android.os.Parcelable;
 
 
 import com.pengpenghui.domain.entity.nfc.record.ParsedNdefRecord;
-import com.pengpenghui.service.nfc.NFCListener;
+import com.pengpenghui.domain.service.nfc.NFCListener;
 
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;

@@ -1,11 +1,9 @@
 package com.pengpenghui.domain.context;
 
-import android.content.Context;
-
 import com.pengpenghui.domain.entity.HttpApi;
-import com.pengpenghui.service.database.DataBaseOperator;
-import com.pengpenghui.service.http.HttpListener;
-import com.pengpenghui.service.http.HttpRequest;
+import com.pengpenghui.domain.service.database.DataBaseOperator;
+import com.pengpenghui.domain.service.http.HttpListener;
+import com.pengpenghui.domain.service.http.HttpRequest;
 
 
 /**

@@ -1,11 +1,10 @@
 package com.pengpenghui.domain.entity;
 
 
-import com.pengpenghui.domain.context.PPHContext;
-import com.pengpenghui.service.http.HttpFileListener;
-import com.pengpenghui.service.http.HttpImgListener;
-import com.pengpenghui.service.http.HttpListener;
-import com.pengpenghui.service.http.HttpRequest;
+import com.pengpenghui.domain.service.http.HttpFileListener;
+import com.pengpenghui.domain.service.http.HttpImgListener;
+import com.pengpenghui.domain.service.http.HttpListener;
+import com.pengpenghui.domain.service.http.HttpRequest;
 
 /**
  * Created by zoson on 6/19/15.

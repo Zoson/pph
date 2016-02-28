@@ -6,11 +6,11 @@ import com.pengpenghui.domain.entity.DataBaseTable;
 import com.pengpenghui.domain.entity.DataProvider;
 import com.pengpenghui.domain.entity.HttpApi;
 import com.pengpenghui.domain.entity.User;
-import com.pengpenghui.service.database.DataBaseOperator;
-import com.pengpenghui.service.http.HttpFileListener;
-import com.pengpenghui.service.http.HttpListener;
-import com.pengpenghui.service.SharedPreference;
-import com.pengpenghui.service.http.HttpRequest;
+import com.pengpenghui.domain.service.database.DataBaseOperator;
+import com.pengpenghui.domain.service.http.HttpFileListener;
+import com.pengpenghui.domain.service.http.HttpListener;
+import com.pengpenghui.domain.service.SharedPreference;
+import com.pengpenghui.domain.service.http.HttpRequest;
 
 import org.json.JSONException;
 import org.json.JSONObject;

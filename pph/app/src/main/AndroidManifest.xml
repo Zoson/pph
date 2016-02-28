@@ -24,9 +24,9 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:name=".PPHApplication"
+        android:name="com.pengpenghui.activity.PPHApplication"
         android:theme="@style/AppTheme" >
-        <activity android:name=".Activity_welcome"
+        <activity android:name="com.pengpenghui.activity.WelcomeActivity"
             android:label="@string/app_name"
             >
             <intent-filter>
@@ -34,13 +34,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
             </activity>
-        <activity android:name=".Activity_Login"
+        <activity android:name="com.pengpenghui.activity.LoginActivity"
              >
 
         </activity>
         <activity
             android:launchMode="singleTask"
-            android:name="com.pengpenghui.ui.MainActivity"
+            android:name="com.pengpenghui.activity.MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.nfc.action.NDEF_DISCOVERED" ></action>
@@ -52,28 +52,28 @@
 
         </activity>
         <activity
-            android:name=".Activity_Register"
+            android:name="com.pengpenghui.activity.RegActivity"
             android:label="@string/app_name" >
         </activity>
         <activity
-            android:name=".Activity_weixincheck"
+            android:name="com.pengpenghui.activity.WeixinCheckActivity"
             android:label="@string/app_name" >
         </activity>
         <activity
-            android:name=".Activity_Setting"
+            android:name="com.pengpenghui.activity.SettingActivity"
             android:label="@string/app_name" >
         </activity>
         <activity
-            android:name=".Activity_Reperson"
+            android:name="com.pengpenghui.activity.RepersonActivity"
             android:label="@string/app_name" >
         </activity>
         <activity
-            android:name=".Activity_Share"
+            android:name="com.pengpenghui.activity.ShareActivity"
             android:label="@string/app_name" >
         </activity>
         <!--分享编辑页-->
         <activity
-            android:name=".wxapi.WXEntryActivity"
+            android:name="com.pengpenghui.activity.wxapi.WXEntryActivity"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:exported="true"
@@ -111,7 +111,7 @@
             android:name="UMENG_APPKEY"
             android:value="55e3facfe0f55a7d8a001a01" >
         </meta-data>
-        <activity android:name=".Activity_MyAttention"/>
+        <activity android:name="com.pengpenghui.activity.MyAttentionActivity"/>
     </application>
 
 </manifest>

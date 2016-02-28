@@ -2,7 +2,7 @@ package com.pengpenghui.domain.entity;
 
 import android.content.ContentValues;
 
-import com.pengpenghui.service.database.DataObjectInterface;
+import com.pengpenghui.domain.service.database.DataObjectInterface;
 
 import org.json.JSONException;
 import org.json.JSONObject;

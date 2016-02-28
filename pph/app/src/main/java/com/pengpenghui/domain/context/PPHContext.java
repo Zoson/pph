@@ -3,12 +3,12 @@ package com.pengpenghui.domain.context;
 import android.content.Context;
 
 import com.pengpenghui.domain.entity.DataProvider;
-import com.pengpenghui.service.database.DataBaseOperator;
-import com.pengpenghui.service.http.HttpRequest;
-import com.pengpenghui.service.nfc.NFCService;
-import com.pengpenghui.service.NetWorkState;
-import com.pengpenghui.service.ServiceManager;
-import com.pengpenghui.service.SharedPreference;
+import com.pengpenghui.domain.service.database.DataBaseOperator;
+import com.pengpenghui.domain.service.http.HttpRequest;
+import com.pengpenghui.domain.service.nfc.NFCService;
+import com.pengpenghui.domain.service.NetWorkState;
+import com.pengpenghui.domain.service.ServiceManager;
+import com.pengpenghui.domain.service.SharedPreference;
 
 /**
  * Created by Zoson on 16/1/12.
