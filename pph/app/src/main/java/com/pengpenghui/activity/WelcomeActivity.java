@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.pengpenghui.domain.context.ContextCallback;
 import com.pengpenghui.domain.context.LogController;
@@ -37,15 +38,14 @@ public class WelcomeActivity extends Activity{
                     logController.tryAutoLog(new ContextCallback() {
                         @Override
                         public void response(int state, Object object) {
-                            if (state == SUCC){
-                                startMainActivity();
-                            }else{
-                                startLogActivity();
+                            startMainActivity();
+                            if (state == FAIL){
+                                Toast.makeText(WelcomeActivity.this,"您还未登录,出于游客模式",Toast.LENGTH_SHORT).show();
                             }
                         }
                     });
                 } else {
-                    startLogActivity();
+                    startMainActivity();
                 }
             }
         }, 1000);

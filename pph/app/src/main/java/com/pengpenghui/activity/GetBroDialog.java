@@ -2,6 +2,7 @@ package com.pengpenghui.activity;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -63,6 +64,12 @@ public class GetBroDialog extends Dialog{
         bt_get_bro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (!mainPageController.isUserLogin()){
+                    Toast.makeText(context,"请先登录",Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(context,LoginActivity.class);
+                    context.startActivity(intent);
+                    return;
+                }
                 mainPageController.getBroByAd(new ContextCallback() {
                     @Override
                     public void response(int state, Object object) {

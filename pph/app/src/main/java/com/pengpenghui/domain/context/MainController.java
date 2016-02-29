@@ -97,20 +97,21 @@ public class MainController extends PPHContext {
     }
 
     public void getBroByAd(final ContextCallback contextCallback){
-        HttpApi.insertOwns(httpRequest, user.getId(), dataProvider.getCurrentAdData().getDis_id()+"", new HttpListener() {
+
+        HttpApi.insertOwns(httpRequest, user.getId(), dataProvider.getCurrentAdData().getDis_id() + "", new HttpListener() {
             @Override
             public void succToRequire(String msg, String data) {
-                contextCallback.response(ContextCallback.SUCC,data);
+                contextCallback.response(ContextCallback.SUCC, data);
             }
 
             @Override
             public void failToRequire(String msg, String data) {
-                contextCallback.response(ContextCallback.FAIL,"领取失败");
+                contextCallback.response(ContextCallback.FAIL, "领取失败");
             }
 
             @Override
             public void netWorkError(String msg, String data) {
-                contextCallback.response(ContextCallback.FAIL,"网络出错");
+                contextCallback.response(ContextCallback.FAIL, "网络出错");
             }
         });
     }
@@ -180,4 +181,11 @@ public class MainController extends PPHContext {
         });
     }
 
+    public boolean isUserLogin(){
+        return (getDataProvider().getUserState()==DataProvider.LOGIN)?true:false;
+    }
+
+    public void exit(){
+        getDataProvider().setUserState(DataProvider.UNLOGIN);
+    }
 }

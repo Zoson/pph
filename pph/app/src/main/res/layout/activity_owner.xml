@@ -10,16 +10,15 @@
         android:paddingTop="33dp"
         android:id="@+id/ln"
         android:orientation="horizontal"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
         >
     <ImageView
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:id="@+id/userpic"
         android:scaleType="fitXY"
-        android:background="@drawable/headpic"/>
+        android:background="@drawable/ic_launcher"/>
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -31,7 +30,7 @@
             android:gravity="left"
             android:layout_marginLeft="20dp"
             android:id="@+id/uesrname_show"
-            android:text="昵称"
+            android:text="游客"
             android:textColor="@color/white"
             android:textSize="25dp"
             />
@@ -41,11 +40,23 @@
             android:id="@+id/phone"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="10dp"
-            android:text="用户账号"
+            android:text="您还未登录"
             android:textColor="@color/white"
             />
         </LinearLayout>
+        <TextView
+            android:text="登录"
+            android:textColor="#fff"
+            android:background="#ff5522"
+            android:gravity="center"
+            android:id="@+id/tv_login"
+            android:layout_width="wrap_content"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:layout_height="30dp"
+            />
     </LinearLayout>
+
     <ListView
         android:listSelector="@color/orange"
         android:layout_marginTop="30dp"
@@ -57,4 +68,7 @@
         android:focusable="true"
         >
         </ListView>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="30dp" />
 </RelativeLayout>

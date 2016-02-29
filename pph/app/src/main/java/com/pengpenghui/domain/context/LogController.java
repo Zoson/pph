@@ -2,6 +2,7 @@ package com.pengpenghui.domain.context;
 import android.graphics.Bitmap;
 
 import com.pengpenghui.domain.entity.DataBaseTable;
+import com.pengpenghui.domain.entity.DataProvider;
 import com.pengpenghui.domain.entity.HttpApi;
 import com.pengpenghui.domain.entity.User;
 
@@ -60,6 +61,7 @@ public class LogController extends PPHContext{
         HttpApi.log(httpRequest,id, psw, new HttpListener() {
             @Override
             public void succToRequire(String msg, String data) {
+                getDataProvider().setUserState(DataProvider.LOGIN);
                 user = getDataProvider().genUserByJson(data);
                 if (user == null){contextCallback.response(ContextCallback.FAIL,"数据处理出错");return;}
                 if (isIdExist(user.getId())){

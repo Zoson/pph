@@ -94,20 +94,8 @@ public class MainActivity extends FragmentActivity implements OnClickListener,
 				return mTabs.get(position);
 			}
 		};
-		User userModel = mainPageController.getUser();
-		if(userModel.getAccount()==null){
-			LogController logController = new LogController();
-			logController.forceTolog(new ContextCallback() {
-				@Override
-				public void response(int state, Object object) {
-					if (state == FAIL){
-						Toast.makeText(MainActivity.this, "请先登录", Toast.LENGTH_SHORT).show();
-						Intent intent = new Intent(MainActivity.this,LoginActivity.class);
-						startActivity(intent);
-						MainActivity.this.finish();
-					}
-				}
-			});
+		if (!mainPageController.isUserLogin()){
+			Toast.makeText(this,"您还未登录",Toast.LENGTH_SHORT).show();
 		}
 	}
 

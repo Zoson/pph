@@ -8,5 +8,6 @@ public interface ContextCallback {
     public final static int SUCC = -2;
     public final static int FAIL = -3;
     public final static int ERROR = -4;
+    public final static int UNLOGIN = -5;
     public void response(int state,Object object);
 }

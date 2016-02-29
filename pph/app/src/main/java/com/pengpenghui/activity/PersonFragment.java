@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.SimpleAdapter;
+import android.widget.Toast;
 
 import com.pengpenghui.domain.context.ContextCallback;
 import com.pengpenghui.domain.context.MainController;
@@ -30,6 +31,7 @@ public class PersonFragment extends Fragment {
     private TextView personName;
     private TextView phoneNum;
     private ListView listview;
+    private TextView tv_login;
     private User user;
     private MainController mainPageController;
     private AdapterView.OnItemClickListener listener;
@@ -55,11 +57,17 @@ public class PersonFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        if (!mainPageController.isUserLogin())return;
         updateInfo();
     }
 
     private void initData(){
         mainPageController = new MainController();
+        if(!mainPageController.isUserLogin()){
+            tv_login.setText("登录");
+            return;
+        }
+        tv_login.setText("退出登录");
         user = mainPageController.getUser();
         personName.setText(user.getNickName());
         phoneNum.setText(user.getId());
@@ -82,16 +90,33 @@ public class PersonFragment extends Fragment {
         listview.setAdapter(adapter);
     }
     private void findView(){
+        tv_login = (TextView)rootView.findViewById(R.id.tv_login);
         personPicture= (ImageView) rootView.findViewById(R.id.userpic);
         personName= (TextView) rootView.findViewById(R.id.uesrname_show);
         phoneNum= (TextView) rootView.findViewById(R.id.phone);
         listview= (ListView) rootView.findViewById(R.id.listview);
     }
     private void setListener(){
+        tv_login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mainPageController.isUserLogin()){
+                    mainPageController.exit();
+                }
+                Intent intent = new Intent(getActivity(),LoginActivity.class);
+                startActivity(intent);
+                getActivity().finish();
+
+            }
+        });
         listview.setOnItemClickListener( new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position,
                                     long id) {
+                if (!mainPageController.isUserLogin()){
+                    Toast.makeText(getActivity(),"您还未登录",Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 switch (position) {
                     case 0: {
                         Intent intent=new Intent(getActivity(),RepersonActivity.class);

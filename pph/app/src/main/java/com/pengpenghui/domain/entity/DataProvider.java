@@ -11,7 +11,9 @@ import java.util.Map;
  * Created by Zoson on 16/1/12.
  */
 public class DataProvider {
-
+    private int userState = UNLOGIN;
+    public final static int UNLOGIN = 0;
+    public final static int LOGIN = 1;
     private User user;
     private List<AdData> adDatas;
     private AdData current_ad;
@@ -55,6 +57,13 @@ public class DataProvider {
         return current_ad;
     }
 
+    public void setUserState(int state){
+        this.userState = state;
+    }
+
+    public int getUserState(){
+        return userState;
+    }
 
     public boolean addAdDataByJson(String json){
         AdData adData = null;
