@@ -5,10 +5,10 @@ import android.content.Context;
 import com.pengpenghui.domain.entity.DataProvider;
 import com.pengpenghui.domain.service.database.DataBaseOperator;
 import com.pengpenghui.domain.service.http.HttpRequest;
-import com.pengpenghui.domain.service.nfc.NFCService;
 import com.pengpenghui.domain.service.NetWorkState;
 import com.pengpenghui.domain.service.ServiceManager;
 import com.pengpenghui.domain.service.SharedPreference;
+import com.pengpenghui.domain.service.nfc.NFCService;
 
 /**
  * Created by Zoson on 16/1/12.

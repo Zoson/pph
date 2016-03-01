@@ -4,6 +4,7 @@ import java.util.List;
 
 import android.app.PendingIntent;
 import android.content.Intent;
+import android.nfc.NfcAdapter;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -16,20 +17,20 @@ import android.view.Window;
 import android.widget.Toast;
 
 import com.pengpenghui.domain.context.ContextCallback;
-import com.pengpenghui.domain.context.LogController;
 import com.pengpenghui.domain.context.MainController;
+import com.pengpenghui.domain.entity.AdData;
 import com.pengpenghui.domain.entity.User;
 import com.pengpenghui.domain.service.nfc.NFCListener;
-import com.pengpenghui.domain.entity.nfc.NFCModel;
+import com.pengpenghui.domain.service.nfc.NFCService;
 import com.pengpenghui.ui.R;
 import com.pengpenghui.ui.component.ChangeColorText;
 
 
 public class MainActivity extends FragmentActivity implements OnClickListener,
-		OnPageChangeListener , NFCListener{
+		OnPageChangeListener , ContextCallback{
 
 	private GetBroDialog getBroDialog;
-    private NFCModel nfcModel;
+    private NFCService nfcModel;
     private PendingIntent pendingIntent;
 	private MainController mainPageController;
 	ViewPager mViewPager;
@@ -41,7 +42,6 @@ public class MainActivity extends FragmentActivity implements OnClickListener,
 	List<Fragment> mTabs = new ArrayList<Fragment>();
 	String[] mTitles = new String[] { "first Fragment !", "Second Fragment !","Third Fragment !" };
 	List<ChangeColorText> mTabIndicators = new ArrayList<ChangeColorText>();
-	private boolean tryStartNfc;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -52,19 +52,8 @@ public class MainActivity extends FragmentActivity implements OnClickListener,
 		initDatas();
 		mViewPager.setAdapter(mAdapter);  //设置Adapter，则每一页显示相应View
 		initEvent();
-		startNfc();
 	}
 
-    private void startNfc(){
-        nfcModel = new NFCModel(this,this);
-		tryStartNfc = nfcModel.checkNFCFunction();
-		if (tryStartNfc){
-			pendingIntent = PendingIntent.getActivity(this, 0, new Intent(this,getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
-		}else{
-			Toast.makeText(this,"you phone dont have NFC device",Toast.LENGTH_SHORT).show();
-			nfcModel = null;
-		}
-    }
 	/** 初始化所有事�? */
 	private void initEvent() {
 		//ViewPager在处理滑动事件的时�?�要用到OnPageChangeListener
@@ -96,6 +85,10 @@ public class MainActivity extends FragmentActivity implements OnClickListener,
 		};
 		if (!mainPageController.isUserLogin()){
 			Toast.makeText(this,"您还未登录",Toast.LENGTH_SHORT).show();
+		}
+
+		if (!mainPageController.checkNFCDevice()){
+			Toast.makeText(this,"您的设备不支持NFC",Toast.LENGTH_SHORT).show();
 		}
 	}
 
@@ -185,44 +178,35 @@ public class MainActivity extends FragmentActivity implements OnClickListener,
 	@Override
 	public void onPageSelected(int arg0) {
 	}
+
     @Override
     protected void onResume() {
         super.onResume();
-		if (tryStartNfc){
-			nfcModel.endbleForegroundDispatch();
-		}
+		mainPageController.handleNFCEvent(getIntent(),this);
 
     }
 
-    public void getnfc(String code){
-        Toast.makeText(this,code,Toast.LENGTH_SHORT).show();
-    }
+
     @Override
     protected void onPause() {
         super.onPause();
-		if (tryStartNfc){
-			nfcModel.disableForegroundDispatch();
-		}
-    }
-    protected void onNewIntent(Intent intent) {
-        super.onNewIntent(intent);
-		if(tryStartNfc){
-			nfcModel.getNfcIntent(intent);
-		}
-    }
-    @Override
-    public void getNfcInfo(String code) {
-        //Toast.makeText(this,code,Toast.LENGTH_SHORT).show();
-		if (getBroDialog!=null&&getBroDialog.isShowing()){
-			return;
-		}
-		mainPageController.fromNfcTagToGetAd(code, new ContextCallback() {
-			@Override
-			public void response(int state, Object object) {
-				getBroDialog = new GetBroDialog(MainActivity.this,mainPageController);
-				getBroDialog.show();
-			}
-		});
     }
 
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+		mainPageController.handleNFCEvent(intent, this);
+    }
+
+	@Override
+	public void response(int state, Object object) {
+		if (FAIL == state) {
+			Toast.makeText(MainActivity.this, "" + object, Toast.LENGTH_SHORT).show();
+			return;
+		}
+		if (getBroDialog!=null&&getBroDialog.isShowing()){
+			getBroDialog.dismiss();
+		}
+		getBroDialog = new GetBroDialog(MainActivity.this, (AdData) object);
+		getBroDialog.show();
+	}
 }

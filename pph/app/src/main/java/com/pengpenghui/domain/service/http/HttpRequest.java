@@ -32,6 +32,7 @@ import java.util.List;
 import java.util.Map;
 
 public class HttpRequest {
+    private final static String TAG = "HttpRequest";
     private final String Website = "http://182.92.100.145/TouchYourCredit";
     private final int SUCCESSFULLY = 0x1;
     private final int UNSUCCESSFULLY = 0x0;
@@ -46,7 +47,7 @@ public class HttpRequest {
             System.out.println("handleinvoke");
             Msg m = (Msg)msg.obj;
             if (m == null){
-                System.out.println(api+"  m is null++++++++");return;
+                Log.e(TAG,api + "  m is null");return;
             }
             switch (msg.what){
                 case SUCCESSFULLY:((HttpListener)m.listeners).succToRequire(m.msg,m.data);break;

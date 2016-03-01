@@ -150,15 +150,7 @@ public class PersonFragment extends Fragment {
         });
 
     }
-    private void TestToGetAd(){
-        mainPageController.fromNfcTagToGetAd("0000", new ContextCallback() {
-            @Override
-            public void response(int state, Object object) {
-                GetBroDialog getBroDialog = new GetBroDialog(getActivity(),mainPageController);
-                getBroDialog.show();
-            }
-        });
-    }
+
 
     public void updateInfo(){
         personPicture.setImageBitmap(user.getBitmap());

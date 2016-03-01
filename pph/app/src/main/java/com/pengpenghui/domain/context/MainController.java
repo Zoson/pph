@@ -1,5 +1,8 @@
 package com.pengpenghui.domain.context;
 
+import android.content.Intent;
+import android.nfc.NfcAdapter;
+
 import com.pengpenghui.domain.entity.AdData;
 import com.pengpenghui.domain.entity.BroMessage;
 import com.pengpenghui.domain.entity.DataBaseTable;
@@ -11,6 +14,8 @@ import com.pengpenghui.domain.service.http.HttpFileListener;
 import com.pengpenghui.domain.service.http.HttpListener;
 import com.pengpenghui.domain.service.SharedPreference;
 import com.pengpenghui.domain.service.http.HttpRequest;
+import com.pengpenghui.domain.service.nfc.NFCListener;
+import com.pengpenghui.domain.service.nfc.NFCService;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -27,15 +32,18 @@ public class MainController extends PPHContext {
     private List<BroMessage> broMessages;
     private DataBaseOperator dataBaseOperator;
     private SharedPreference sharedPreference;
-    private DataProvider dataProvider;
     private HttpRequest httpRequest;
+    private NFCService nfcService;
+    private DataProvider contextData;
+    private AdData adData;
     public MainController(){
         this.user = getDataProvider().getUser();
         broMessages  = getDataProvider().getBroMessages();
         dataBaseOperator = getDataBaseOperator();
         httpRequest = getHttpService();
-        dataProvider = getDataProvider();
         sharedPreference = getSharePreference();
+        nfcService = getNFCService();
+        contextData = getDataProvider();
     }
 
     public List<BroMessage> getBroList(){
@@ -47,11 +55,11 @@ public class MainController extends PPHContext {
     }
 
     public AdData getCurrentAd(){
-        return dataProvider.getCurrentAdData();
+        return contextData.getCurrentAdData();
     }
 
     private List<BroMessage> genBroList(String data){
-        return dataProvider.genBroMessagesByJson(data);
+        return contextData.genBroMessagesByJson(data);
     }
 
     public void getBro(final ContextCallback contextCallback){
@@ -73,32 +81,9 @@ public class MainController extends PPHContext {
         });
     }
 
-    public void fromNfcTagToGetAd(String tag, final ContextCallback contextCallback){
-        HttpApi.tagToGetAd(httpRequest, tag, new HttpListener() {
-            @Override
-            public void succToRequire(String msg, String data) {
-                if (dataProvider.addAdDataByJson(data)) {
-                    contextCallback.response(ContextCallback.SUCC, "广告成功获取");
-                } else {
-                    contextCallback.response(ContextCallback.SUCC, "数据处理出错");
-                }
-            }
-
-            @Override
-            public void failToRequire(String msg, String data) {
-                contextCallback.response(ContextCallback.FAIL, "广告获取失败");
-            }
-
-            @Override
-            public void netWorkError(String msg, String data) {
-                contextCallback.response(ContextCallback.FAIL, "网络出错");
-            }
-        });
-    }
-
     public void getBroByAd(final ContextCallback contextCallback){
 
-        HttpApi.insertOwns(httpRequest, user.getId(), dataProvider.getCurrentAdData().getDis_id() + "", new HttpListener() {
+        HttpApi.insertOwns(httpRequest, user.getId(), contextData.getCurrentAdData().getDis_id() + "", new HttpListener() {
             @Override
             public void succToRequire(String msg, String data) {
                 contextCallback.response(ContextCallback.SUCC, data);
@@ -130,17 +115,17 @@ public class MainController extends PPHContext {
         HttpApi.setPsw(httpRequest, user.getId(), oldps, newps, new HttpListener() {
             @Override
             public void succToRequire(String msg, String data) {
-                contextCallback.response(ContextCallback.SUCC,"修改成功");
+                contextCallback.response(ContextCallback.SUCC, "修改成功");
             }
 
             @Override
             public void failToRequire(String msg, String data) {
-                contextCallback.response(ContextCallback.FAIL,"修改失败");
+                contextCallback.response(ContextCallback.FAIL, "修改失败");
             }
 
             @Override
             public void netWorkError(String msg, String data) {
-                contextCallback.response(ContextCallback.FAIL,"网络出错");
+                contextCallback.response(ContextCallback.FAIL, "网络出错");
             }
         });
     }
@@ -187,5 +172,47 @@ public class MainController extends PPHContext {
 
     public void exit(){
         getDataProvider().setUserState(DataProvider.UNLOGIN);
+    }
+
+    public void handleNFCEvent(Intent intent,final ContextCallback contextCallback){
+        if (!NfcAdapter.ACTION_NDEF_DISCOVERED.equals(intent.getAction())){
+            return;
+        }
+        if (!checkNFCDevice()){
+            contextCallback.response(ContextCallback.FAIL,"您的手机不支持NFC");
+            return;
+        }
+        nfcService.getNfcIntent(intent, new NFCListener() {
+            @Override
+            public void getNfcInfo(String code) {
+                HttpApi.tagToGetAd(httpRequest, code, new HttpListener() {
+                    @Override
+                    public void succToRequire(String msg, String data) {
+                        if (contextData.addAdDataByJson(data)) {
+                            adData = contextData.getAdDatas().get(0);
+                            contextCallback.response(ContextCallback.SUCC, adData);
+                        } else {
+                            contextCallback.response(ContextCallback.SUCC, "数据处理出错");
+                        }
+                    }
+
+                    @Override
+                    public void failToRequire(String msg, String data) {
+                        contextCallback.response(ContextCallback.FAIL, "广告获取失败");
+                    }
+
+                    @Override
+                    public void netWorkError(String msg, String data) {
+                        contextCallback.response(ContextCallback.FAIL, "广告获取失败");
+                    }
+                });
+            }
+        });
+    }
+
+    public boolean checkNFCDevice(){
+        contextData.setIsNFCEnable(nfcService.checkNFCFunction());
+        return contextData.isNFCEnable();
+
     }
 }

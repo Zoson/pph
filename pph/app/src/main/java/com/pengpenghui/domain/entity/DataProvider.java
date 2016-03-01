@@ -14,6 +14,7 @@ public class DataProvider {
     private int userState = UNLOGIN;
     public final static int UNLOGIN = 0;
     public final static int LOGIN = 1;
+    private boolean isNFCEnable = false;
     private User user;
     private List<AdData> adDatas;
     private AdData current_ad;
@@ -100,4 +101,11 @@ public class DataProvider {
         return broMessages;
     }
 
+    public boolean isNFCEnable() {
+        return isNFCEnable;
+    }
+
+    public void setIsNFCEnable(boolean isNFCEnable) {
+        this.isNFCEnable = isNFCEnable;
+    }
 }

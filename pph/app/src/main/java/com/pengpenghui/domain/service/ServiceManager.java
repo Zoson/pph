@@ -35,7 +35,7 @@ public class ServiceManager {
                     ob = new HttpRequest();
                     break;
                 case NFC:
-                    ob = new NFCService();
+                    ob = new NFCService(this.context);
                     break;
                 case NETWORDSTATE:
                     ob = new NetWorkState(this.context);
