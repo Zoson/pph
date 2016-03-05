@@ -88,7 +88,7 @@ public class DataProvider {
         try {
             JSONObject jsonObject = new JSONObject(json);
             int count = jsonObject.getInt("count");
-            for (int i =0 ; i < count ; i++){
+            for (int i =broMessages.size() ; i < count ; i++){
                 BroMessage broMessage = BroMessage.genByJsonData(user.getId(),jsonObject.getString("" + i));
                 if (broMessage == null) continue;
                 broMessages.add(broMessage);

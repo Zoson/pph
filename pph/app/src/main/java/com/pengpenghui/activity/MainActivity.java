@@ -47,7 +47,8 @@ public class MainActivity extends FragmentActivity implements OnClickListener,
 		super.onCreate(savedInstanceState);
 		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_main);
-		
+		//Window window = getWindow();
+		//window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
 		initView();
 		initDatas();
 		mViewPager.setAdapter(mAdapter);  //设置Adapter，则每一页显示相应View
