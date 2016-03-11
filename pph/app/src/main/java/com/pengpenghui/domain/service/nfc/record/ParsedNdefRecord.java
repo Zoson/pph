@@ -5,5 +5,6 @@ package com.pengpenghui.domain.service.nfc.record;
  */
 public interface ParsedNdefRecord {
 
+    // 接口方法
     public String getActualPayload();
 }
