@@ -55,5 +55,4 @@ public class GiftManager extends PPHContext{
         });
         return 0.0;
     }
-
 }
