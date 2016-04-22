@@ -5,6 +5,7 @@
     android:orientation="horizontal"
     android:gravity="center_vertical"
     android:paddingTop="16dp"
+    android:background="#00ffffff"
     android:descendantFocusability="blocksDescendants"
     >
 

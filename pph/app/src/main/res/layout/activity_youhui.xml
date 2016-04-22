@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+   >
     <TextView
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -13,97 +14,123 @@
         android:textSize="23dp" />
 
 
-
-    <android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/swipe_container_youhui"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
-
  <LinearLayout 
      android:layout_width="match_parent"
      android:layout_height="match_parent"
      android:orientation="vertical"
+     android:background="#eeeeee"
      >
 
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="100dp"
-        android:background="@drawable/hongbao_bg"
-        android:gravity="center_horizontal"
-        android:orientation="vertical"
-        >
+     <RelativeLayout
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:gravity="center_vertical"
+         android:paddingTop="8dp"
+         android:paddingBottom="8dp"
+         android:paddingLeft="15dp"
+         android:background="@color/white"
+         >
+     <ImageView
+         android:layout_width="70dp"
+         android:layout_height="70dp"
+         android:layout_marginTop="8dp"
+         android:id="@+id/youhui_costpic"
+         android:background="@drawable/youhui_cost"
+         />
+
         <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:gravity="center_horizontal">
-
-        <ImageView
-            android:layout_marginTop="18dp"
-            android:id="@+id/im1"
-            android:layout_width="120dp"
-            android:layout_height="40dp"
-            android:background="@drawable/hongbao_2"/>
-
-        <TextView
-            android:layout_marginTop="5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/im1"
-            android:layout_marginLeft="10dp"
-            android:id="@+id/hongbao_cost"
-            android:textColor="@color/orange"
-            android:textSize="50dp"
-            android:text="0"/>
+            android:id="@+id/youhui_costrl"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/youhui_costpic">
+            <TextView
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:id="@+id/youhui_costbg"
+                android:textColor="@color/material_blue_grey_900"
+                android:textSize="16sp"
+                android:text="优惠券"/>
 
-            <ImageView
-                android:layout_marginTop="18dp"
+            <TextView
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:id="@+id/youhui_cost"
+                android:layout_marginTop="4dp"
+                android:text="00"
+                android:textSize="24sp"
+                android:textColor="@color/orange"
+                android:layout_below="@+id/youhui_costbg"/>
+        </RelativeLayout>
+
+         <ImageView
+             android:layout_width="20dp"
+             android:layout_height="90dp"
+             android:background="@drawable/youhui_split"
+             android:id="@+id/youhui_split"
+             android:layout_marginRight="6dp"
+             android:layout_toRightOf="@+id/youhui_costrl"
+             />
+         <ImageView
+             android:layout_width="70dp"
+             android:layout_height="70dp"
+             android:layout_marginTop="8dp"
+             android:id="@+id/youhui_moneypic"
+             android:layout_toRightOf="@+id/youhui_split"
+             android:background="@drawable/youhui_wallet"
+             />
+
+         <RelativeLayout
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:id="@+id/youhui_moneyrl"
+             android:layout_centerVertical="true"
+             android:layout_toRightOf="@+id/youhui_moneypic">
+             <TextView
+                 android:layout_width="60dp"
+                 android:layout_height="wrap_content"
+                 android:gravity="center_horizontal"
+                 android:id="@+id/youhui_moneybg"
+                 android:textColor="@color/material_blue_grey_900"
+                 android:textSize="16sp"
+                 android:text="红包"/>
+
+             <TextView
+                 android:layout_width="60dp"
+                 android:layout_height="wrap_content"
+                 android:gravity="center_horizontal"
+                 android:id="@+id/youhui_money"
+                 android:layout_marginTop="4dp"
+                 android:text="00.0"
+                 android:textStyle="bold"
+                 android:textSize="24sp"
+                 android:textColor="@color/orange"
+                 android:layout_below="@+id/youhui_moneybg"/>
+         </RelativeLayout>
+            <Button
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:layout_marginLeft="10dp"
-                android:layout_toRightOf="@+id/hongbao_cost"
-                android:background="@drawable/hongbao_1"/>
+                android:background="@drawable/youhui_arrow"
+                android:id="@+id/hongbaoButton"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"/>
+     </RelativeLayout>
 
 
-        </RelativeLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:gravity="center_vertical">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:textColor="@color/white"
-                android:textSize="20dp"
-                android:text="优惠券"/>
-            <TextView
-                android:id="@+id/bro_sum"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="250dp"
-                android:textColor="@color/white"
-                android:textSize="20dp"
-                android:text="0 张"/>
+    <ListView
+        android:id="@+id/listview_youhui"
+        android:layout_gravity="left"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:divider="#00000000"
+        android:fadingEdge="none"
+        android:focusable="false"
 
+        />
 
-        </LinearLayout>
-      </LinearLayout>
-       <ListView
-         android:id="@+id/listview_youhui"
-         android:layout_gravity="left"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:divider="#00000000"
-         android:fadingEdge="none"
-         android:focusable="false"
-         android:layout_marginTop="4dp"
-         android:layout_marginLeft="8dp"
-         />
  </LinearLayout>
-        </ScrollView>
-    </android.support.v4.widget.SwipeRefreshLayout>
+
 
 </LinearLayout>
