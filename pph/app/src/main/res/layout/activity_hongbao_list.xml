@@ -54,7 +54,7 @@
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@+id/im1"
                 android:layout_marginLeft="10dp"
-                android:id="@+id/hongbao_cost"
+                android:id="@+id/hongbao_allcost"
                 android:textColor="@color/orange"
                 android:textSize="50dp"
                 android:text="0"/>
@@ -64,11 +64,24 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginLeft="10dp"
-                android:layout_toRightOf="@+id/hongbao_cost"
+                android:layout_toRightOf="@+id/hongbao_allcost"
                 android:background="@drawable/hongbao_1"/>
 
 
         </RelativeLayout>
 
     </LinearLayout>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:text="一键提现"
+        android:textColor="@color/white"
+        android:textSize="20dp"
+        android:id="@+id/bt_sure_hongbao"
+        android:background="@drawable/bnse"
+        />
 </LinearLayout>

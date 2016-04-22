@@ -77,6 +77,7 @@
              android:layout_width="70dp"
              android:layout_height="70dp"
              android:layout_marginTop="8dp"
+             android:layout_marginRight="6dp"
              android:id="@+id/youhui_moneypic"
              android:layout_toRightOf="@+id/youhui_split"
              android:background="@drawable/youhui_wallet"
@@ -95,7 +96,7 @@
                  android:id="@+id/youhui_moneybg"
                  android:textColor="@color/material_blue_grey_900"
                  android:textSize="16sp"
-                 android:text="红包"/>
+                 android:text="钱包"/>
 
              <TextView
                  android:layout_width="60dp"
