@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    android:versionName="0.1.1"
-    package="com.pengpenghui.ui" >
+    package="com.pengpenghui.ui"
+    android:versionName="0.1.1">
+
     <!-- ###################声明SDK使用的相关权限###################### -->
     <!-- ###################声明SDK使用的相关权限###################### -->
     <!-- 检测网络状态 -->
@@ -16,102 +17,96 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <!-- QQ、QQ空间所需权限 -->
     <uses-permission android:name="android.permission.GET_TASKS" />
-    <uses-permission android:name="android.permission.NFC"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"></uses-permission>
-    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"></uses-permission>
+    <uses-permission android:name="android.permission.NFC" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
 
     <application
+        android:name="com.pengpenghui.activity.PPHApplication"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:name="com.pengpenghui.activity.PPHApplication"
-        android:theme="@style/AppTheme" >
-        <activity android:name="com.pengpenghui.activity.WelcomeActivity"
-            android:label="@string/app_name"
-            >
+        android:theme="@style/AppTheme">
+        <activity
+            android:name="com.pengpenghui.activity.WelcomeActivity"
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-            </activity>
-        <activity android:name="com.pengpenghui.activity.LoginActivity"
-             >
-
         </activity>
+        <activity android:name="com.pengpenghui.activity.LoginActivity"></activity>
         <activity
-            android:launchMode="singleTask"
             android:name="com.pengpenghui.activity.MainActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:launchMode="singleTask">
             <intent-filter>
-                <action android:name="android.nfc.action.NDEF_DISCOVERED" ></action>
-                <category android:name="android.intent.category.DEFAULT" >
-                </category>
-                <data android:mimeType="text/plain" >
-                </data>
-            </intent-filter>
+                <action android:name="android.nfc.action.NDEF_DISCOVERED" />
 
+                <category android:name="android.intent.category.DEFAULT"></category>
+
+                <data android:mimeType="text/plain"></data>
+            </intent-filter>
         </activity>
         <activity
             android:name="com.pengpenghui.activity.RegActivity"
-            android:label="@string/app_name" >
-        </activity>
+            android:label="@string/app_name"></activity>
         <activity
             android:name="com.pengpenghui.activity.WeixinCheckActivity"
-            android:label="@string/app_name" >
-        </activity>
+            android:label="@string/app_name"></activity>
         <activity
             android:name="com.pengpenghui.activity.SettingActivity"
-            android:label="@string/app_name" >
-        </activity>
+            android:label="@string/app_name"></activity>
+        <activity
+            android:name="com.pengpenghui.activity.HongbaoRecActivity"
+            android:label="@string/app_name"></activity>
         <activity
             android:name="com.pengpenghui.activity.RepersonActivity"
-            android:label="@string/app_name" >
-        </activity>
+            android:label="@string/app_name"></activity>
         <activity
             android:name="com.pengpenghui.activity.ShareActivity"
-            android:label="@string/app_name" >
-        </activity>
-        <!--分享编辑页-->
+            android:label="@string/app_name"></activity>
+        <!-- 分享编辑页 -->
         <activity
             android:name="com.pengpenghui.activity.wxapi.WXEntryActivity"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:exported="true"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <activity
             android:name="com.umeng.socialize.view.ShareActivity"
             android:configChanges="orientation|keyboard"
             android:launchMode="singleTask"
             android:noHistory="true"
             android:theme="@style/Theme.UMDialog"
-            android:windowSoftInputMode="stateVisible|adjustResize" >
-        </activity>
+            android:windowSoftInputMode="stateVisible|adjustResize"></activity>
 
         <!-- ############ QQ空间和QQ SSO授权的Activity注册 ############ -->
         <activity
             android:name="com.tencent.tauth.AuthActivity"
             android:launchMode="singleTask"
-            android:noHistory="true" >
+            android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <!-- 100424468，如果你使用的公用账号，则不需要修改；否则修改成你在QQ开放平台申请的 APP ID-->
+                <!-- 100424468，如果你使用的公用账号，则不需要修改；否则修改成你在QQ开放平台申请的 APP ID -->
                 <data android:scheme="tencent100424468" />
             </intent-filter>
         </activity>
-
-        <activity android:name="com.tencent.connect.common.AssistActivity"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"
-            android:screenOrientation="portrait">
-        </activity>
+        <activity
+            android:name="com.tencent.connect.common.AssistActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"></activity>
 
         <meta-data
             android:name="UMENG_APPKEY"
-            android:value="55e3facfe0f55a7d8a001a01" >
-        </meta-data>
-        <activity android:name="com.pengpenghui.activity.MyAttentionActivity"/>
+            android:value="55e3facfe0f55a7d8a001a01"></meta-data>
+
+        <activity android:name="com.pengpenghui.activity.MyAttentionActivity" />
+
     </application>
 
 </manifest>

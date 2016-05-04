@@ -24,11 +24,12 @@ import java.util.Map;
 public class MyAttentionActivity extends Activity {
     private ListView myList;
     private Button reButton;
+    private Button delButton;
 
     //预设
-    private String[] example={"s1","s2","s3","s4","s5"};
-    private int[] pid={R.drawable.yushepic,R.drawable.yushepic,
-            R.drawable.yushepic,R.drawable.yushepic,R.drawable.yushepic,};
+    private String[] example={"莲花超市(洗护产品)","中山灯具",};
+    private String[] example2={"广州市番禺区","中山市某某路"};
+    private int[] pid={R.drawable.attention_example,R.drawable.attention_example2};
     // 定义item数量 变量自己定,以上是预设
 
     // 定义item内容
@@ -59,7 +60,8 @@ public class MyAttentionActivity extends Activity {
                 Log.d("list", "你点击了第" + arg2 + "行");
             }
         });
-        reButton.setOnClickListener(new View.OnClickListener(){
+
+        reButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 MyAttentionActivity.this.finish();
@@ -74,13 +76,14 @@ public class MyAttentionActivity extends Activity {
             Map<String, Object> listem  = new HashMap<String, Object>();
             listem .put("image", pid[i]);
             listem .put("title", example[i] );
+            listem .put("text", example2[i] );
             listems .add(listem);
         }
 
         SimpleAdapter adapter = new SimpleAdapter(this.getApplicationContext(),
                 listems,R.layout.list_attention_item,
-                new String[]{"title","image"},
-                new int[]{R.id.itemText,R.id.itempic});
+                new String[]{"title","image","text"},
+                new int[]{R.id.itemAttentionName,R.id.itemAttentionimage,R.id.itemAttentionText});
         myList.setAdapter(adapter);
     }
 

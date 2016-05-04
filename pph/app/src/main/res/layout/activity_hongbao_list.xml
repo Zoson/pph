@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/orange"
+        android:gravity="center_vertical"
+        android:padding="6dp"
+
+        >
+
+        <Button
+            android:layout_width="32dp"
+            android:layout_height="36dp"
+            android:layout_marginLeft="10dp"
+            android:id="@+id/bn_re_hongbao"
+            android:background="@drawable/return_icon"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="红包记录"
+            android:textColor="@color/white"
+            android:textSize="23sp" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="80dp"
+        android:background="@drawable/hongbao_bg"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+
+            android:gravity="center_horizontal">
+
+            <ImageView
+                android:layout_marginTop="18dp"
+                android:id="@+id/im1"
+                android:layout_width="120dp"
+                android:layout_height="40dp"
+                android:background="@drawable/hongbao_2"/>
+
+            <TextView
+                android:layout_marginTop="6dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/im1"
+                android:layout_marginLeft="10dp"
+                android:id="@+id/hongbao_allcost"
+                android:textColor="@color/orange"
+                android:textSize="50dp"
+                android:text="0"/>
+
+            <ImageView
+                android:layout_marginTop="18dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/hongbao_allcost"
+                android:background="@drawable/hongbao_1"/>
+
+
+        </RelativeLayout>
+
+    </LinearLayout>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:text="一键提现"
+        android:textColor="@color/white"
+        android:textSize="20dp"
+        android:id="@+id/bt_sure_hongbao"
+        android:background="@drawable/bnse"
+        />
+</LinearLayout>
