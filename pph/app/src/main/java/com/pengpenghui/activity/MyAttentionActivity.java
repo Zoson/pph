@@ -1,6 +1,7 @@
 package com.pengpenghui.activity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
+import com.pengpenghui.domain.context.MyAttentionAdapter;
 import com.pengpenghui.ui.R;
 
 import java.util.ArrayList;
@@ -79,12 +81,8 @@ public class MyAttentionActivity extends Activity {
             listem .put("text", example2[i] );
             listems .add(listem);
         }
-
-        SimpleAdapter adapter = new SimpleAdapter(this.getApplicationContext(),
-                listems,R.layout.list_attention_item,
-                new String[]{"title","image","text"},
-                new int[]{R.id.itemAttentionName,R.id.itemAttentionimage,R.id.itemAttentionText});
-        myList.setAdapter(adapter);
+        MyAttentionAdapter madapter= new MyAttentionAdapter(this,listems,R.layout.list_attention_item);
+        myList.setAdapter(madapter);
     }
 
 

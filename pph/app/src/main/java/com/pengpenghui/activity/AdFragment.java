@@ -20,7 +20,7 @@ public class AdFragment extends Fragment {
 	private WebView webView;
     private View rootView;
     private SwipeRefreshLayout swipeRefreshLayout;
-    private String neturl="http://182.92.100.145/TouchYourCredit/ad2/";
+    private static final String neturl="http://182.92.100.145/TouchYourCredit/ad2/";
     @Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
