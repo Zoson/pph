@@ -24,56 +24,47 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:gravity="center_horizontal"
+        android:gravity="center"
         android:paddingLeft="20dp"
         android:paddingRight="20dp">
+
         <TextView
             android:layout_marginTop="10dp"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:text="你好你好你好好的所得税地方热风水电费加速度快付款单师傅"
+            android:text="关注微信公众号“碰碰惠”，即可体验以微信红包在线领取优惠的功能"
             android:textSize="20dp"
             />
 
         <TextView
             android:layout_marginTop="10dp"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/shuoming1"
+            android:layout_height="300dp"
+            android:background="@drawable/intro"
             />
         <TextView
             android:layout_marginTop="10dp"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="60dp"
-            android:paddingRight="60dp"
-            android:text="你好你好你好好的所得税地方热风水电费加速度快付款单师傅"
+            android:text="公众号提供“查看”，“微信绑定”，“关于我们”三大块功能，具体功能可自行关注公众号了解。"
+            android:textSize="20dp"
+            />
+        <TextView
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="绑定须知:点击微信绑定功能的获取验证码功能即可获取个人验证码，复制黏贴进客户端即可完成绑定。"
             android:textSize="20dp"
             />
 
         <TextView
             android:layout_marginTop="10dp"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/shuoming1"
-            /> <TextView
-        android:layout_marginTop="10dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingLeft="60dp"
-        android:paddingRight="60dp"
-        android:text="你好你好你好好的所得税地方热风水电费加速度快付款单师傅"
-        android:textSize="20dp"
-        />
-
-        <TextView
-            android:layout_marginTop="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/shuoming1"
+            android:layout_height="400dp"
+            android:background="@drawable/intro02"
             />
+
+
     </LinearLayout>
 
 

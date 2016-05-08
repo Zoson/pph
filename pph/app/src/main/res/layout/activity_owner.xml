@@ -2,7 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg2">
+    android:background="@drawable/bg2"
+    android:gravity="center_horizontal">
     <LinearLayout
         android:layout_gravity="center_vertical"
         android:paddingLeft="25dp"
@@ -44,17 +45,7 @@
             android:textColor="@color/white"
             />
         </LinearLayout>
-        <TextView
-            android:text="登录"
-            android:textColor="#fff"
-            android:background="#ff5522"
-            android:gravity="center"
-            android:id="@+id/tv_login"
-            android:layout_width="wrap_content"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:layout_height="30dp"
-            />
+
     </LinearLayout>
 
     <ListView
@@ -69,6 +60,20 @@
         >
         </ListView>
     <TextView
+        android:text="登录"
+        android:layout_below="@+id/listview"
         android:layout_width="match_parent"
-        android:layout_height="30dp" />
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:textColor="@color/white"
+        android:textSize="20dp"
+        android:id="@+id/tv_login"
+        android:gravity="center"
+        android:background="@drawable/bnse"
+
+        />
+
 </RelativeLayout>
