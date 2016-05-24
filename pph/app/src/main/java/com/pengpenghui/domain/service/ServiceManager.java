@@ -3,7 +3,6 @@ package com.pengpenghui.domain.service;
 import android.content.Context;
 
 import com.pengpenghui.domain.service.database.DataBaseOperator;
-import com.pengpenghui.domain.service.http.HttpRequest;
 import com.pengpenghui.domain.service.nfc.NFCService;
 
 import java.util.HashMap;
@@ -32,7 +31,6 @@ public class ServiceManager {
                     ob = new DataBaseOperator(this.context);
                     break;
                 case HTTP:
-                    ob = new HttpRequest();
                     break;
                 case NFC:
                     ob = new NFCService(this.context);

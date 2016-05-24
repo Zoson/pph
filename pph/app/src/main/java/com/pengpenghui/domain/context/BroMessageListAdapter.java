@@ -45,8 +45,8 @@ public class BroMessageListAdapter extends BaseAdapter {
     }
     private void initData(ViewHolder viewHolder,int position){
         viewHolder.tv_dis_money.setText(String.valueOf(list_bromessage.get(position).getDisMoney()));
-        viewHolder.tv_date_begin.setText(list_bromessage.get(position).getDuration().toString_beginDate());
-        viewHolder.tv_date_end.setText(list_bromessage.get(position).getDuration().toString_endDate());
+        viewHolder.tv_date_begin.setText(list_bromessage.get(position).getBeginDate());
+        viewHolder.tv_date_end.setText(list_bromessage.get(position).getEndDate());
         viewHolder.tv_address.setText(list_bromessage.get(position).getStoreName());
         viewHolder.tv_style.setText("元优惠券");
     }

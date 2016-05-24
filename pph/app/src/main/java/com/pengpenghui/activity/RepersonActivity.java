@@ -113,7 +113,7 @@ public class RepersonActivity extends Activity{
         personName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                RenameDialog renameDialog = new RenameDialog(RepersonActivity.this, mainPageController);
+                RenameDialog renameDialog = new RenameDialog(RepersonActivity.this);
                 renameDialog.setTitle("修改昵称");
                 renameDialog.show();
             }
@@ -126,7 +126,7 @@ public class RepersonActivity extends Activity{
         });
     }
     private void initData(){
-        mainPageController = new MainController();
+        mainPageController = MainController.get();
         userModel = mainPageController.getUser();
         personName.setText(userModel.getNickName());
         personPicture.setImageBitmap(userModel.getBitmap());

@@ -1,13 +1,15 @@
 package com.pengpenghui.domain.entity;
 
+import com.druson.cycle.enity.Enity;
+
 /**
  * Created by Zoson on 15/11/27.
  */
-public class WxGift{
-    private boolean isbind;
+public class WxGift extends Enity{
+    private int giftId;
     private String id;
-    private String verifyCode;
-    private String gift_sum;
+    private String time;
+    private int Money;
 
     public static WxGift instance = new WxGift();
     public static WxGift getInstance(){
@@ -16,13 +18,6 @@ public class WxGift{
 
     protected WxGift(){
 
-    }
-    public boolean isbind() {
-        return isbind;
-    }
-
-    public void setIsbind(boolean isbind) {
-        this.isbind = isbind;
     }
 
     public String getId() {
@@ -33,20 +28,16 @@ public class WxGift{
         this.id = id;
     }
 
-    public String getVerifyCode() {
-        return verifyCode;
+    public String getTime(){
+        return time;
     }
 
-    public void setVerifyCode(String verifyCode) {
-        this.verifyCode = verifyCode;
+    public int getGift_sum() {
+        return Money;
     }
 
-    public String getGift_sum() {
-        return gift_sum;
-    }
-
-    public void setGift_sum(String gift_sum) {
-        this.gift_sum = gift_sum;
+    public void setGift_sum(int gift_sum) {
+        this.Money = gift_sum;
     }
 
 }

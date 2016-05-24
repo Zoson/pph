@@ -11,7 +11,10 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
+import com.pengpenghui.domain.context.ContextCallback;
+import com.pengpenghui.domain.context.MainController;
 import com.pengpenghui.domain.context.MyAttentionAdapter;
+import com.pengpenghui.domain.entity.AdData;
 import com.pengpenghui.ui.R;
 
 import java.util.ArrayList;
@@ -27,7 +30,8 @@ public class MyAttentionActivity extends Activity {
     private ListView myList;
     private Button reButton;
     private Button delButton;
-
+    private MainController mainController;
+    private MyAttentionAdapter madapter;
     //预设
     private String[] example={"莲花超市(洗护产品)","中山灯具",};
     private String[] example2={"广州市番禺区","中山市某某路"};
@@ -45,9 +49,22 @@ public class MyAttentionActivity extends Activity {
 
     }
     private void initData(){
-
-
+        mainController = MainController.get();
+        List<AdData> list = mainController.getAttention(new ContextCallback() {
+            @Override
+            public void response(int state, Object object) {
+                notifyMyAdapter();
+            }
+        });
+        madapter= new MyAttentionAdapter(this,list,R.layout.list_attention_item);
+        myList.setAdapter(madapter);
     }
+
+    public void notifyMyAdapter(){
+        if (madapter == null)return;
+        madapter.notifyDataSetChanged();
+    }
+
     private void findView(){
         reButton=(Button)findViewById(R.id.bn_re_attention);
         myList=(ListView)findViewById(R.id.my_list);
@@ -73,16 +90,15 @@ public class MyAttentionActivity extends Activity {
     }
 
     private void setAdapter(){
-        List<Map<String, Object>> listems  = new ArrayList<Map<String, Object>>();
-        for(int i = 0; i <example.length; i++) {
-            Map<String, Object> listem  = new HashMap<String, Object>();
-            listem .put("image", pid[i]);
-            listem .put("title", example[i] );
-            listem .put("text", example2[i] );
-            listems .add(listem);
-        }
-        MyAttentionAdapter madapter= new MyAttentionAdapter(this,listems,R.layout.list_attention_item);
-        myList.setAdapter(madapter);
+//        List<Map<String, Object>> listems  = new ArrayList<Map<String, Object>>();
+//        for(int i = 0; i <example.length; i++) {
+//            Map<String, Object> listem  = new HashMap<String, Object>();
+//            listem .put("image", pid[i]);
+//            listem .put("title", example[i] );
+//            listem .put("text", example2[i] );
+//            listems .add(listem);
+//        }
+
     }
 
 

@@ -54,7 +54,7 @@ public class GetBroActivity extends Activity implements NFCListener {
             finish();
             return;
         }
-        setTitle(adData.getAd_info());
+        setTitle(adData.getInfo());
         wv_get_bro.loadUrl(adData.getAd_url());
         wv_get_bro.setWebViewClient(new WebViewClient());
         WebSettings webSettings = wv_get_bro.getSettings();

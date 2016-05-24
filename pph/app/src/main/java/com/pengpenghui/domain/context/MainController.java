@@ -10,13 +10,13 @@ import com.pengpenghui.domain.entity.DataProvider;
 import com.pengpenghui.domain.entity.HttpApi;
 import com.pengpenghui.domain.entity.User;
 import com.pengpenghui.domain.service.database.DataBaseOperator;
-import com.pengpenghui.domain.service.http.HttpFileListener;
 import com.pengpenghui.domain.service.http.HttpListener;
 import com.pengpenghui.domain.service.SharedPreference;
-import com.pengpenghui.domain.service.http.HttpRequest;
+
 import com.pengpenghui.domain.service.nfc.NFCListener;
 import com.pengpenghui.domain.service.nfc.NFCService;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -32,15 +32,18 @@ public class MainController extends PPHContext {
     private List<BroMessage> broMessages;
     private DataBaseOperator dataBaseOperator;
     private SharedPreference sharedPreference;
-    private HttpRequest httpRequest;
     private NFCService nfcService;
     private DataProvider contextData;
     private AdData adData;
-    public MainController(){
+
+    private static MainController instance = new MainController();
+    public static MainController get(){
+        return instance;
+    }
+    protected MainController(){
         this.user = getDataProvider().getUser();
         broMessages  = getDataProvider().getBroMessages();
         dataBaseOperator = getDataBaseOperator();
-        httpRequest = getHttpService();
         sharedPreference = getSharePreference();
         nfcService = getNFCService();
         contextData = getDataProvider();
@@ -63,40 +66,32 @@ public class MainController extends PPHContext {
     }
 
     public void getBro(final ContextCallback contextCallback){
-        HttpApi.ownsToGetDis(httpRequest, user.getId(), new HttpListener() {
+        HttpApi.ownsToGetDis( user.getId(), new HttpListener() {
             @Override
-            public void succToRequire(String msg, String data) {
+            public void succ(String message, String data, byte[] bytes) {
                 contextCallback.response(ContextCallback.SUCC, genBroList(data));
             }
 
             @Override
-            public void failToRequire(String msg, String data) {
-                contextCallback.response(ContextCallback.FAIL, "获取失败");
+            public void fail(String message) {
+                contextCallback.response(ContextCallback.FAIL, message);
             }
 
-            @Override
-            public void netWorkError(String msg, String data) {
-                contextCallback.response(ContextCallback.FAIL, "网络错误");
-            }
         });
     }
 
     public void getBroByAd(final ContextCallback contextCallback){
 
-        HttpApi.insertOwns(httpRequest, user.getId(), contextData.getCurrentAdData().getDis_id() + "", new HttpListener() {
+        HttpApi.getDis(user.getId(), contextData.getCurrentAdData().getAd_id(), new HttpListener() {
+
             @Override
-            public void succToRequire(String msg, String data) {
+            public void succ(String message, String data, byte[] bytes) {
                 contextCallback.response(ContextCallback.SUCC, data);
             }
 
             @Override
-            public void failToRequire(String msg, String data) {
-                contextCallback.response(ContextCallback.FAIL, "领取失败");
-            }
-
-            @Override
-            public void netWorkError(String msg, String data) {
-                contextCallback.response(ContextCallback.FAIL, "网络出错");
+            public void fail(String message) {
+                contextCallback.response(ContextCallback.SUCC, message);
             }
         });
     }
@@ -111,29 +106,26 @@ public class MainController extends PPHContext {
         return list;
     }
 
-    public void changePassword(String oldps,String newps, final ContextCallback contextCallback){
-        HttpApi.setPsw(httpRequest, user.getId(), oldps, newps, new HttpListener() {
+    public void changePassword(String oldps, final String newps, final ContextCallback contextCallback){
+        final User user = new User();
+        HttpApi.setPsw(user.getId(), oldps, newps, new HttpListener() {
             @Override
-            public void succToRequire(String msg, String data) {
-                contextCallback.response(ContextCallback.SUCC, "修改成功");
+            public void succ(String message, String data, byte[] bytes) {
+                user.setPassWord(newps);
+                contextCallback.response(ContextCallback.SUCC,message);
             }
 
             @Override
-            public void failToRequire(String msg, String data) {
-                contextCallback.response(ContextCallback.FAIL, "修改失败");
-            }
-
-            @Override
-            public void netWorkError(String msg, String data) {
-                contextCallback.response(ContextCallback.FAIL, "网络出错");
+            public void fail(String message) {
+                contextCallback.response(ContextCallback.FAIL, message);
             }
         });
     }
 
     public void changeName(String name, final ContextCallback contextCallback){
-        HttpApi.setNickName(httpRequest, user.getId(), name, new HttpListener() {
+        HttpApi.setNickName(user.getId(), name, new HttpListener() {
             @Override
-            public void succToRequire(String msg, String data) {
+            public void succ(String message, String data, byte[] bytes) {
                 try {
                     JSONObject js = new JSONObject(data);
                     user.setNickName(js.getString("newNickName"));
@@ -145,25 +137,15 @@ public class MainController extends PPHContext {
             }
 
             @Override
-            public void failToRequire(String msg, String data) {
-                contextCallback.response(ContextCallback.FAIL, "修改失败");
-            }
-
-            @Override
-            public void netWorkError(String msg, String data) {
-                contextCallback.response(ContextCallback.FAIL, "网络出错");
+            public void fail(String message) {
+                contextCallback.response(ContextCallback.FAIL, message);
             }
         });
     }
 
     public void changPicture(String file){
         sharedPreference.set("file", file);
-        HttpApi.setPicture(httpRequest, user.getId(), file, new HttpFileListener() {
-            @Override
-            public void succToFile() {
-
-            }
-        });
+        HttpApi.setPicture(user.getId(), file, null);
     }
 
     public boolean isUserLogin(){
@@ -185,9 +167,9 @@ public class MainController extends PPHContext {
         nfcService.getNfcIntent(intent, new NFCListener() {
             @Override
             public void getNfcInfo(String code) {
-                HttpApi.tagToGetAd(httpRequest, code, new HttpListener() {
+                HttpApi.tagToGetAd(code, new HttpListener() {
                     @Override
-                    public void succToRequire(String msg, String data) {
+                    public void succ(String message, String data, byte[] bytes) {
                         if (contextData.addAdDataByJson(data)) {
                             adData = contextData.getAdDatas().get(0);
                             contextCallback.response(ContextCallback.SUCC, adData);
@@ -197,13 +179,8 @@ public class MainController extends PPHContext {
                     }
 
                     @Override
-                    public void failToRequire(String msg, String data) {
-                        contextCallback.response(ContextCallback.FAIL, "广告获取失败");
-                    }
-
-                    @Override
-                    public void netWorkError(String msg, String data) {
-                        contextCallback.response(ContextCallback.FAIL, "广告获取失败");
+                    public void fail(String message) {
+                        contextCallback.response(ContextCallback.FAIL, message);
                     }
                 });
             }
@@ -213,6 +190,31 @@ public class MainController extends PPHContext {
     public boolean checkNFCDevice(){
         contextData.setIsNFCEnable(nfcService.checkNFCFunction());
         return contextData.isNFCEnable();
+    }
 
+    public List<AdData> getAttention(final ContextCallback callback){
+        List<AdData> adDatas = getDataProvider().getAdDatas();
+        HttpApi.getAttention(user.getId(), new HttpListener() {
+            @Override
+            public void succ(String message, String data, byte[] bytes) {
+                try {
+                    JSONArray jsonObject = new JSONArray(data);
+                    for (int i=0;i<jsonObject.length();i++){
+                        String json = jsonObject.getString(i);
+                        AdData adData = new AdData();
+                        adData.initByJson(json);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                callback.response(ContextCallback.SUCC,"获取成功");
+            }
+
+            @Override
+            public void fail(String message) {
+                callback.response(ContextCallback.SUCC,message);
+            }
+        });
+        return adDatas;
     }
 }

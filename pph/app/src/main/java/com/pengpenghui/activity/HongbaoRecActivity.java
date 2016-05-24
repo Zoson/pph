@@ -7,7 +7,11 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.pengpenghui.domain.context.ContextCallback;
+import com.pengpenghui.domain.context.GiftManager;
+import com.pengpenghui.domain.entity.DataBaseTable;
 import com.pengpenghui.ui.R;
 
 public class HongbaoRecActivity extends Activity {
@@ -17,6 +21,8 @@ public class HongbaoRecActivity extends Activity {
     private Button getMoney;
     //红包金额总数
     private TextView hongbao_allcost;
+
+    private GiftManager giftManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,6 +30,7 @@ public class HongbaoRecActivity extends Activity {
         setContentView(R.layout.activity_hongbao_list);
         findView();
         setListener();
+        giftManager = GiftManager.get();
     }
 
     private void findView(){
@@ -43,11 +50,18 @@ public class HongbaoRecActivity extends Activity {
         getMoney.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.v("提现", "yijiantixian");
+                giftManager.getMoney(new ContextCallback(){
+
+                    @Override
+                    public void response(int state, Object object) {
+                        Toast.makeText(HongbaoRecActivity.this,object+"",Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+
             }
         }));
     }
     private void initData(){
-
     }
 }

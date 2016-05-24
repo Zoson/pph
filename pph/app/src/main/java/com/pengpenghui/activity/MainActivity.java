@@ -72,7 +72,7 @@ public class MainActivity extends FragmentActivity implements OnClickListener,
 		Fragment_person = new PersonFragment();
 		mTabs.add(Fragment_person);
 
-		mainPageController = new MainController();
+		mainPageController = MainController.get();
 
 		mAdapter = new FragmentPagerAdapter(getSupportFragmentManager()){
 			@Override

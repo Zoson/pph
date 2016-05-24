@@ -34,7 +34,7 @@ public class RecIntentService extends BroadcastReceiver {
     }
 
     private void initData(){
-        mainController = new MainController();
+        mainController = MainController.get();
 
     }
 }

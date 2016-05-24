@@ -2,6 +2,7 @@ package com.pengpenghui.domain.entity;
 
 import android.content.ContentValues;
 
+import com.druson.cycle.enity.Enity;
 import com.pengpenghui.domain.service.database.DataObjectInterface;
 
 import org.json.JSONException;
@@ -12,21 +13,31 @@ import java.util.Map;
 /**
  * Created by zoson on 6/17/15.
  */
-public class BroMessage implements DataObjectInterface {
-    private String userId;
+public class BroMessage extends Enity implements DataObjectInterface {
     private long disId;
-    private long adid;
+    private long AdId;
     private int disMoney;
     private String storeName;
     private String name;
-    private Duration duration;
+
+    public String getBeginDate() {
+        return beginDate;
+    }
+
+    public String getEndDate() {
+        return endDate;
+    }
+
+    private String beginDate;
+    private String endDate;
+    private String type;
 
     public long getAdid() {
-        return adid;
+        return AdId;
     }
 
     public void setAdid(long adid) {
-        this.adid = adid;
+        this.AdId = adid;
     }
 
     public void setName(String name){
@@ -34,21 +45,6 @@ public class BroMessage implements DataObjectInterface {
     }
     public String getName(){
         return this.name;
-    }
-    public Duration getDuration(){
-        return duration;
-    }
-
-    public void setDuration(String begin,String end){
-        this.duration = new Duration(begin,end);
-    }
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
     }
 
     public long getDisId() {
@@ -78,9 +74,8 @@ public class BroMessage implements DataObjectInterface {
     @Override
     public ContentValues getContentValues() {
         ContentValues contentValues = new ContentValues();
-        //contentValues.put(DataBaseTable.UserDataTable.ID, User.getInstance().getId());
-        contentValues.put(DataBaseTable.BroMessageTable.BEGINDATA,duration.toString_beginDate());
-        contentValues.put(DataBaseTable.BroMessageTable.ENDDATE,duration.toString_endDate());
+        contentValues.put(DataBaseTable.BroMessageTable.BEGINDATA,beginDate);
+        contentValues.put(DataBaseTable.BroMessageTable.ENDDATE,endDate);
         contentValues.put(DataBaseTable.BroMessageTable.STORENAME,storeName);
         contentValues.put(DataBaseTable.BroMessageTable.DISID,disId);
         contentValues.put(DataBaseTable.BroMessageTable.DISMONEY,disMoney);
@@ -89,30 +84,11 @@ public class BroMessage implements DataObjectInterface {
     }
     public void getDataFromDatabase(Map<String,String> map){
         disId = Long.parseLong(map.get(DataBaseTable.BroMessageTable.DISID));
-        userId = (map.get(DataBaseTable.UserDataTable.ID));
         disMoney = Integer.parseInt(map.get(DataBaseTable.BroMessageTable.DISMONEY));
         storeName = map.get(DataBaseTable.BroMessageTable.STORENAME);
-        duration.setBegin(map.get(DataBaseTable.BroMessageTable.BEGINDATA));
-        duration.setEnd(map.get(DataBaseTable.BroMessageTable.ENDDATE));
+        beginDate = map.get(DataBaseTable.BroMessageTable.BEGINDATA);
+        endDate = map.get(DataBaseTable.BroMessageTable.ENDDATE);
         name = map.get(DataBaseTable.BroMessageTable.NAME);
-    }
-    public static BroMessage genByJsonData(String userId,String data){
-        BroMessage broMessage = new BroMessage();
-        JSONObject jsonObject1 = null;
-        try {
-            jsonObject1 = new JSONObject(data);
-            broMessage.disId = jsonObject1.getLong("disId");
-            broMessage.disMoney = jsonObject1.getInt("disMoney");
-            broMessage.storeName = jsonObject1.getString("storeName");
-            broMessage.name = jsonObject1.getString("name");
-            broMessage.userId = userId;
-            broMessage.duration = new Duration(jsonObject1.getString("beginDate"),jsonObject1.getString("endDate"));
-        } catch (JSONException e) {
-            e.printStackTrace();
-            broMessage = null;
-            return broMessage;
-        }
-        return broMessage;
     }
 
 }

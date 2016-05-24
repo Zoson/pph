@@ -81,7 +81,7 @@ public class LoginActivity extends Activity {
         });
     }
     private void initData(){
-        logController = new LogController();
+        logController = LogController.get();
         setRecord();
     }
     private void setRecord(){

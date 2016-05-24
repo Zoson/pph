@@ -17,18 +17,17 @@ public class RenameDialog extends Dialog {
     private EditText et_rename;
     private Button bt_get_bro;
     private Button bt_cancel;
-    private MainController mainPageController;
     private Context context;
-
+    private MainController mainController;
     public RenameDialog(Context context, int theme) {
         super(context, theme);
     }
 
-    public RenameDialog(Context context,MainController mainPageController) {
+    public RenameDialog(Context context) {
         super(context);
         setContentView(R.layout.activity_dialog_rename);
         this.context = context;
-        this.mainPageController = mainPageController;
+        this.mainController = MainController.get();
         findView();
         setListener();
     }
@@ -47,7 +46,7 @@ public class RenameDialog extends Dialog {
         bt_get_bro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mainPageController.changeName(et_rename.getText().toString(), new ContextCallback() {
+                mainController.changeName(et_rename.getText().toString(), new ContextCallback() {
                     @Override
                     public void response(int state, Object object) {
 

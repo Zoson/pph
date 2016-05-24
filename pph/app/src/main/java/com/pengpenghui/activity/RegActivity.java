@@ -35,7 +35,7 @@ public class RegActivity extends Activity {
         super.onCreate(savedInstanceState);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_register);
-        logController = new LogController();
+        logController = LogController.get();
         findView();
         setListener();
     }

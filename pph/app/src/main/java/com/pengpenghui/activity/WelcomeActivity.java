@@ -30,7 +30,7 @@ public class WelcomeActivity extends Activity{
         ll_welcome = (LinearLayout)findViewById(R.id.ll_welcome);
     }
     private void init(){
-        logController = new LogController();
+        logController = LogController.get();
         ll_welcome.postDelayed(new Runnable() {
             @Override
             public void run() {

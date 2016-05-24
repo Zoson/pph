@@ -20,14 +20,24 @@ public class DataProvider {
     private AdData current_ad;
     private List<BroMessage> broMessages;
     private List<WxGift> gifts;
+
     public DataProvider(){
-        user = new User();
         adDatas = new ArrayList<>();
         broMessages = new ArrayList<>();
         gifts = new ArrayList<>();
     }
     public User genUserByJson(String data){
-        return user = User.dealJsonData(data);
+        User user = new User();
+        try {
+            user.initByJson(data);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return user;
+    }
+
+    public void setUser(User user){
+        this.user = user;
     }
 
     public User getUser(){
@@ -67,8 +77,12 @@ public class DataProvider {
     }
 
     public boolean addAdDataByJson(String json){
-        AdData adData = null;
-        adData = AdData.genAdataByJson(json);
+        AdData adData = new AdData();
+        try {
+            adData.initByJson(json);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
         if (adData == null) return false;
         current_ad = adData;
         this.adDatas.add(adData);
@@ -89,7 +103,8 @@ public class DataProvider {
             JSONObject jsonObject = new JSONObject(json);
             int count = jsonObject.getInt("count");
             for (int i =broMessages.size() ; i < count ; i++){
-                BroMessage broMessage = BroMessage.genByJsonData(user.getId(),jsonObject.getString("" + i));
+                BroMessage broMessage = new BroMessage();
+                broMessage.initByJson(jsonObject.getString("" + i));
                 if (broMessage == null) continue;
                 broMessages.add(broMessage);
             }

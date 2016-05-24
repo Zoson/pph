@@ -2,53 +2,85 @@ package com.pengpenghui.domain.entity;
 
 import android.graphics.Bitmap;
 
+import com.druson.cycle.enity.Enity;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
  * Created by zoson on 6/17/15.
  */
-public class AdData {
-    private long ad_id;
-    private String ad_url;
-    private String ad_owner;
+public class AdData extends Enity {
+    private int AdId;
+    private String AdUrl;
+
+    public int getAdId() {
+        return AdId;
+    }
+
+    public void setAdId(int adId) {
+        AdId = adId;
+    }
+
+    public String getAdUrl() {
+        return AdUrl;
+    }
+
+    public void setAdUrl(String adUrl) {
+        AdUrl = adUrl;
+    }
+
+    public String getAdOwner() {
+        return AdOwner;
+    }
+
+    public void setAdOwner(String adOwner) {
+        AdOwner = adOwner;
+    }
+
+    public void setPriority(int priority) {
+        this.priority = priority;
+    }
+
+    public String getAdPicture() {
+        return AdPicture;
+    }
+
+    public void setAdPicture(String adPicture) {
+        AdPicture = adPicture;
+    }
+
+    public void setAd_picture(Bitmap ad_picture) {
+        this.ad_picture = ad_picture;
+    }
+
+    public String getInfo() {
+        return info;
+    }
+
+    public void setInfo(String info) {
+        this.info = info;
+    }
+
+    private String AdOwner;
     private int priority;
-    private String ad_picture_url;
+    private String AdPicture;
     private Bitmap ad_picture;
-    private String ad_info;
-    private long dis_id ;
-    private int dis_count;
+    private String info;
     public AdData(){
 
     }
 
-    public static AdData genAdataByJson(String json){
-        AdData adData = new AdData();
-        try {
-            JSONObject jsonObject = new JSONObject(json);
-            adData.ad_id = jsonObject.getLong("AdId");
-            adData.ad_url = jsonObject.getString("AdUrl");
-            adData.ad_owner = jsonObject.getString("AdOwner");
-            adData.priority = jsonObject.getInt("priority");
-            adData.ad_picture_url = jsonObject.getString("AdPicture");
-            adData.ad_info = jsonObject.getString("info");
-            adData.dis_id = jsonObject.getLong("disId");
-        } catch (JSONException e) {
-            adData = null;
-            e.printStackTrace();
-        }
-        return adData;
-    }
-    public long getAd_id() {
-        return ad_id;
+    public int getAd_id() {
+        return AdId;
     }
 
     public String getAd_url() {
-        return ad_url;
+        return AdUrl;
     }
 
     public String getAd_owner() {
-        return ad_owner;
+        return AdOwner;
     }
 
     public int getPriority() {
@@ -56,23 +88,11 @@ public class AdData {
     }
 
     public String getAd_picture_url() {
-        return ad_picture_url;
+        return AdPicture;
     }
 
     public Bitmap getAd_picture() {
         return ad_picture;
-    }
-
-    public String getAd_info() {
-        return ad_info;
-    }
-
-    public long getDis_id() {
-        return dis_id;
-    }
-
-    public int getDis_count() {
-        return dis_count;
     }
 
 }

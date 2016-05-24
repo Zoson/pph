@@ -62,7 +62,7 @@ public class PersonFragment extends Fragment {
     }
 
     private void initData(){
-        mainPageController = new MainController();
+        mainPageController = MainController.get();
         if(!mainPageController.isUserLogin()){
             tv_login.setText("登录");
             return;

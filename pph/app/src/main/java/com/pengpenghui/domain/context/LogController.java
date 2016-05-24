@@ -7,10 +7,10 @@ import com.pengpenghui.domain.entity.HttpApi;
 import com.pengpenghui.domain.entity.User;
 
 import com.pengpenghui.domain.service.database.DataBaseOperator;
-import com.pengpenghui.domain.service.http.HttpImgListener;
 import com.pengpenghui.domain.service.http.HttpListener;
 import com.pengpenghui.domain.service.SharedPreference;
-import com.pengpenghui.domain.service.http.HttpRequest;
+
+import org.json.JSONException;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -21,12 +21,16 @@ import java.util.Map;
 public class LogController extends PPHContext{
     private SharedPreference sharedPreference;
     private DataBaseOperator dataBaseOperator;
-    private HttpRequest httpRequest;
     private User user;
-    public LogController(){
+    public static LogController get(){
+        return instance;
+    }
+
+    private static LogController instance = new LogController();
+
+    protected LogController(){
         sharedPreference = getSharePreference();
         dataBaseOperator = getDataBaseOperator();
-        httpRequest = getHttpService();
         user = getDataProvider().getUser();
     }
 
@@ -46,7 +50,7 @@ public class LogController extends PPHContext{
     }
 
     public void recordAccunt(String account,String password){
-        sharedPreference.set("account",account);
+        sharedPreference.set("account", account);
         sharedPreference.set("password",password);
     }
 
@@ -58,11 +62,19 @@ public class LogController extends PPHContext{
     }
 
     public void tryLog(final String id,final String psw, final ContextCallback contextCallback){
-        HttpApi.log(httpRequest,id, psw, new HttpListener() {
+        final User user = new User();
+        user.setId(id);
+        user.setPassWord(psw);
+        HttpApi.log(user, new HttpListener() {
             @Override
-            public void succToRequire(String msg, String data) {
+            public void succ(String message, String data, byte[] bytes) {
                 getDataProvider().setUserState(DataProvider.LOGIN);
-                user = getDataProvider().genUserByJson(data);
+                try {
+                    user.initByJson(data);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                getDataProvider().setUser(user);
                 if (user == null){contextCallback.response(ContextCallback.FAIL,"数据处理出错");return;}
                 if (isIdExist(user.getId())){
                     String[] attr = {DataBaseTable.UserDataTable.ID};
@@ -71,31 +83,26 @@ public class LogController extends PPHContext{
                 }else {
                     dataBaseOperator.insert(user, DataBaseTable.UserDataTable.USER_TABLE_NAME);
                 }
-                contextCallback.response(ContextCallback.SUCC, msg);
+                contextCallback.response(ContextCallback.SUCC, message);
                 recordAccunt(id, psw);
                 getPhoto(user.getImg());
             }
 
             @Override
-            public void failToRequire(String msg, String data) {
+            public void fail(String message) {
                 contextCallback.response(ContextCallback.FAIL, "登录失败");
-            }
 
-            @Override
-            public void netWorkError(String msg, String data) {
-                contextCallback.response(ContextCallback.FAIL, "网络错误");
             }
-
         });
     }
 
     public void getPhoto(String img){
-        HttpApi.getPhoto(httpRequest,img, new HttpImgListener() {
-            @Override
-            public void succToImg(Bitmap bitmap) {
-                user.setBitmap(bitmap);
-            }
-        });
+//        HttpApi.getPhoto(httpRequest, img, new HttpImgListener() {
+//            @Override
+//            public void succToImg(Bitmap bitmap) {
+//                user.setBitmap(bitmap);
+//            }
+//        });
     }
 
     public String readinfo(){
@@ -119,46 +126,27 @@ public class LogController extends PPHContext{
     }
 
     public void tryReg(final String account, final String password, final String nickname, final ContextCallback contextCallback){
-        HttpApi.isSuited(httpRequest,account, new HttpListener() {
+        final User user = new User();
+        user.setPassWord(password);
+        user.setId(account);
+        user.setNickName(nickname);
+        HttpApi.register(user, new HttpListener() {
             @Override
-            public void succToRequire(String msg, String data) {
-                regAccount(account,password,nickname,contextCallback);
-                contextCallback.response(ContextCallback.SUCC,msg);
+            public void succ(String message, String data, byte[] bytes) {
+                getDataProvider().setUser(user);
+                contextCallback.response(ContextCallback.SUCC,message);
             }
 
             @Override
-            public void failToRequire(String msg, String data) {
-                contextCallback.response(ContextCallback.FAIL,"账号不存在");
-            }
-
-            @Override
-            public void netWorkError(String msg, String data) {
-                contextCallback.response(ContextCallback.FAIL,"网络错误");
+            public void fail(String message) {
+                contextCallback.response(ContextCallback.FAIL,message);
             }
         });
     }
 
-    public void regAccount(String account,String password,String nickname, final ContextCallback contextCallback){
-        HttpApi.register(httpRequest,account, password, nickname, new HttpListener() {
-            @Override
-            public void succToRequire(String msg, String data) {
-                contextCallback.response(ContextCallback.SUCC,msg);
-            }
-
-            @Override
-            public void failToRequire(String msg, String data) {
-                contextCallback.response(ContextCallback.FAIL,"注册失败");
-            }
-
-            @Override
-            public void netWorkError(String msg, String data) {
-                contextCallback.response(ContextCallback.ERROR,"网络错误");
-            }
-        });
-    }
 
     public void forceTolog(ContextCallback contextCallback){
-        user.setAccount(sharedPreference.get("account",""));
+        user.setId(sharedPreference.get("account", ""));
         user.setPassWord(sharedPreference.get("password", ""));
         this.tryAutoLog(contextCallback);
     }

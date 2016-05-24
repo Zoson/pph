@@ -3,6 +3,7 @@ package com.pengpenghui.domain.entity;
 import android.content.ContentValues;
 import android.graphics.Bitmap;
 
+import com.druson.cycle.enity.Enity;
 import com.pengpenghui.domain.service.database.DataObjectInterface;
 
 import org.json.JSONException;
@@ -13,41 +14,33 @@ import java.util.Map;
 /**
  * Created by 杨超chao on 2015/6/17.
  */
-public class User implements DataObjectInterface {
+public class User extends Enity implements DataObjectInterface {
     private String id;
-    private String account = null;
-    private String passWord;
-    private String nickName;
-    private String img;
-    private Bitmap bitmap = null;
+    private String password;
+    private String nickname;
+    private String bitmap;
+    private Bitmap img = null;
     private double money = 0;
     private static User instance = null;
 
-    protected User(){
+    public User(){
 
-    }
-    public String getAccount(){
-        return account;
-    }
-
-    public void setAccount(String account){
-        this.account = account;
     }
 
     public String getNickName() {
-        return nickName;
+        return nickname;
     }
 
     public void setNickName(String nickName) {
-        this.nickName = nickName;
+        this.nickname = nickName;
     }
 
     public String getPassWord() {
-        return passWord;
+        return password;
     }
 
     public void setPassWord(String passWord) {
-        this.passWord = passWord;
+        this.password = passWord;
     }
     public String getId() {
         return id;
@@ -58,20 +51,20 @@ public class User implements DataObjectInterface {
     }
 
     public String getImg() {
-        return img;
+        return bitmap;
     }
 
     public void setImg(String img) {
-        this.img = img;
+        this.bitmap= img;
     }
 
 
     public Bitmap getBitmap() {
-        return bitmap;
+        return img;
     }
 
     public void setBitmap(Bitmap bitmap) {
-        this.bitmap = bitmap;
+        this.img = bitmap;
     }
 
     public double getMoney() {
@@ -86,34 +79,19 @@ public class User implements DataObjectInterface {
     public ContentValues getContentValues() {
         ContentValues contentValues = new ContentValues();
         contentValues.put(DataBaseTable.UserDataTable.ID,id);
-        contentValues.put(DataBaseTable.UserDataTable.PASSWORD,passWord);
-        contentValues.put(DataBaseTable.UserDataTable.NICKNAME,nickName);
+        contentValues.put(DataBaseTable.UserDataTable.PASSWORD,password);
+        contentValues.put(DataBaseTable.UserDataTable.NICKNAME,nickname);
         contentValues.put(DataBaseTable.UserDataTable.MONEY,money);
-        contentValues.put(DataBaseTable.UserDataTable.IMG,img);
+        contentValues.put(DataBaseTable.UserDataTable.IMG,bitmap);
         return contentValues;
     }
 
     public void getDataFromDatabase(Map<String,String> map){
         id = map.get(DataBaseTable.UserDataTable.ID);
-        passWord = map.get(DataBaseTable.UserDataTable.PASSWORD);
-        nickName = map.get(DataBaseTable.UserDataTable.NICKNAME);
+        password = map.get(DataBaseTable.UserDataTable.PASSWORD);
+        nickname = map.get(DataBaseTable.UserDataTable.NICKNAME);
         money = Double.parseDouble(map.get(DataBaseTable.UserDataTable.MONEY));
-        img = map.get(DataBaseTable.UserDataTable.IMG);
+        bitmap = map.get(DataBaseTable.UserDataTable.IMG);
     }
 
-    public static User dealJsonData(String data){
-        User user = new User();
-        try {
-            JSONObject jsonObject = new JSONObject(data);
-            user.id = jsonObject.getString("id");
-            user.nickName = jsonObject.getString("nickName");
-            user.passWord = jsonObject.getString("password");
-            user.img = jsonObject.getString("bitmap");
-            user.money = Double.parseDouble(jsonObject.getString("money"));
-        } catch (JSONException e) {
-            e.printStackTrace();
-            user = null;
-        }
-        return user;
-    }
 }

@@ -1,8 +1,7 @@
 package com.pengpenghui.domain.service.http;
 
 /**
- * Created by zoson on 15/6/14.
+ * Created by Zoson on 16/5/24.
  */
-public interface HttpFileListener {
-    public void succToFile();
+public class HttpFileListener {
 }

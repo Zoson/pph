@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
+import com.pengpenghui.domain.entity.AdData;
 import com.pengpenghui.ui.R;
 
 import java.util.List;
@@ -24,10 +25,10 @@ import java.util.Map;
 public class MyAttentionAdapter extends BaseAdapter {
     //没有定义实体，我就先这么写了
     private LayoutInflater mInflater;
-    private List<Map<String, Object>> list;
+    private List<AdData> list;
     private int layoutID;
 
-    public MyAttentionAdapter(Context context, List<Map<String, Object>> list,
+    public MyAttentionAdapter(Context context, List<AdData> list,
                      int layoutID) {
         this.mInflater = LayoutInflater.from(context);
         this.list = list;
@@ -72,9 +73,9 @@ public class MyAttentionAdapter extends BaseAdapter {
 
     }
     private void initData(AttentionViewHolder viewHolder,int position){
-        viewHolder.date_image.setBackgroundResource((int) list.get(position).get("image"));
-        viewHolder.data_tittle.setText((String)list.get(position).get("title"));
-        viewHolder.data_address.setText((String)list.get(position).get("text"));
+        viewHolder.date_image.setImageBitmap(list.get(position).getAd_picture());
+        viewHolder.data_tittle.setText(list.get(position).getAd_owner());
+        viewHolder.data_address.setText(list.get(position).getInfo());
     }
     public void addListener(View convertView, final int k) {
         ((Button)convertView.findViewById(R.id.itemAttentionbutton)).setOnClickListener(new View.OnClickListener() {

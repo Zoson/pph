@@ -121,7 +121,7 @@ public class MainFragment extends android.support.v4.app.Fragment{
     }
 
     public void initData(){
-        mainPageController = new MainController();
+        mainPageController = MainController.get();
         if (!mainPageController.isUserLogin()){
             return;
         }

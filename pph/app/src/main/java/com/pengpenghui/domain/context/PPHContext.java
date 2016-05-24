@@ -4,7 +4,6 @@ import android.content.Context;
 
 import com.pengpenghui.domain.entity.DataProvider;
 import com.pengpenghui.domain.service.database.DataBaseOperator;
-import com.pengpenghui.domain.service.http.HttpRequest;
 import com.pengpenghui.domain.service.NetWorkState;
 import com.pengpenghui.domain.service.ServiceManager;
 import com.pengpenghui.domain.service.SharedPreference;
@@ -33,9 +32,6 @@ public class PPHContext {
         return (DataBaseOperator)BaseContext.mServiceManager.getService(ServiceManager.Service.DATABASE);
     }
 
-    public HttpRequest getHttpService(){
-        return (HttpRequest)BaseContext.mServiceManager.getService(ServiceManager.Service.HTTP);
-    }
 
     public NetWorkState getNetWorkState(){
         return (NetWorkState)BaseContext.mServiceManager.getService(ServiceManager.Service.NETWORDSTATE);

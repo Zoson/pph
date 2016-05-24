@@ -1,103 +1,296 @@
 package com.pengpenghui.domain.entity;
 
-
-import com.pengpenghui.domain.service.http.HttpFileListener;
-import com.pengpenghui.domain.service.http.HttpImgListener;
+import com.druson.cycle.service.http.Request;
 import com.pengpenghui.domain.service.http.HttpListener;
-import com.pengpenghui.domain.service.http.HttpRequest;
+import com.pengpenghui.domain.service.http.HttpService;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
- * Created by zoson on 6/19/15.
+ * Created by Zoson on 16/5/23.
  */
 public class HttpApi {
-    private final static String isSuited = "isSuited.php";
-    private final static String setUserIdPassword = "setUserIdPassword.php";
-    private final static String log = "log.php";
-    private final static String register = "register.php";
-    private final static String setPsw = "setPsw.php";
-    private final static String setNickName = "setNickName.php";
-    private final static String setPicture = "setPicture.php";
-    private final static String tagToGetAd = "tagToGetAd.php";
-    private final static String deleteOwns = "deleteOwns.php";
-    private final static String ownsToGetDis = "ownsToGetDis.php";
-    private final static String insertOwns = "insertOwns.php";
-    private final static String test = "test.php";
-    private final static String insertVerifyCode = "insertVerifyCode.php";
-    private final static String deleteVerifyCode = "deleteVerifyCode.php";
-    private final static String insertGif = "insertGift.php";
-    private final static String getGiftSum = "getGifySum.php";
 
-    public static void tagToGetAd(HttpRequest httpRequest,String adid,HttpListener httpListener){
-        httpRequest.sendGet(tagToGetAd,"tag="+adid,httpListener);
-    }
-    public static void deleteOwns(HttpRequest httpRequest,String id,String disid,HttpListener httpListener){
-        String param = "id="+id+"&"+"disId="+disid;
-        httpRequest.sendPost(deleteOwns, param, httpListener);
-    }
-    public static void insertOwns(HttpRequest httpRequest,String id,String disid,HttpListener httpListener){
-        String param = "id="+id+"&"+"disId="+disid;
-        httpRequest.sendPost(insertOwns,param,httpListener);
-    }
+    private static String Address = "http://182.92.100.145/Touch/index.php/Home/Enter";
+    private static final String register = "register";
+    private static final String log = "log";
+    private static final String setPsw = "setPsw";
+    private static final String setNickName = "setNickName";
+    private static final String setPicture = "setPicture";
+    private static final String getAd = "getAd";
+    private static final String getDisMessage = "getDisMessage";
+    private static final String getDis = "getDis";
+    private static final String ownsToGetDis = "ownsToGetDis";
+    private static final String deleteOwns = "deleteOwns";
+    private static final String tagToGetAd = "tagToGetAd";
+    private static final String insertAttention = "insertAttention";
+    private static final String deleteAttention = "deleteAttention";
+    private static final String getAttention = "getAttention";
+    private static final String insertVerityCode = "insertVerityCode";
+    private static final String isNotBind = "isNotBind";
+    private static final String getMoney = "getMoney";
+    private static final String getGiftSum = "getGiftSum";
 
-    public static void isSuited(HttpRequest httpRequest,String id,HttpListener httpListener){
-        String param = "id="+id;
-        httpRequest.sendGet(isSuited, param, httpListener);
-    }
-    public static void setUserIdPassword(HttpRequest httpRequest,String account,String password,HttpListener httpListener){
-        String param = "id=" + account + "&" + "password=" + password;
-        httpRequest.sendPost(setUserIdPassword, param, httpListener);
-    }
-    public static void log(HttpRequest httpRequest,String id,String password,HttpListener httpListener){
-        String param = "id="+id+"&"+"password="+password;
-        httpRequest.sendPost(log,param,httpListener);
-    }
-    public static void register(HttpRequest httpRequest,String id,String password,String nickname,HttpListener httpListener){
-        String param = "id="+id+"&"+"password="+password+"&"+"nickName="+nickname;
-        httpRequest.sendPost(register,param,httpListener);
-    }
-    public static void setPsw(HttpRequest httpRequest,String id,String password,String newpsw,HttpListener httpListener){
-        String param = "id=" + id + "&" +"passWord="+password+"&"+"newPsw="+newpsw;
-        httpRequest.sendPost(setPsw,param,httpListener);
-    }
-    public static void setNickName(HttpRequest httpRequest,String id,String nickName,HttpListener httpListener){
-        String param = "id="+id+"&"+"newNickName="+nickName;
-        httpRequest.sendGet(setNickName, param, httpListener);
-    }
-    public static void setPicture(HttpRequest httpRequest,String id,String filepath,HttpFileListener httpFileListener){
-        String param = "id="+id;
-        httpRequest.sendFileByPost(setPicture, param, filepath, "bitmap", httpFileListener);
-    }
-    public static void ownsToGetDis(HttpRequest httpRequest,String id,HttpListener httpListener){
-        String param = "id="+id;
-        httpRequest.sendGet(ownsToGetDis, param, httpListener);
+    private static HttpService httpService = new HttpService();
+    public static void register(User user,HttpListener httpListener){
+        if (user == null)return;
+        Request request = new Request();
+        request.putParams("data",user.toJsonString());
+        request.api = register;
+        request.url = Address;
+        httpService.sendPost(request,httpListener);
     }
 
-    public static void test(HttpRequest httpRequest,HttpListener httpListener){
-        String param = "test=哈哈哈";
-        httpRequest.sendGet(test,param,httpListener);
+    public static void log(User user,HttpListener httpListener){
+        if (user == null)return;
+        Request request = new Request();
+        request.putParams("data",user.toJsonString());
+        request.api = log;
+        request.url = Address;
+        httpService.sendPost(request,httpListener);
     }
 
-    public static void insertVerifyCode(HttpRequest httpRequest,String id,String verifyCode,HttpListener httpListener){
-        String param = "id="+id+"&"+"verifyCode="+verifyCode;
-        httpRequest.sendPost(insertVerifyCode, param, httpListener);
+    public static void setPsw(String id,String oldps ,String newps ,HttpListener httpListener){
+        Request request = new Request();
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("id", id);
+            jsonObject.put("password",oldps);
+            jsonObject.put("newPsw",newps);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        request.putParams("data",jsonObject.toString());
+        request.api = setPsw;
+        request.url = Address;
+        httpService.sendPost(request,httpListener);
     }
 
-    public static void deleteVerifyCode(HttpRequest httpRequest,String id,HttpListener httpListener){
-        String param = "id="+id;
-        httpRequest.sendGet(deleteVerifyCode, param, httpListener);
+    public static void setNickName(String id ,String nickName,HttpListener httpListener){
+        Request request = new Request();
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("id", id);
+            jsonObject.put("newNickName",nickName);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        request.putParams("data",jsonObject.toString());
+        request.api = setNickName;
+        request.url = Address;
+        httpService.sendPost(request,httpListener);
     }
 
-    public static void insertGift(HttpRequest httpRequest,String id,String money,HttpListener httpListener){
-        String param = "id="+id+"&"+"money="+money;
-        httpRequest.sendGet(insertGif,param,httpListener);
+    public static void setPicture(String id,String filepath,HttpListener httpListener){
+//        if (filepath == null)return;
+//        Request request = new Request();
+//        JSONObject jsonObject = new JSONObject();
+//        //jsonObject.put("bitmap",filepath)
+//        //request.putParams("data",user.toJsonString());
+//        request.api = setPicture;
+//        request.url = Address;
+//        httpService.sendPost(request,httpListener);
     }
 
-    public static void getGiftSum(HttpRequest httpRequest,String id,HttpListener httpListener){
-        String param = "id="+id;
-        httpRequest.sendGet(getGiftSum,param,httpListener);
+    public static void getAd(String AdId,HttpListener httpListener){
+        if (AdId == null)return;
+        Request request = new Request();
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("AdId",AdId);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        request.putParams("data",jsonObject.toString());
+        request.api = getAd;
+        request.url = Address;
+        httpService.sendPost(request,httpListener);
     }
 
-    public static void getPhoto(HttpRequest httpRequest,String url,HttpImgListener httpImgListener){
-        httpRequest.getPhoto(url,httpImgListener);
+    public static void getDisMessage(String disId,HttpListener httpListener){
+        Request request = new Request();
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("disId",disId);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        request.putParams("data", jsonObject.toString());
+        request.api = getDisMessage;
+        request.url = Address;
+        httpService.sendPost(request,httpListener);
     }
+
+    public static void getDis(String id,int disId,HttpListener httpListener){
+        Request request = new Request();
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("id",id);
+            jsonObject.put("disId",disId);
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return;
+        }
+        request.putParams("data",jsonObject.toString());
+        request.api = getDis;
+        request.url = Address;
+        httpService.sendPost(request,httpListener);
+    }
+
+    public static void ownsToGetDis(String id,HttpListener httpListener){
+        Request request = new Request();
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("id",id);
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return;
+        }
+        request.putParams("data",jsonObject.toString());
+        request.api = ownsToGetDis;
+        request.url = Address;
+        httpService.sendPost(request,httpListener);
+    }
+
+    public static void deleteOwns(String id,String disId,HttpListener httpListener){
+        Request request = new Request();
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("id",id);
+            jsonObject.put("disId",disId);
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return;
+        }
+        request.putParams("data",jsonObject.toString());
+        request.api = deleteOwns;
+        request.url = Address;
+        httpService.sendPost(request,httpListener);
+    }
+
+    public static void tagToGetAd(String tag,HttpListener httpListener){
+        Request request = new Request();
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("tag",tag);
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return;
+        }
+        request.putParams("data",jsonObject.toString());
+        request.api = ownsToGetDis;
+        request.url = Address;
+        httpService.sendPost(request,httpListener);
+    }
+
+    public static void insertAttention(String id,String AdId,HttpListener httpListener){
+        Request request = new Request();
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("id",id);
+            jsonObject.put("AdId",AdId);
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return;
+        }
+        request.putParams("data",jsonObject.toString());
+        request.api = insertAttention;
+        request.url = Address;
+        httpService.sendPost(request,httpListener);
+    }
+
+    public static void deleteAttention(String id,String AdId,HttpListener httpListener){
+        Request request = new Request();
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("id",id);
+            jsonObject.put("AdId",AdId);
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return;
+        }
+        request.putParams("data",jsonObject.toString());
+        request.api = deleteAttention;
+        request.url = Address;
+        httpService.sendPost(request,httpListener);
+    }
+
+    public static void getAttention(String id,HttpListener httpListener){
+        Request request = new Request();
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("id",id);
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return;
+        }
+        request.putParams("data",jsonObject.toString());
+        request.api = getAttention;
+        request.url = Address;
+        httpService.sendPost(request,httpListener);
+    }
+
+    public static void insertVerifyCode(String id,String verifyCode,HttpListener httpListener){
+        Request request = new Request();
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("id",id);
+            jsonObject.put("verifyCode",verifyCode);
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return;
+        }
+        request.putParams("data",jsonObject.toString());
+        request.api = insertVerityCode;
+        request.url = Address;
+        httpService.sendPost(request,httpListener);
+    }
+
+    public static void isNotBind(String id,HttpListener httpListener){
+        Request request = new Request();
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("id",id);
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return;
+        }
+        request.putParams("data",jsonObject.toString());
+        request.api = isNotBind;
+        request.url = Address;
+        httpService.sendPost(request,httpListener);
+    }
+
+    public static void getMoney(String id,double money,HttpListener httpListener){
+        Request request = new Request();
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("id",id);
+            jsonObject.put("money",money);
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return;
+        }
+        request.putParams("data",jsonObject.toString());
+        request.api = getMoney;
+        request.url = Address;
+        httpService.sendPost(request,httpListener);
+    }
+
+    public static void getGiftSum(String id,HttpListener httpListener){
+        Request request = new Request();
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("id",id);
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return;
+        }
+        request.putParams("data",jsonObject.toString());
+        request.api = getGiftSum;
+        request.url = Address;
+        httpService.sendPost(request,httpListener);
+    }
+
 }

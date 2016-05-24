@@ -15,6 +15,8 @@ import com.pengpenghui.domain.entity.AdData;
 import com.pengpenghui.domain.context.MainController;
 import com.pengpenghui.ui.R;
 
+import java.util.jar.Manifest;
+
 /**
  * Created by Administrator on 2015/8/7.
  */
@@ -35,13 +37,13 @@ public class GetBroDialog extends Dialog{
         setContentView(R.layout.activity_dialog_get_bro);
         this.context = context;
         this.adData = adData;
-        this.mainPageController = new MainController();
+        this.mainPageController = MainController.get();
         findView();
         setListener();
         initData();
     }
     private void initData(){
-        setTitle(adData.getAd_info());
+        setTitle(adData.getInfo());
         wv_get_bro.loadUrl(adData.getAd_url());
         wv_get_bro.setWebViewClient(new WebViewClient());
         WebSettings webSettings = wv_get_bro.getSettings();
