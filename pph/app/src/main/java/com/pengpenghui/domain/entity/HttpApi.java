@@ -1,6 +1,7 @@
 package com.pengpenghui.domain.entity;
 
 import com.druson.cycle.service.http.Request;
+import com.pengpenghui.domain.service.http.HttpFileListener;
 import com.pengpenghui.domain.service.http.HttpListener;
 import com.pengpenghui.domain.service.http.HttpService;
 
@@ -83,14 +84,13 @@ public class HttpApi {
     }
 
     public static void setPicture(String id,String filepath,HttpListener httpListener){
-//        if (filepath == null)return;
-//        Request request = new Request();
-//        JSONObject jsonObject = new JSONObject();
-//        //jsonObject.put("bitmap",filepath)
-//        //request.putParams("data",user.toJsonString());
-//        request.api = setPicture;
-//        request.url = Address;
-//        httpService.sendPost(request,httpListener);
+        if (filepath == null)return;
+        Request request = new Request();
+        request.putFileParams("bitmap",filepath);
+        request.putParams("id",id);
+        request.api = setPicture;
+        request.url = Address;
+        httpService.sendFile(request, httpListener);
     }
 
     public static void getAd(String AdId,HttpListener httpListener){
@@ -105,7 +105,7 @@ public class HttpApi {
         request.putParams("data",jsonObject.toString());
         request.api = getAd;
         request.url = Address;
-        httpService.sendPost(request,httpListener);
+        httpService.sendPost(request, httpListener);
     }
 
     public static void getDisMessage(String disId,HttpListener httpListener){
@@ -184,7 +184,7 @@ public class HttpApi {
         httpService.sendPost(request,httpListener);
     }
 
-    public static void insertAttention(String id,String AdId,HttpListener httpListener){
+    public static void insertAttention(String id,int AdId,HttpListener httpListener){
         Request request = new Request();
         JSONObject jsonObject = new JSONObject();
         try {
@@ -200,7 +200,7 @@ public class HttpApi {
         httpService.sendPost(request,httpListener);
     }
 
-    public static void deleteAttention(String id,String AdId,HttpListener httpListener){
+    public static void deleteAttention(String id,int AdId,HttpListener httpListener){
         Request request = new Request();
         JSONObject jsonObject = new JSONObject();
         try {
@@ -291,6 +291,12 @@ public class HttpApi {
         request.api = getGiftSum;
         request.url = Address;
         httpService.sendPost(request,httpListener);
+    }
+
+    public static void getFile(String url,HttpFileListener httpFileListener){
+        Request request = new Request();
+        request.url = url;
+        httpService.getFile(request,httpFileListener);
     }
 
 }

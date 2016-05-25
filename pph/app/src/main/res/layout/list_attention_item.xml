@@ -27,7 +27,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:scaleType="fitXY"
-                android:background="@drawable/attention_example" />
+                />
 
             <RelativeLayout
                 android:layout_width="match_parent"

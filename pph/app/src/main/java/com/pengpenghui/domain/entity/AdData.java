@@ -14,6 +14,17 @@ public class AdData extends Enity {
     private int AdId;
     private String AdUrl;
 
+    public void setAdPicture(Bitmap adPicture) {
+        this.adPicture = adPicture;
+    }
+
+    private Bitmap adPicture;
+
+    public Bitmap getAdBitmap(){
+        return adPicture;
+    }
+
+
     public int getAdId() {
         return AdId;
     }
@@ -50,9 +61,6 @@ public class AdData extends Enity {
         AdPicture = adPicture;
     }
 
-    public void setAd_picture(Bitmap ad_picture) {
-        this.ad_picture = ad_picture;
-    }
 
     public String getInfo() {
         return info;
@@ -65,7 +73,6 @@ public class AdData extends Enity {
     private String AdOwner;
     private int priority;
     private String AdPicture;
-    private Bitmap ad_picture;
     private String info;
     public AdData(){
 
@@ -91,8 +98,5 @@ public class AdData extends Enity {
         return AdPicture;
     }
 
-    public Bitmap getAd_picture() {
-        return ad_picture;
-    }
 
 }

@@ -1,5 +1,6 @@
 package com.pengpenghui.domain.context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 
 import com.pengpenghui.domain.entity.DataBaseTable;
 import com.pengpenghui.domain.entity.DataProvider;
@@ -7,6 +8,7 @@ import com.pengpenghui.domain.entity.HttpApi;
 import com.pengpenghui.domain.entity.User;
 
 import com.pengpenghui.domain.service.database.DataBaseOperator;
+import com.pengpenghui.domain.service.http.HttpFileListener;
 import com.pengpenghui.domain.service.http.HttpListener;
 import com.pengpenghui.domain.service.SharedPreference;
 
@@ -85,7 +87,7 @@ public class LogController extends PPHContext{
                 }
                 contextCallback.response(ContextCallback.SUCC, message);
                 recordAccunt(id, psw);
-                getPhoto(user.getImg());
+                getPhoto(user.getImg(),contextCallback);
             }
 
             @Override
@@ -96,13 +98,22 @@ public class LogController extends PPHContext{
         });
     }
 
-    public void getPhoto(String img){
-//        HttpApi.getPhoto(httpRequest, img, new HttpImgListener() {
-//            @Override
-//            public void succToImg(Bitmap bitmap) {
-//                user.setBitmap(bitmap);
-//            }
-//        });
+    public void getPhoto(final String img, final ContextCallback callback){
+        HttpApi.getFile(img , new HttpFileListener() {
+            @Override
+            public void succ(String message, byte[] bytes) {
+                Bitmap bitmap = BitmapFactory.decodeByteArray(bytes,0,bytes.length);
+                User user = getDataProvider().getUser();
+                user.setBitmap(bitmap);
+                System.out.println("Logcontroller getPhoto "+img);
+                callback.response(ContextCallback.SUCC,message);
+            }
+
+            @Override
+            public void fail(String message) {
+
+            }
+        });
     }
 
     public String readinfo(){

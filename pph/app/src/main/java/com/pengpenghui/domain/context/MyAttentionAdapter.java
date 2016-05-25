@@ -27,12 +27,14 @@ public class MyAttentionAdapter extends BaseAdapter {
     private LayoutInflater mInflater;
     private List<AdData> list;
     private int layoutID;
+    private MainController mainController;
 
     public MyAttentionAdapter(Context context, List<AdData> list,
                      int layoutID) {
         this.mInflater = LayoutInflater.from(context);
         this.list = list;
         this.layoutID = layoutID;
+        mainController = MainController.get();
 
     }
     @Override
@@ -73,7 +75,7 @@ public class MyAttentionAdapter extends BaseAdapter {
 
     }
     private void initData(AttentionViewHolder viewHolder,int position){
-        viewHolder.date_image.setImageBitmap(list.get(position).getAd_picture());
+        viewHolder.date_image.setImageBitmap(list.get(position).getAdBitmap());
         viewHolder.data_tittle.setText(list.get(position).getAd_owner());
         viewHolder.data_address.setText(list.get(position).getInfo());
     }
@@ -81,7 +83,12 @@ public class MyAttentionAdapter extends BaseAdapter {
         ((Button)convertView.findViewById(R.id.itemAttentionbutton)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.v("shanchu","shanchu"+k);
+                mainController.deleteAttention(k, new ContextCallback() {
+                    @Override
+                    public void response(int state, Object object) {
+                        MyAttentionAdapter.this.notifyDataSetChanged();
+                    }
+                });
             }
         });
     }
@@ -90,7 +97,6 @@ public class MyAttentionAdapter extends BaseAdapter {
         public TextView  data_tittle;
         public TextView  data_address;
         public Button    bu_delete;
-
     }
 }
 

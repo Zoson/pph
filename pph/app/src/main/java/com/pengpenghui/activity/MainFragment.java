@@ -125,6 +125,7 @@ public class MainFragment extends android.support.v4.app.Fragment{
         if (!mainPageController.isUserLogin()){
             return;
         }
+
         giftManager = new GiftManager();
         giftManager.getGiftCount(new ContextCallback() {
             @Override

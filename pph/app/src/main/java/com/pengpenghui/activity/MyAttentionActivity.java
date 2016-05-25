@@ -62,7 +62,9 @@ public class MyAttentionActivity extends Activity {
 
     public void notifyMyAdapter(){
         if (madapter == null)return;
+        myList.removeAllViewsInLayout();
         madapter.notifyDataSetChanged();
+        System.out.println("MyAttentionActivity notifyMyAdapter");
     }
 
     private void findView(){
@@ -98,7 +100,6 @@ public class MyAttentionActivity extends Activity {
 //            listem .put("text", example2[i] );
 //            listems .add(listem);
 //        }
-
     }
 
 

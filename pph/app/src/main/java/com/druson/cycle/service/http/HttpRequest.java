@@ -245,7 +245,9 @@ public class HttpRequest {
             }
             response.data_string = data.toString();
             in.close();
-            Log.i(TAG, "sendFile Succ " + request.url + "/" + request.api);
+            response.state = SUCC;
+            System.out.println("sendFile "+data.toString());
+            Log.i(TAG, "sendFile " + request.url + "/" + request.api);
         } catch (MalformedURLException e) {
             e.printStackTrace();
             response.state = FAIL;

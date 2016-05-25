@@ -1,6 +1,8 @@
 package com.pengpenghui.domain.context;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.nfc.NfcAdapter;
 
 import com.pengpenghui.domain.entity.AdData;
@@ -10,6 +12,7 @@ import com.pengpenghui.domain.entity.DataProvider;
 import com.pengpenghui.domain.entity.HttpApi;
 import com.pengpenghui.domain.entity.User;
 import com.pengpenghui.domain.service.database.DataBaseOperator;
+import com.pengpenghui.domain.service.http.HttpFileListener;
 import com.pengpenghui.domain.service.http.HttpListener;
 import com.pengpenghui.domain.service.SharedPreference;
 
@@ -47,10 +50,30 @@ public class MainController extends PPHContext {
         sharedPreference = getSharePreference();
         nfcService = getNFCService();
         contextData = getDataProvider();
+
+        insertAttention(80,null);
+        insertAttention(79,null);
+        insertAttention(81,null);
     }
 
     public List<BroMessage> getBroList(){
         return broMessages;
+    }
+
+    public void deleteAttention(int index, final ContextCallback callback){
+        final List<AdData> list = getDataProvider().getAdDatas();
+        AdData adData = list.get(index);
+        list.remove(index);
+        HttpApi.deleteAttention(user.getId(), adData.getAdId(), new HttpListener() {
+            @Override
+            public void succ(String message, String data, byte[] bytes) {
+                callback.response(ContextCallback.SUCC, "删除成功");
+            }
+
+            @Override
+            public void fail(String message) {
+            }
+        });
     }
 
     public User getUser(){
@@ -66,7 +89,9 @@ public class MainController extends PPHContext {
     }
 
     public void getBro(final ContextCallback contextCallback){
-        HttpApi.ownsToGetDis( user.getId(), new HttpListener() {
+        User user  = getDataProvider().getUser();
+        if (user == null)return;
+        HttpApi.ownsToGetDis(user.getId(), new HttpListener() {
             @Override
             public void succ(String message, String data, byte[] bytes) {
                 contextCallback.response(ContextCallback.SUCC, genBroList(data));
@@ -81,9 +106,9 @@ public class MainController extends PPHContext {
     }
 
     public void getBroByAd(final ContextCallback contextCallback){
-
+        User user  = getDataProvider().getUser();
+        if (user == null)return;
         HttpApi.getDis(user.getId(), contextData.getCurrentAdData().getAd_id(), new HttpListener() {
-
             @Override
             public void succ(String message, String data, byte[] bytes) {
                 contextCallback.response(ContextCallback.SUCC, data);
@@ -107,12 +132,13 @@ public class MainController extends PPHContext {
     }
 
     public void changePassword(String oldps, final String newps, final ContextCallback contextCallback){
-        final User user = new User();
+        final User user  = getDataProvider().getUser();
+        if (user == null)return;
         HttpApi.setPsw(user.getId(), oldps, newps, new HttpListener() {
             @Override
             public void succ(String message, String data, byte[] bytes) {
                 user.setPassWord(newps);
-                contextCallback.response(ContextCallback.SUCC,message);
+                contextCallback.response(ContextCallback.SUCC, message);
             }
 
             @Override
@@ -123,6 +149,8 @@ public class MainController extends PPHContext {
     }
 
     public void changeName(String name, final ContextCallback contextCallback){
+        final User user  = getDataProvider().getUser();
+        if (user == null)return;
         HttpApi.setNickName(user.getId(), name, new HttpListener() {
             @Override
             public void succ(String message, String data, byte[] bytes) {
@@ -145,7 +173,17 @@ public class MainController extends PPHContext {
 
     public void changPicture(String file){
         sharedPreference.set("file", file);
-        HttpApi.setPicture(user.getId(), file, null);
+        HttpApi.setPicture(user.getId(), file, new HttpListener() {
+            @Override
+            public void succ(String message, String data, byte[] bytes) {
+                System.out.println("changPicture "+message+" data "+data);
+            }
+
+            @Override
+            public void fail(String message) {
+
+            }
+        });
     }
 
     public boolean isUserLogin(){
@@ -193,28 +231,67 @@ public class MainController extends PPHContext {
     }
 
     public List<AdData> getAttention(final ContextCallback callback){
-        List<AdData> adDatas = getDataProvider().getAdDatas();
+        User user  = getDataProvider().getUser();
+        final List<AdData> adDatas = getDataProvider().getAdDatas();
+        if (user == null)return adDatas;
         HttpApi.getAttention(user.getId(), new HttpListener() {
             @Override
             public void succ(String message, String data, byte[] bytes) {
                 try {
                     JSONArray jsonObject = new JSONArray(data);
-                    for (int i=0;i<jsonObject.length();i++){
+                    for (int i = adDatas.size(); i < jsonObject.length(); i++) {
                         String json = jsonObject.getString(i);
                         AdData adData = new AdData();
                         adData.initByJson(json);
+                        adDatas.add(adData);
+                        getAdPicture(adData,callback);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                callback.response(ContextCallback.SUCC,"获取成功");
+                callback.response(ContextCallback.SUCC, "获取成功");
             }
 
             @Override
             public void fail(String message) {
-                callback.response(ContextCallback.SUCC,message);
+                callback.response(ContextCallback.SUCC, message);
             }
         });
         return adDatas;
+    }
+
+    public void insertAttention(int id,ContextCallback callback){
+        User user  = getDataProvider().getUser();
+        if (user == null)return;
+        HttpApi.insertAttention(user.getId(), id, new HttpListener() {
+            @Override
+            public void succ(String message, String data, byte[] bytes) {
+
+            }
+
+            @Override
+            public void fail(String message) {
+
+            }
+        });
+    }
+
+    public void getAdPicture(final AdData adData , final ContextCallback callback) {
+        User user  = getDataProvider().getUser();
+        if (user == null)return;
+        if (adData.getAdBitmap()!=null)return;
+        HttpApi.getFile(adData.getAd_picture_url(), new HttpFileListener() {
+            @Override
+            public void succ(String message, byte[] bytes) {
+                Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                adData.setAdPicture(bitmap);
+                callback.response(ContextCallback.SUCC, message);
+            }
+
+            @Override
+            public void fail(String message) {
+
+            }
+        });
     }
 }

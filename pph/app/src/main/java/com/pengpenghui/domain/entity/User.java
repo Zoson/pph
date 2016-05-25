@@ -17,7 +17,7 @@ import java.util.Map;
 public class User extends Enity implements DataObjectInterface {
     private String id;
     private String password;
-    private String nickname;
+    private String nickName;
     private String bitmap;
     private Bitmap img = null;
     private double money = 0;
@@ -28,11 +28,11 @@ public class User extends Enity implements DataObjectInterface {
     }
 
     public String getNickName() {
-        return nickname;
+        return nickName;
     }
 
     public void setNickName(String nickName) {
-        this.nickname = nickName;
+        this.nickName = nickName;
     }
 
     public String getPassWord() {
@@ -80,7 +80,7 @@ public class User extends Enity implements DataObjectInterface {
         ContentValues contentValues = new ContentValues();
         contentValues.put(DataBaseTable.UserDataTable.ID,id);
         contentValues.put(DataBaseTable.UserDataTable.PASSWORD,password);
-        contentValues.put(DataBaseTable.UserDataTable.NICKNAME,nickname);
+        contentValues.put(DataBaseTable.UserDataTable.NICKNAME,nickName);
         contentValues.put(DataBaseTable.UserDataTable.MONEY,money);
         contentValues.put(DataBaseTable.UserDataTable.IMG,bitmap);
         return contentValues;
@@ -89,7 +89,7 @@ public class User extends Enity implements DataObjectInterface {
     public void getDataFromDatabase(Map<String,String> map){
         id = map.get(DataBaseTable.UserDataTable.ID);
         password = map.get(DataBaseTable.UserDataTable.PASSWORD);
-        nickname = map.get(DataBaseTable.UserDataTable.NICKNAME);
+        nickName = map.get(DataBaseTable.UserDataTable.NICKNAME);
         money = Double.parseDouble(map.get(DataBaseTable.UserDataTable.MONEY));
         bitmap = map.get(DataBaseTable.UserDataTable.IMG);
     }
