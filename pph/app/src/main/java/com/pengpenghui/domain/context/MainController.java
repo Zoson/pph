@@ -77,7 +77,7 @@ public class MainController extends PPHContext {
     }
 
     public User getUser(){
-        return user;
+        return getDataProvider().getUser();
     }
 
     public AdData getCurrentAd(){
