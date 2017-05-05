@@ -149,7 +149,7 @@ public abstract class Enity {
     public void initByJson(String json) throws JSONException {
         JSONObject jsonObject = new JSONObject(json);
         Field[] fields = this.getClass().getDeclaredFields();
-        for (int i=0;i<fields.length;i++){
+        for (int i=0;i<fields.length - 2;i++){
             boolean isBaseType = true;
             fields[i].setAccessible(true);
             String name = fields[i].getName();

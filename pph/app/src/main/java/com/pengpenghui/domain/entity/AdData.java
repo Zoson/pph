@@ -13,12 +13,23 @@ import org.json.JSONObject;
 public class AdData extends Enity {
     private int AdId;
     private String AdUrl;
+    private int disID;
 
     public void setAdPicture(Bitmap adPicture) {
         this.adPicture = adPicture;
     }
 
     private Bitmap adPicture;
+
+    public void setDisID(int disID) {
+
+        this.disID = disID;
+    }
+
+    public int getDisID() {
+
+        return this.disID;
+    }
 
     public Bitmap getAdBitmap(){
         return adPicture;

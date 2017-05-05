@@ -108,7 +108,7 @@ public class MainController extends PPHContext {
     public void getBroByAd(final ContextCallback contextCallback){
         User user  = getDataProvider().getUser();
         if (user == null)return;
-        HttpApi.getDis(user.getId(), contextData.getCurrentAdData().getAd_id(), new HttpListener() {
+        HttpApi.getDis(user.getId(), contextData.getCurrentAdData().getAdId(), new HttpListener() {
             @Override
             public void succ(String message, String data, byte[] bytes) {
                 contextCallback.response(ContextCallback.SUCC, data);

@@ -179,7 +179,7 @@ public class HttpApi {
             return;
         }
         request.putParams("data",jsonObject.toString());
-        request.api = ownsToGetDis;
+        request.api = tagToGetAd;
         request.url = Address;
         httpService.sendPost(request,httpListener);
     }
